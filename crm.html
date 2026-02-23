@@ -292,11 +292,10 @@ async function doLogin(){
   spinner.style.display='inline-block';
   err.style.display='none';
 
-  // Credentials check
+  // Verificación de credenciales
+  await new Promise(r => setTimeout(r, 600));
   const USERS = { 'erik': '1234' };
-  await new Promise(r => setTimeout(r, 600)); // small delay for UX
-
-  if(USERS[u.toLowerCase()] && USERS[u.toLowerCase()] === p){
+  if (USERS[u.toLowerCase()] && USERS[u.toLowerCase()] === p) {
     const displayUser = u.charAt(0).toUpperCase() + u.slice(1).toLowerCase();
     sessionStorage.setItem('pc_crm_auth', displayUser);
     document.getElementById('login-screen').classList.add('out');

@@ -1,58 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trabaja con Nosotros — PorciCentro Guatemala</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── JOBS SECTION ── */
+.jobs-sec{padding:90px 24px;background:var(--crema)}
+.jobs-wrap{max-width:var(--max-w);margin:0 auto}
 
-<section class="apply-sec" id="apply-form"><div class="apply-wrap">
-  <div class="sec-head"><div class="sec-kicker" style="justify-content:center"><div class="sec-kicker-line"></div><span>Postulación</span></div><h2 class="sec-title white">¿Listo para <em>aplicar?</em></h2><p class="sec-desc light">Completa el formulario y adjunta tus documentos. Nos pondremos en contacto contigo a la brevedad.</p></div>
-  <div class="apply-form">
-    <div class="form-row">
-      <div class="fg"><label>Nombre completo *</label><input type="text" id="f-nombre" placeholder="Tu nombre completo" required></div>
-      <div class="fg"><label>Teléfono / WhatsApp *</label><input type="tel" id="f-tel" placeholder="+502 0000-0000" required></div>
-    </div>
-    <div class="form-row">
-      <div class="fg"><label>Edad</label><input type="number" id="f-edad" placeholder="Ej: 28" min="18" max="65"></div>
-      <div class="fg"><label>Plaza de interés *</label>
-        <select id="f-plaza">
-          <option value="">Selecciona una plaza</option>
-          <option value="Carnicero Profesional">Carnicero Profesional</option>
-          <option value="Motorista Repartidor">Motorista Repartidor</option>
-        </select>
-      </div>
-    </div>
-    <div class="fg"><label>Experiencia relevante *</label><textarea id="f-exp" placeholder="Cuéntanos brevemente tu experiencia en el área..."></textarea></div>
-    <div class="fg">
-      <label>Adjuntar documentos (CV, DPI, licencia, etc.)</label>
-      <div class="file-drop" id="file-drop">
-        <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.png,.jpeg" onchange="handleFiles(this.files)">
-        <div class="fd-ico">📎</div>
-        <div class="fd-title">Arrastra tus archivos aquí o haz clic para seleccionar</div>
-        <div class="fd-sub">PDF, Word, JPG, PNG · Máximo 5 archivos</div>
-        <div class="fd-files" id="fd-files"></div>
-      </div>
-      <div class="file-note">⚠️ Los archivos serán mencionados en el mensaje de WhatsApp. Deberás enviarlos manualmente en el chat.</div>
-    </div>
-    <div class="fg"><label>Mensaje adicional</label><textarea id="f-msg" placeholder="¿Algo más que quieras agregar?"></textarea></div>
-    <button class="submit-btn" onclick="enviarAplicacion()">
-      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0013 14.85l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0121.18 16"/></svg>
-      Enviar solicitud por WhatsApp
-    </button>
-    <p class="wa-alt">¿Prefieres contactar directo? <a href="https://wa.me/50248890091" target="_blank">Escríbenos al +502 4889-0091</a></p>
+.jobs-intro{text-align:center;max-width:680px;margin:0 auto 64px}
+.jobs-intro .sec-kicker{justify-content:center}
+.jobs-intro p{font-size:.97rem;color:var(--gris);line-height:1.85;margin-top:16px}
+
+.jobs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:28px;margin-bottom:80px}
+.job-card{background:#fff;border-radius:var(--r-xl);padding:36px;box-shadow:var(--shadow-sm);border:2px solid transparent;transition:all .35s cubic-bezier(.25,.8,.25,1);cursor:pointer;position:relative;overflow:hidden}
+.job-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(184,0,26,.04) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.job-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg);border-color:var(--rojo)}
+.job-card:hover::before{opacity:1}
+.job-card.selected{border-color:var(--rojo);box-shadow:0 8px 40px rgba(184,0,26,.18)}
+
+.jc-ico{width:60px;height:60px;border-radius:var(--r);background:var(--rojo-bg);display:flex;align-items:center;justify-content:center;margin-bottom:20px;border:1px solid rgba(184,0,26,.15)}
+.jc-ico svg{width:28px;height:28px;stroke:var(--rojo);fill:none;stroke-width:2;stroke-linecap:round}
+.jc-tag{display:inline-block;font-family:var(--font-c);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 12px;border-radius:100px;background:var(--rojo-bg);color:var(--rojo);margin-bottom:12px}
+.jc-title{font-family:var(--font-h);font-size:1.4rem;font-weight:700;color:var(--negro);margin-bottom:10px;line-height:1.2}
+.jc-desc{font-size:.88rem;color:var(--gris);line-height:1.72;margin-bottom:20px}
+.jc-reqs{display:flex;flex-direction:column;gap:6px;margin-bottom:22px}
+.jc-req{display:flex;align-items:flex-start;gap:8px;font-size:.83rem;color:var(--negro)}
+.jc-req::before{content:'✓';color:var(--verde);font-weight:700;flex-shrink:0;margin-top:1px}
+.jc-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:18px;border-top:1px solid rgba(0,0,0,.06)}
+.jc-sal{font-family:var(--font-c);font-size:.7rem;letter-spacing:1px;color:var(--gris-m)}
+.jc-sal strong{color:var(--rojo);font-size:.85rem}
+.jc-btn{font-family:var(--font-c);font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;background:var(--rojo);color:#fff;padding:9px 16px;border-radius:var(--r-sm);transition:all .2s}
+.jc-btn:hover{background:var(--rojo-viv)}
+
+/* ── BENEFITS ── */
+.benefits{padding:80px 24px;background:var(--negro);color:#fff}
+.benefits-wrap{max-width:var(--max-w);margin:0 auto}
+.ben-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:56px;border:1px solid rgba(255,255,255,.05);border-radius:var(--r-xl);overflow:hidden}
+.ben-card{padding:36px 28px;background:rgba(255,255,255,.03);transition:background .3s}
+.ben-card:hover{background:rgba(184,0,26,.07)}
+.ben-card+.ben-card{border-left:1px solid rgba(255,255,255,.05)}
+.ben-ico{font-size:2rem;margin-bottom:16px}
+.ben-title{font-family:var(--font-h);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px}
+.ben-text{font-size:.84rem;color:rgba(255,255,255,.38);line-height:1.72}
+
+/* ── APPLY FORM ── */
+.apply-sec{padding:90px 24px 110px;background:var(--gris-l)}
+.apply-wrap{max-width:800px;margin:0 auto}
+
+.apply-form{background:#fff;border-radius:var(--r-xl);padding:48px;box-shadow:var(--shadow-md);margin-top:48px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fg{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+.fg label{font-family:var(--font-c);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--gris);font-weight:700}
+.fg input,.fg select,.fg textarea{background:var(--crema);border:1.5px solid var(--gris-l);border-radius:var(--r);padding:13px 16px;color:var(--negro);font-family:var(--font-b);font-size:.95rem;transition:border-color .2s;width:100%;outline:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--rojo);background:#fff}
+.fg textarea{resize:vertical;min-height:110px}
+
+/* File drop */
+.file-drop{position:relative;border:2px dashed rgba(0,0,0,.12);border-radius:var(--r);padding:32px 24px;text-align:center;transition:all .25s;cursor:pointer}
+.file-drop:hover,.file-drop.drag{border-color:var(--rojo);background:var(--rojo-bg)}
+.file-drop input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.fd-ico{font-size:2rem;opacity:.3;margin-bottom:8px}
+.fd-title{font-family:var(--font-c);font-size:.82rem;letter-spacing:.5px;color:var(--gris);margin-bottom:4px}
+.fd-sub{font-size:.77rem;color:var(--gris-m)}
+.fd-files{display:flex;flex-direction:column;gap:5px;margin-top:12px}
+.fd-file{display:flex;align-items:center;gap:7px;font-size:.8rem;color:var(--negro);background:var(--gris-l);padding:6px 10px;border-radius:var(--r-sm)}
+.fd-file svg{width:14px;height:14px;stroke:var(--rojo);fill:none;stroke-width:2;flex-shrink:0}
+.file-note{font-size:.78rem;color:var(--gris-m);margin-top:8px;line-height:1.5}
+
+.submit-btn{width:100%;background:var(--rojo);color:#fff;font-family:var(--font-c);font-size:.8rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:16px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;gap:9px;transition:all .25s;border:none;cursor:pointer;margin-top:8px}
+.submit-btn:hover{background:var(--rojo-viv);transform:translateY(-2px);box-shadow:0 8px 28px rgba(184,0,26,.35)}
+.submit-btn svg{width:17px;height:17px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round}
+.wa-alt{text-align:center;margin-top:14px;font-size:.84rem;color:var(--gris)}
+.wa-alt a{color:var(--rojo);font-weight:600}
+.wa-alt a:hover{text-decoration:underline}
+
+@media(max-width:768px){
+  .ben-grid{grid-template-columns:1fr 1fr}
+  .ben-card+.ben-card{border-left:none}
+  .ben-card:nth-child(odd){border-right:1px solid rgba(255,255,255,.05)}
+  .ben-card:nth-child(n+3){border-top:1px solid rgba(255,255,255,.05)}
+}
+@media(max-width:640px){
+  .jobs-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .apply-form{padding:28px 18px}
+  .ben-grid{grid-template-columns:1fr}
+  .ben-card+.ben-card{border-left:none;border-top:1px solid rgba(255,255,255,.05)}
+  .ben-card:nth-child(odd){border-right:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="nav-inner">
+  <a class="nav-logo" href="index.html"><div class="logo-mark">PC</div><div class="logo-wordmark">PORCI<em>CENTRO</em></div></a>
+  <div class="nav-links">
+    <a href="index.html">Inicio</a>
+    <a href="productos.html">Productos</a>
+    <a href="recetario.html">Recetario</a>
+    <a href="nosotros.html">Nosotros</a>
+    <a href="trabaja.html" class="active">Trabaja con Nosotros</a>
+    <a href="contacto.html">Contacto</a>
   </div>
-</div></section>
+  <div class="nav-actions">
+    <a class="btn-nav-cta" href="https://wa.me/50248890091" target="_blank" rel="noopener">WhatsApp</a>
+    <button class="burger" id="pc-burger" onclick="pcToggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</div></nav>
+
+<div class="mob-nav" id="pc-mob-nav">
+  <a href="index.html" onclick="pcCloseMenu()">Inicio</a>
+  <a href="productos.html" onclick="pcCloseMenu()">Productos</a>
+  <a href="recetario.html" onclick="pcCloseMenu()">Recetario</a>
+  <a href="nosotros.html" onclick="pcCloseMenu()">Nosotros</a>
+  <a href="trabaja.html" onclick="pcCloseMenu()">Trabaja con Nosotros</a>
+  <a href="contacto.html" onclick="pcCloseMenu()">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-dots"></div>
+  <div class="page-tag"><div class="page-tag-dot"></div><span>Oportunidades de Empleo · Guatemala</span></div>
+  <h1>Únete al <span class="red">Equipo</span></h1>
+  <p class="page-hero-sub">En PorciCentro buscamos personas comprometidas, trabajadoras y con ganas de crecer. Sé parte de la distribuidora de carne de cerdo más confiable de Guatemala.</p>
+</section>
+
+<!-- PLAZAS DISPONIBLES -->
+<section class="jobs-sec">
+  <div class="jobs-wrap">
+    <div class="jobs-intro rv">
+      <div class="sec-kicker"><div class="sec-kicker-line"></div><span>Plazas Disponibles</span></div>
+      <h2 class="sec-title">¿Qué plaza te <em>interesa?</em></h2>
+      <p>Actualmente tenemos dos posiciones abiertas. Haz clic en la plaza de tu interés y llena el formulario de solicitud más abajo.</p>
+    </div>
+
+    <div class="jobs-grid">
+      <!-- Plaza 1 -->
+      <div class="job-card rv d1" onclick="selectJob('Carnicero Profesional')">
+        <div class="jc-ico">
+          <svg viewBox="0 0 24 24"><path d="M3 6l9 6 9-6M3 6v12l9 6 9-6V6"/></svg>
+        </div>
+        <div class="jc-tag">Tiempo Completo</div>
+        <div class="jc-title">Carnicero Profesional</div>
+        <div class="jc-desc">Responsable de despiece, corte y preparación de carne de cerdo con altos estándares de calidad e higiene. Rol central en nuestra operación diaria.</div>
+        <div class="jc-reqs">
+          <div class="jc-req">Experiencia mínima 1 año en carnicería o rastro</div>
+          <div class="jc-req">Conocimiento en cortes de cerdo</div>
+          <div class="jc-req">Responsable, puntual y ordenado</div>
+          <div class="jc-req">Disponibilidad lunes a domingo</div>
+        </div>
+        <div class="jc-foot">
+          <div class="jc-sal">Salario <strong>Negociable</strong></div>
+          <button class="jc-btn" onclick="selectJob('Carnicero Profesional');document.getElementById('apply-form').scrollIntoView({behavior:'smooth'})">Aplicar →</button>
+        </div>
+      </div>
+
+      <!-- Plaza 2 -->
+      <div class="job-card rv d2" onclick="selectJob('Motorista Repartidor')">
+        <div class="jc-ico">
+          <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div class="jc-tag">Tiempo Completo</div>
+        <div class="jc-title">Motorista Repartidor</div>
+        <div class="jc-desc">Encargado de las entregas de pedidos a clientes en la ciudad de Guatemala. Representa la cara de PorciCentro frente al cliente con puntualidad y amabilidad.</div>
+        <div class="jc-reqs">
+          <div class="jc-req">Licencia de conducir vigente (tipo B o C)</div>
+          <div class="jc-req">Conocimiento de rutas en ciudad de Guatemala</div>
+          <div class="jc-req">Puntual, responsable y con buen trato</div>
+          <div class="jc-req">Disponibilidad lunes a domingo</div>
+        </div>
+        <div class="jc-foot">
+          <div class="jc-sal">Salario <strong>Negociable</strong></div>
+          <button class="jc-btn" onclick="selectJob('Motorista Repartidor');document.getElementById('apply-form').scrollIntoView({behavior:'smooth'})">Aplicar →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- BENEFITS -->
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="benefits">
+  <div class="benefits-wrap">
+    <div class="sec-head rv">
+      <div class="sec-kicker" style="justify-content:center"><div class="sec-kicker-line"></div><span>¿Por qué PorciCentro?</span></div>
+      <h2 class="sec-title white">Lo que ofrecemos a <em>nuestro equipo</em></h2>
+    </div>
+    <div class="ben-grid">
+      <div class="ben-card rv d1">
+        <div class="ben-ico">💰</div>
+        <div class="ben-title">Salario Justo</div>
+        <p class="ben-text">Remuneración competitiva, puntual y acorde a tu experiencia y desempeño desde el primer día.</p>
+      </div>
+      <div class="ben-card rv d2">
+        <div class="ben-ico">📈</div>
+        <div class="ben-title">Crecimiento</div>
+        <p class="ben-text">Empresa en expansión con oportunidades reales de crecer junto al negocio. Tu esfuerzo se nota y se premia.</p>
+      </div>
+      <div class="ben-card rv d3">
+        <div class="ben-ico">🤝</div>
+        <div class="ben-title">Buen Ambiente</div>
+        <p class="ben-text">Equipo pequeño, unido y comprometido. Trabajamos con respeto, comunicación directa y compañerismo.</p>
+      </div>
+      <div class="ben-card rv d4">
+        <div class="ben-ico">🕗</div>
+        <div class="ben-title">Horario Fijo</div>
+        <p class="ben-text">Horario establecido de lunes a domingo, 8AM a 5PM, para que puedas organizar tu vida personal.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO -->
+<section class="apply-sec" id="apply-form">
+  <div class="apply-wrap">
+    <div class="sec-head rv" style="text-align:center">
+      <div class="sec-kicker" style="justify-content:center"><div class="sec-kicker-line"></div><span>Postulación</span></div>
+      <h2 class="sec-title">¿Listo para <em>aplicar?</em></h2>
+      <p class="sec-desc" style="color:var(--gris);max-width:520px;margin:12px auto 0;font-size:.95rem;line-height:1.75">Completa el formulario y nos pondremos en contacto contigo a la brevedad por WhatsApp.</p>
+    </div>
+
+    <div class="apply-form rv d1">
+      <div class="form-row">
+        <div class="fg"><label>Nombre completo *</label><input type="text" id="f-nombre" placeholder="Tu nombre completo" required></div>
+        <div class="fg"><label>Teléfono / WhatsApp *</label><input type="tel" id="f-tel" placeholder="+502 0000-0000" required></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Edad</label><input type="number" id="f-edad" placeholder="Ej: 28" min="18" max="65"></div>
+        <div class="fg"><label>Plaza de interés *</label>
+          <select id="f-plaza">
+            <option value="">Selecciona una plaza</option>
+            <option value="Carnicero Profesional">Carnicero Profesional</option>
+            <option value="Motorista Repartidor">Motorista Repartidor</option>
+          </select>
+        </div>
+      </div>
+      <div class="fg"><label>Experiencia relevante *</label><textarea id="f-exp" placeholder="Cuéntanos brevemente tu experiencia en el área..."></textarea></div>
+      <div class="fg">
+        <label>Adjuntar documentos (CV, DPI, licencia, etc.)</label>
+        <div class="file-drop" id="file-drop">
+          <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.png,.jpeg" onchange="handleFiles(this.files)">
+          <div class="fd-ico">📎</div>
+          <div class="fd-title">Arrastra tus archivos aquí o haz clic para seleccionar</div>
+          <div class="fd-sub">PDF, Word, JPG, PNG · Máximo 5 archivos</div>
+          <div class="fd-files" id="fd-files"></div>
+        </div>
+        <div class="file-note">⚠️ Los archivos serán mencionados en el mensaje de WhatsApp. Deberás enviarlos manualmente en el chat.</div>
+      </div>
+      <div class="fg"><label>Mensaje adicional</label><textarea id="f-msg" placeholder="¿Algo más que quieras agregar?"></textarea></div>
+      <button class="submit-btn" onclick="enviarAplicacion()">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0013 14.85l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0121.18 16"/></svg>
+        Enviar solicitud por WhatsApp
+      </button>
+      <p class="wa-alt">¿Prefieres contactar directo? <a href="https://wa.me/50248890091" target="_blank">Escríbenos al +502 4889-0091</a></p>
+    </div>
+  </div>
+</section>
 
 <footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
 
 <script src="shared.js"></script>
 <script>
 let uploadedFiles = [];
-function handleFiles(files) {
-  uploadedFiles = Array.from(files).slice(0,5);
-  const fd = document.getElementById('fd-files');
-  fd.innerHTML = uploadedFiles.map(f=>`<div class="fd-file"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>${f.name} (${(f.size/1024).toFixed(0)} KB)</div>`).join('');
-}
-const drop = document.getElementById('file-drop');
-drop.addEventListener('dragover', e=>{e.preventDefault();drop.classList.add('drag');});
-drop.addEventListener('dragleave', ()=>drop.classList.remove('drag'));
-drop.addEventListener('drop', e=>{e.preventDefault();drop.classList.remove('drag');handleFiles(e.dataTransfer.files);});
 
-function selectJob(job) { document.getElementById('f-plaza').value = job; }
+function handleFiles(files) {
+  uploadedFiles = Array.from(files).slice(0, 5);
+  const fd = document.getElementById('fd-files');
+  fd.innerHTML = uploadedFiles.map(f => `<div class="fd-file"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>${f.name} (${(f.size/1024).toFixed(0)} KB)</div>`).join('');
+}
+
+const drop = document.getElementById('file-drop');
+drop.addEventListener('dragover', e => { e.preventDefault(); drop.classList.add('drag'); });
+drop.addEventListener('dragleave', () => drop.classList.remove('drag'));
+drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('drag'); handleFiles(e.dataTransfer.files); });
+
+function selectJob(job) {
+  document.getElementById('f-plaza').value = job;
+  // highlight selected card
+  document.querySelectorAll('.job-card').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.job-card').forEach(c => {
+    if (c.querySelector('.jc-title')?.textContent === job) c.classList.add('selected');
+  });
+}
 
 function enviarAplicacion() {
   const nombre = document.getElementById('f-nombre').value.trim();
@@ -61,17 +295,18 @@ function enviarAplicacion() {
   const edad = document.getElementById('f-edad').value;
   const exp = document.getElementById('f-exp').value.trim();
   const msg = document.getElementById('f-msg').value.trim();
-  if(!nombre||!tel||!plaza){pcToast('Por favor completa los campos requeridos');return;}
+  if (!nombre || !tel || !plaza) { pcToast('Por favor completa los campos requeridos'); return; }
   let wa = `💼 *SOLICITUD DE EMPLEO — PORCICENTRO*\n━━━━━━━━━━━━━━━━━━━━\n`;
   wa += `👤 *Nombre:* ${nombre}\n`;
   wa += `📱 *Teléfono:* ${tel}\n`;
-  if(edad) wa += `🎂 *Edad:* ${edad} años\n`;
+  if (edad) wa += `🎂 *Edad:* ${edad} años\n`;
   wa += `🏢 *Plaza:* ${plaza}\n`;
-  if(exp) wa += `\n📝 *Experiencia:*\n${exp}\n`;
-  if(uploadedFiles.length) wa += `\n📎 *Documentos adjuntos:* ${uploadedFiles.map(f=>f.name).join(', ')}\n_(Favor enviar los archivos en este chat)_\n`;
-  if(msg) wa += `\n💬 *Mensaje adicional:*\n${msg}\n`;
+  if (exp) wa += `\n📝 *Experiencia:*\n${exp}\n`;
+  if (uploadedFiles.length) wa += `\n📎 *Documentos adjuntos:* ${uploadedFiles.map(f => f.name).join(', ')}\n_(Favor enviar los archivos en este chat)_\n`;
+  if (msg) wa += `\n💬 *Mensaje adicional:*\n${msg}\n`;
   wa += `\n━━━━━━━━━━━━━━━━━━━━\n_Enviado desde porcicentro.gt_`;
-  window.open('https://wa.me/50248890091?text='+encodeURIComponent(wa),'_blank');
+  window.open('https://wa.me/50248890091?text=' + encodeURIComponent(wa), '_blank');
 }
 </script>
-</body></html>
+</body>
+</html>
