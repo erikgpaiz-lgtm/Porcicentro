@@ -180,6 +180,35 @@ ul{list-style:none}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(30,30,30,.95);color:#fff;font-family:var(--fc);font-size:.75rem;letter-spacing:1px;padding:10px 20px;border-radius:100px;opacity:0;transition:all .3s;z-index:9999;border:1px solid rgba(255,255,255,.08);pointer-events:none;white-space:nowrap}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 
+
+/* ── KANBAN PIPELINE ── */
+.kbn-board{display:flex;gap:14px;overflow-x:auto;padding-bottom:24px;min-height:calc(100vh - 160px);align-items:flex-start}
+.kbn-board::-webkit-scrollbar{height:5px}
+.kbn-col{flex-shrink:0;width:240px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.kbn-col-hd{display:flex;align-items:center;gap:7px;padding:14px 14px 12px;background:rgba(0,0,0,.2)}
+.kbn-col-ico{font-size:.85rem}
+.kbn-col-title{font-family:var(--fc);font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.7);flex:1}
+.kbn-col-cnt{background:rgba(255,255,255,.08);color:rgba(255,255,255,.5);font-family:var(--fc);font-size:.65rem;font-weight:700;padding:2px 8px;border-radius:100px;min-width:22px;text-align:center}
+.kbn-cards{flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:80px}
+.kbn-drop-zone{border:2px dashed rgba(255,255,255,.06);border-radius:8px;padding:12px;text-align:center;font-family:var(--fc);font-size:.6rem;letter-spacing:1px;color:rgba(255,255,255,.12);text-transform:uppercase;display:none}
+.kbn-cards:empty .kbn-drop-zone,.kbn-cards .kbn-drop-zone:last-child{display:block}
+.kbn-add-btn{margin:8px 10px 10px;background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.1);border-radius:8px;padding:8px;font-family:var(--fc);font-size:.65rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;transition:all .2s}
+.kbn-add-btn:hover{background:rgba(184,0,26,.12);border-color:var(--r);color:var(--r)}
+.kbn-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;cursor:grab;transition:all .2s;position:relative}
+.kbn-card:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.15);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.3)}
+.kbn-card:active{cursor:grabbing;transform:scale(.97)}
+.kc-head{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin-bottom:6px}
+.kc-name{font-family:var(--fc);font-size:.85rem;font-weight:700;color:#fff;line-height:1.2}
+.kc-action{background:none;border:none;cursor:pointer;font-size:.8rem;opacity:.4;transition:opacity .2s;padding:2px}
+.kc-action:hover{opacity:1}
+.kc-meta{display:block;font-size:.75rem;color:rgba(255,255,255,.38);margin-bottom:3px}
+.kc-wa{color:#25D366 !important;text-decoration:none}
+.kc-wa:hover{text-decoration:underline}
+.kc-notes{font-size:.75rem;color:rgba(255,255,255,.3);line-height:1.45;margin:7px 0;border-left:2px solid rgba(255,255,255,.08);padding-left:7px}
+.kc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;gap:6px}
+.kc-stage-sel{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.5);font-size:.62rem;font-family:var(--fb);padding:4px 6px;outline:none;cursor:pointer;flex:1;min-width:0}
+.kc-stage-sel option{background:#1a1a1a}
+
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
   .sidebar{transform:translateX(-100%);width:260px}
@@ -227,6 +256,7 @@ ul{list-style:none}
       <button class="sb-link" onclick="goPage('clientes',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Clientes</button>
       <button class="sb-link" onclick="goPage('pedidos',this)"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>Pedidos</button>
       <button class="sb-link" onclick="goPage('seguimiento',this)"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Seguimiento</button>
+      <button class="sb-link" onclick="goPage('pipeline',this)"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="5" height="18" rx="1"/><rect x="9.5" y="3" width="5" height="13" rx="1"/><rect x="17" y="3" width="5" height="8" rx="1"/></svg>Pipeline / Kanban</button>
       <div class="sb-label">Herramientas</div>
       <button class="sb-link" onclick="exportCSV('clientes')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar Clientes</button>
       <button class="sb-link" onclick="exportCSV('pedidos')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar Pedidos</button>
@@ -349,10 +379,10 @@ function goPage(page,btn){
   STATE.page=page;
   document.querySelectorAll('.sb-link').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  const titles={dashboard:'Dashboard',clientes:'Clientes',pedidos:'Pedidos',seguimiento:'Seguimiento'};
+  const titles={dashboard:'Dashboard',clientes:'Clientes',pedidos:'Pedidos',seguimiento:'Seguimiento',pipeline:'Pipeline de Prospectos'};
   document.getElementById('page-title').textContent=titles[page]||page;
-  const ctaLabels={clientes:'Nuevo Cliente',pedidos:'Nuevo Pedido',dashboard:'Nuevo Cliente',seguimiento:'Agregar Nota'};
-  const ctaActions={clientes:"openModal('cliente')",pedidos:"openModal('pedido')",dashboard:"openModal('cliente')",seguimiento:"openModal('nota')"};
+  const ctaLabels={clientes:'Nuevo Cliente',pedidos:'Nuevo Pedido',dashboard:'Nuevo Cliente',seguimiento:'Agregar Nota',pipeline:'Nuevo Prospecto'};
+  const ctaActions={clientes:"openModal('cliente')",pedidos:"openModal('pedido')",dashboard:"openModal('cliente')",seguimiento:"openModal('nota')",pipeline:"openModal('cliente')"};
   const ctaBtn=document.getElementById('topbar-cta');
   ctaBtn.setAttribute('onclick',ctaActions[page]||'');
   ctaBtn.innerHTML=`<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round"><path d="M12 5v14M5 12h14"/></svg>${ctaLabels[page]||'Nuevo'}`;
@@ -367,6 +397,7 @@ function renderPage(page){
   else if(page==='clientes') c.innerHTML=renderClientes();
   else if(page==='pedidos') c.innerHTML=renderPedidos();
   else if(page==='seguimiento') c.innerHTML=renderSeguimiento();
+  else if(page==='pipeline'){ c.innerHTML=renderPipeline(); initDragDrop(); }
 }
 
 // ─── DASHBOARD ──────────────────────────────────────────────
@@ -507,6 +538,93 @@ function selectSegCliente(id){
     </div>`;
 }
 
+// ─── PIPELINE / KANBAN ──────────────────────────────────────
+const PIPELINE_COLS = [
+  { id:'no_contactado', label:'Sin Contactar', color:'#555', icon:'🔴' },
+  { id:'contactado',    label:'Contactado',    color:'#D4920A', icon:'🟡' },
+  { id:'en_seguimiento',label:'En Seguimiento',color:'#2563EB', icon:'🔵' },
+  { id:'negociando',    label:'Negociando',    color:'#7C3AED', icon:'🟣' },
+  { id:'cliente',       label:'¡Cliente!',     color:'#1A6B3A', icon:'🟢' },
+  { id:'perdido',       label:'Perdido',       color:'#B8001A', icon:'⬛' },
+];
+
+function renderPipeline(){
+  const prospectos = loadData('prospectos');
+  const cols = PIPELINE_COLS.map(col => {
+    const cards = prospectos.filter(p => (p.etapa||'no_contactado') === col.id);
+    return `<div class="kbn-col" data-col="${col.id}">
+      <div class="kbn-col-hd" style="border-top:3px solid ${col.color}">
+        <span class="kbn-col-ico">${col.icon}</span>
+        <span class="kbn-col-title">${col.label}</span>
+        <span class="kbn-col-cnt">${cards.length}</span>
+      </div>
+      <div class="kbn-cards" id="cards-${col.id}" ondragover="event.preventDefault()" ondrop="dropCard(event,'${col.id}')">
+        ${cards.map(p => renderProspectoCard(p)).join('')}
+        <div class="kbn-drop-zone">Arrastra aquí</div>
+      </div>
+      <button class="kbn-add-btn" onclick="openModal('prospecto',null,'${col.id}')">+ Agregar</button>
+    </div>`;
+  }).join('');
+  return `<div class="kbn-board">${cols}</div>`;
+}
+
+function renderProspectoCard(p){
+  return `<div class="kbn-card" draggable="true" id="kc-${p.id}" data-id="${p.id}"
+    ondragstart="dragStart(event,'${p.id}')" ondragend="this.style.opacity='1'">
+    <div class="kc-head">
+      <div class="kc-name">${esc(p.nombre)}</div>
+      <div style="display:flex;gap:4px">
+        <button class="kc-action" onclick="editProspecto('${p.id}');event.stopPropagation()">✏️</button>
+        <button class="kc-action" onclick="delProspecto('${p.id}');event.stopPropagation()">🗑️</button>
+      </div>
+    </div>
+    ${p.empresa?`<div class="kc-meta">🏢 ${esc(p.empresa)}</div>`:''}
+    ${p.tel?`<a href="https://wa.me/502${p.tel.replace(/\D/g,'')}" target="_blank" class="kc-meta kc-wa" onclick="event.stopPropagation()">📱 ${esc(p.tel)}</a>`:''}
+    ${p.notas?`<div class="kc-notes">${esc(p.notas.substring(0,80))}${p.notas.length>80?'...':''}</div>`:''}
+    <div class="kc-footer">
+      <span style="font-size:.62rem;color:rgba(255,255,255,.2)">${p.fecha||''}</span>
+      <select class="kc-stage-sel" onchange="moverProspecto('${p.id}',this.value);event.stopPropagation()" onclick="event.stopPropagation()">
+        ${PIPELINE_COLS.map(c=>`<option value="${c.id}" ${c.id===(p.etapa||'no_contactado')?'selected':''}>${c.label}</option>`).join('')}
+      </select>
+    </div>
+  </div>`;
+}
+
+let draggedId = null;
+function dragStart(ev, id){ draggedId=id; ev.dataTransfer.effectAllowed='move'; ev.currentTarget.style.opacity='.4'; }
+function dropCard(ev, colId){
+  ev.preventDefault();
+  if(!draggedId) return;
+  moverProspecto(draggedId, colId);
+  draggedId=null;
+}
+function moverProspecto(id, etapa){
+  const prospectos=loadData('prospectos');
+  const idx=prospectos.findIndex(p=>p.id===id);
+  if(idx<0) return;
+  prospectos[idx].etapa=etapa;
+  saveData('prospectos',prospectos);
+  renderPage('pipeline');
+  initDragDrop();
+  const col=PIPELINE_COLS.find(c=>c.id===etapa);
+  showToast('Movido a: '+(col?.label||etapa));
+}
+function initDragDrop(){
+  document.querySelectorAll('.kbn-card').forEach(card=>{
+    card.addEventListener('dragend',()=>{ card.style.opacity='1'; });
+  });
+}
+function editProspecto(id){
+  const p=loadData('prospectos').find(x=>x.id===id);
+  if(p) openModal('prospecto',p);
+}
+function delProspecto(id){
+  if(!confirm('¿Eliminar este prospecto?')) return;
+  saveData('prospectos',loadData('prospectos').filter(x=>x.id!==id));
+  renderPage('pipeline');
+  showToast('Prospecto eliminado');
+}
+
 function addNota(){
   const inp=document.getElementById('seg-note-input');
   if(!inp||!inp.value.trim()||!currentSegCliente) return;
@@ -535,6 +653,25 @@ function openModal(type, id){
       <div class="fg"><label>Email</label><input id="mc-email" type="email" value="${esc(c.email||'')}" placeholder="correo@ejemplo.com"></div>
       <div class="fg"><label>Notas / Preferencias</label><textarea id="mc-notas" placeholder="Pedidos habituales, horarios preferidos, cortes favoritos...">${esc(c.notas||'')}</textarea></div>
       <div class="modal-ft"><button class="btn btn-sec" onclick="closeModal()">Cancelar</button><button class="btn btn-prim" onclick="saveCliente('${id||''}')">Guardar Cliente</button></div>`;
+  } else if(type==='prospecto'){
+    const p=id||{};
+    const etapaDefault=arguments[2]||'no_contactado';
+    box.innerHTML=`
+      <div class="modal-hd"><div class="modal-title">${p.id?'Editar Prospecto':'Nuevo Prospecto'}</div><button class="modal-close" onclick="closeModal()">&#x2715;</button></div>
+      <div class="fg"><label>Nombre *</label><input id="mp-nombre" placeholder="Nombre completo" value="${esc(p.nombre||'')}"></div>
+      <div class="fg-row">
+        <div class="fg"><label>Teléfono</label><input id="mp-tel" placeholder="+502 0000-0000" value="${esc(p.tel||'')}"></div>
+        <div class="fg"><label>Empresa / Negocio</label><input id="mp-empresa" placeholder="Restaurante, carnicería..." value="${esc(p.empresa||'')}"></div>
+      </div>
+      <div class="fg"><label>Etapa</label>
+        <select id="mp-etapa">
+          ${PIPELINE_COLS.map(c=>`<option value="${c.id}" ${(p.etapa||etapaDefault)===c.id?'selected':''}>${c.icon} ${c.label}</option>`).join('')}
+        </select>
+      </div>
+      <div class="fg"><label>Notas</label><textarea id="mp-notas" placeholder="Detalles del prospecto, interés, seguimiento...">${esc(p.notas||'')}</textarea></div>
+      <div class="modal-ft"><button class="btn btn-sec" onclick="closeModal()">Cancelar</button><button class="btn btn-prim" onclick="saveProspecto('${p.id||''}')">Guardar</button></div>`;
+    bg.classList.add('on');
+    return;
   } else if(type==='pedido'){
     const pedidos=loadData('pedidos');
     const clientes=loadData('clientes');
@@ -564,6 +701,29 @@ function openModal(type, id){
 function closeModal(e){
   if(e&&e.target!==document.getElementById('modal-bg')) return;
   document.getElementById('modal-bg').classList.remove('on');
+}
+
+
+function saveProspecto(id){
+  const nombre=document.getElementById('mp-nombre').value.trim();
+  if(!nombre){showToast('El nombre es requerido');return;}
+  const prospectos=loadData('prospectos');
+  const obj={
+    id:id||genId(),
+    nombre,
+    tel:document.getElementById('mp-tel').value.trim(),
+    empresa:document.getElementById('mp-empresa').value.trim(),
+    etapa:document.getElementById('mp-etapa').value,
+    notas:document.getElementById('mp-notas').value.trim(),
+    fecha:id?prospectos.find(x=>x.id===id)?.fecha:today()
+  };
+  if(id){const i=prospectos.findIndex(x=>x.id===id);if(i>-1)prospectos[i]=obj;}
+  else prospectos.push(obj);
+  saveData('prospectos',prospectos);
+  document.getElementById('modal-bg').classList.remove('on');
+  renderPage('pipeline');
+  initDragDrop();
+  showToast(id?'Prospecto actualizado':'Prospecto agregado');
 }
 
 function saveCliente(id){
