@@ -1,0 +1,77 @@
+
+<section class="apply-sec" id="apply-form"><div class="apply-wrap">
+  <div class="sec-head"><div class="sec-kicker" style="justify-content:center"><div class="sec-kicker-line"></div><span>Postulación</span></div><h2 class="sec-title white">¿Listo para <em>aplicar?</em></h2><p class="sec-desc light">Completa el formulario y adjunta tus documentos. Nos pondremos en contacto contigo a la brevedad.</p></div>
+  <div class="apply-form">
+    <div class="form-row">
+      <div class="fg"><label>Nombre completo *</label><input type="text" id="f-nombre" placeholder="Tu nombre completo" required></div>
+      <div class="fg"><label>Teléfono / WhatsApp *</label><input type="tel" id="f-tel" placeholder="+502 0000-0000" required></div>
+    </div>
+    <div class="form-row">
+      <div class="fg"><label>Edad</label><input type="number" id="f-edad" placeholder="Ej: 28" min="18" max="65"></div>
+      <div class="fg"><label>Plaza de interés *</label>
+        <select id="f-plaza">
+          <option value="">Selecciona una plaza</option>
+          <option value="Carnicero Profesional">Carnicero Profesional</option>
+          <option value="Motorista Repartidor">Motorista Repartidor</option>
+        </select>
+      </div>
+    </div>
+    <div class="fg"><label>Experiencia relevante *</label><textarea id="f-exp" placeholder="Cuéntanos brevemente tu experiencia en el área..."></textarea></div>
+    <div class="fg">
+      <label>Adjuntar documentos (CV, DPI, licencia, etc.)</label>
+      <div class="file-drop" id="file-drop">
+        <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.png,.jpeg" onchange="handleFiles(this.files)">
+        <div class="fd-ico">📎</div>
+        <div class="fd-title">Arrastra tus archivos aquí o haz clic para seleccionar</div>
+        <div class="fd-sub">PDF, Word, JPG, PNG · Máximo 5 archivos</div>
+        <div class="fd-files" id="fd-files"></div>
+      </div>
+      <div class="file-note">⚠️ Los archivos serán mencionados en el mensaje de WhatsApp. Deberás enviarlos manualmente en el chat.</div>
+    </div>
+    <div class="fg"><label>Mensaje adicional</label><textarea id="f-msg" placeholder="¿Algo más que quieras agregar?"></textarea></div>
+    <button class="submit-btn" onclick="enviarAplicacion()">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0013 14.85l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0121.18 16"/></svg>
+      Enviar solicitud por WhatsApp
+    </button>
+    <p class="wa-alt">¿Prefieres contactar directo? <a href="https://wa.me/50248890091" target="_blank">Escríbenos al +502 4889-0091</a></p>
+  </div>
+</div></section>
+
+<footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
+
+<script src="shared.js"></script>
+<script>
+let uploadedFiles = [];
+function handleFiles(files) {
+  uploadedFiles = Array.from(files).slice(0,5);
+  const fd = document.getElementById('fd-files');
+  fd.innerHTML = uploadedFiles.map(f=>`<div class="fd-file"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>${f.name} (${(f.size/1024).toFixed(0)} KB)</div>`).join('');
+}
+const drop = document.getElementById('file-drop');
+drop.addEventListener('dragover', e=>{e.preventDefault();drop.classList.add('drag');});
+drop.addEventListener('dragleave', ()=>drop.classList.remove('drag'));
+drop.addEventListener('drop', e=>{e.preventDefault();drop.classList.remove('drag');handleFiles(e.dataTransfer.files);});
+
+function selectJob(job) { document.getElementById('f-plaza').value = job; }
+
+function enviarAplicacion() {
+  const nombre = document.getElementById('f-nombre').value.trim();
+  const tel = document.getElementById('f-tel').value.trim();
+  const plaza = document.getElementById('f-plaza').value;
+  const edad = document.getElementById('f-edad').value;
+  const exp = document.getElementById('f-exp').value.trim();
+  const msg = document.getElementById('f-msg').value.trim();
+  if(!nombre||!tel||!plaza){pcToast('Por favor completa los campos requeridos');return;}
+  let wa = `💼 *SOLICITUD DE EMPLEO — PORCICENTRO*\n━━━━━━━━━━━━━━━━━━━━\n`;
+  wa += `👤 *Nombre:* ${nombre}\n`;
+  wa += `📱 *Teléfono:* ${tel}\n`;
+  if(edad) wa += `🎂 *Edad:* ${edad} años\n`;
+  wa += `🏢 *Plaza:* ${plaza}\n`;
+  if(exp) wa += `\n📝 *Experiencia:*\n${exp}\n`;
+  if(uploadedFiles.length) wa += `\n📎 *Documentos adjuntos:* ${uploadedFiles.map(f=>f.name).join(', ')}\n_(Favor enviar los archivos en este chat)_\n`;
+  if(msg) wa += `\n💬 *Mensaje adicional:*\n${msg}\n`;
+  wa += `\n━━━━━━━━━━━━━━━━━━━━\n_Enviado desde porcicentro.gt_`;
+  window.open('https://wa.me/50248890091?text='+encodeURIComponent(wa),'_blank');
+}
+</script>
+</body></html>
