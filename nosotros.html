@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nosotros — PorciCentro Guatemala</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared.css">
+<style>
+.story{padding:100px 24px;background:var(--crema)}
+.story-wrap{max-width:var(--max-w);margin:0 auto}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.story-img{border-radius:var(--r-xl);background:linear-gradient(135deg,#1a0005,#380010);height:480px;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:rgba(255,255,255,.15);box-shadow:0 24px 80px rgba(0,0,0,.15)}
+.story-img .ph-ico{font-size:4rem;opacity:.15}
+.year-badge{position:absolute;top:-20px;right:-20px;width:110px;height:110px;border-radius:50%;background:var(--rojo);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 12px 40px rgba(184,0,26,.4);color:#fff}
+.yb-n{font-family:var(--font-h);font-size:1.8rem;font-weight:900;line-height:1}
+.yb-l{font-family:var(--font-c);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;opacity:.8}
+.story-copy .sec-title{text-align:left}
+.story-copy .sec-kicker{justify-content:flex-start}
+.story-text{font-size:.95rem;color:var(--gris);line-height:1.88;margin-bottom:16px}
+.story-text strong{color:var(--negro)}
+.values{padding:100px 24px;background:var(--negro);color:#fff}
+.values-wrap{max-width:var(--max-w);margin:0 auto}
+.val-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;border:1px solid rgba(255,255,255,.05);border-radius:var(--r-xl);overflow:hidden}
+.val-card{padding:48px 36px;background:rgba(255,255,255,.03);transition:background .3s;position:relative;overflow:hidden}
+.val-card:hover{background:rgba(184,0,26,.08)}
+.val-card+.val-card{border-left:1px solid rgba(255,255,255,.05)}
+.val-num{font-family:var(--font-h);font-size:5rem;font-weight:900;color:rgba(184,0,26,.12);position:absolute;top:16px;right:24px;line-height:1}
+.val-ico{width:56px;height:56px;border-radius:var(--r);background:rgba(184,0,26,.12);border:1px solid rgba(184,0,26,.2);display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.val-ico svg{width:26px;height:26px;stroke:var(--rojo);fill:none;stroke-width:2;stroke-linecap:round}
+.val-title{font-family:var(--font-h);font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:12px}
+.val-text{font-size:.9rem;color:rgba(255,255,255,.42);line-height:1.78}
+.mv{padding:80px 24px;background:var(--gris-l)}
+.mv-wrap{max-width:var(--max-w);margin:0 auto}
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px}
+.mv-card{background:#fff;border-radius:var(--r-xl);padding:40px;border-left:4px solid var(--rojo);box-shadow:var(--shadow-sm)}
+.mv-label{font-family:var(--font-c);font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--rojo);font-weight:700;margin-bottom:12px}
+.mv-title{font-family:var(--font-h);font-size:1.5rem;font-weight:700;color:var(--negro);margin-bottom:12px}
+.mv-text{font-size:.9rem;color:var(--gris);line-height:1.82}
+@media(max-width:1024px){.story-grid{grid-template-columns:1fr;gap:48px}.val-grid{grid-template-columns:1fr}.val-card+.val-card{border-left:none;border-top:1px solid rgba(255,255,255,.05)}.mv-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-inner">
+  <a class="nav-logo" href="index.html"><div class="logo-mark">PC</div><div class="logo-wordmark">PORCI<em>CENTRO</em></div></a>
+  <div class="nav-links"><a href="index.html">Inicio</a><a href="productos.html">Productos</a><a href="recetario.html">Recetario</a><a href="nosotros.html" class="active">Nosotros</a><a href="trabaja.html">Trabaja con Nosotros</a><a href="contacto.html">Contacto</a></div>
+  <div class="nav-actions"><a class="btn-nav-cta" href="https://wa.me/50248890091" target="_blank" rel="noopener">WhatsApp</a><button class="burger" id="pc-burger" onclick="pcToggleMenu()"><span></span><span></span><span></span></button></div>
+</div></nav>
+<div class="mob-nav" id="pc-mob-nav"><a href="index.html" onclick="pcCloseMenu()">Inicio</a><a href="productos.html" onclick="pcCloseMenu()">Productos</a><a href="recetario.html" onclick="pcCloseMenu()">Recetario</a><a href="nosotros.html" onclick="pcCloseMenu()">Nosotros</a><a href="trabaja.html" onclick="pcCloseMenu()">Trabaja con Nosotros</a><a href="contacto.html" onclick="pcCloseMenu()">Contacto</a></div>
+
+<section class="page-hero"><div class="page-hero-dots"></div><div class="page-tag"><div class="page-tag-dot"></div><span>Nuestra Historia · Est. 2025</span></div><h1>Quiénes <span class="red">Somos</span></h1><p class="page-hero-sub">PorciCentro nació con una visión clara: llevar carne de cerdo fresca y de calidad a cada rincón de Guatemala con honestidad, puntualidad y servicio de excelencia.</p></section>
+
+<section class="story"><div class="story-wrap"><div class="story-grid">
+  <div class="story-img rv">
+    <div class="ph-ico">🏢</div><span style="font-family:var(--font-c);font-size:.6rem;letter-spacing:2px;text-transform:uppercase">Imagen próximamente</span>
+    <div class="year-badge"><div class="yb-n">2025</div><div class="yb-l">Fundación</div></div>
+  </div>
+  <div class="story-copy rv d1">
+    <div class="sec-kicker"><div class="sec-kicker-line"></div><span>Nuestra Historia</span></div>
+    <h2 class="sec-title">Un sueño <em>guatemalteco</em></h2>
+    <p class="story-text">PorciCentro nació en <strong>2025</strong> con una misión sencilla pero poderosa: distribuir carne de cerdo fresca de la más alta calidad a restaurantes, carnicerías y hogares en Guatemala.</p>
+    <p class="story-text">Desde el primer día apostamos por la <strong>frescura total</strong> —sin congelados, sin intermediarios innecesarios— llevando los cortes directamente del rastro al cliente en menos de 24 horas.</p>
+    <p class="story-text">Hoy operamos de <strong>lunes a domingo</strong>, ofrecemos más de 18 cortes diferentes y seguimos creciendo gracias a la confianza de nuestra clientela.</p>
+    <a class="btn btn-primary" href="contacto.html" style="margin-top:12px">Contáctanos →</a>
+  </div>
+</div></div></section>
+
+<section class="values"><div class="values-wrap">
+  <div class="sec-head rv"><div class="sec-kicker" style="justify-content:center"><div class="sec-kicker-line"></div><span>Nuestros Pilares</span></div><h2 class="sec-title white">Lo que nos <em>define</em></h2></div>
+  <div class="val-grid">
+    <div class="val-card rv d1"><div class="val-num">01</div><div class="val-ico"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="val-title">Calidad sin Compromiso</div><p class="val-text">Seleccionamos únicamente carne de cerdo fresca, inspeccionada y con trazabilidad desde el rastro. Nunca vendemos producto congelado o de calidad dudosa.</p></div>
+    <div class="val-card rv d2"><div class="val-num">02</div><div class="val-ico"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="val-title">Honestidad Total</div><p class="val-text">Precios claros, pesos exactos, sin sorpresas. Creemos que la confianza se construye con transparencia y coherencia en cada pedido.</p></div>
+    <div class="val-card rv d3"><div class="val-num">03</div><div class="val-ico"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div><div class="val-title">Servicio al Cliente</div><p class="val-text">Atención directa por WhatsApp, respuesta rápida y entregas puntuales. Tu comodidad y satisfacción son nuestra prioridad en cada interacción.</p></div>
+  </div>
+</div></section>
+
+<section class="mv"><div class="mv-wrap">
+  <div class="sec-head rv"><div class="sec-kicker" style="justify-content:center"><div class="sec-kicker-line"></div><span>Rumbo Claro</span></div><h2 class="sec-title">Misión & <em>Visión</em></h2></div>
+  <div class="mv-grid">
+    <div class="mv-card rv d1"><div class="mv-label">Misión</div><div class="mv-title">Alimentar Guatemala con lo mejor del cerdo</div><p class="mv-text">Proveer carne de cerdo fresca, de calidad superior y a precios justos, a través de un servicio ágil, honesto y comprometido con el bienestar de nuestros clientes y colaboradores.</p></div>
+    <div class="mv-card rv d2"><div class="mv-label">Visión</div><div class="mv-title">Ser la distribuidora de cerdo de referencia</div><p class="mv-text">Convertirnos en el aliado estratégico de restaurantes, carnicerías y hogares en Guatemala, reconocidos por nuestra frescura, puntualidad y trato humano excepcional.</p></div>
+  </div>
+</div></section>
+
+<footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
+<script src="shared.js"></script>
+</body></html>
