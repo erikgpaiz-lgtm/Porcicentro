@@ -292,32 +292,23 @@ async function doLogin(){
   spinner.style.display='inline-block';
   err.style.display='none';
 
-  try {
-    const res = await fetch('/.netlify/functions/auth', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ user: u, pass: p })
-    });
-    const data = await res.json();
+  // Credentials check
+  const USERS = { 'erik': '1234' };
+  await new Promise(r => setTimeout(r, 600)); // small delay for UX
 
-    if(data.ok){
-      sessionStorage.setItem('pc_crm_auth', data.user);
-      sessionStorage.setItem('pc_crm_token', data.token || '');
-      document.getElementById('login-screen').classList.add('out');
-      setTimeout(()=>{
-        document.getElementById('login-screen').style.display='none';
-        document.getElementById('app').classList.add('on');
-        renderPage('dashboard');
-      },420);
-      document.getElementById('sb-av').textContent=data.user[0].toUpperCase();
-      document.getElementById('sb-uname').textContent=data.user.charAt(0).toUpperCase()+data.user.slice(1);
-    } else {
-      err.textContent=data.error||'Usuario o contrasena incorrectos.';
-      err.style.display='block';
-    }
-  } catch(e) {
-    // Fallback for local development or if function is unavailable
-    err.textContent='Error de conexion. Intenta de nuevo.';
+  if(USERS[u.toLowerCase()] && USERS[u.toLowerCase()] === p){
+    const displayUser = u.charAt(0).toUpperCase() + u.slice(1).toLowerCase();
+    sessionStorage.setItem('pc_crm_auth', displayUser);
+    document.getElementById('login-screen').classList.add('out');
+    setTimeout(()=>{
+      document.getElementById('login-screen').style.display='none';
+      document.getElementById('app').classList.add('on');
+      renderPage('dashboard');
+    },420);
+    document.getElementById('sb-av').textContent=displayUser[0].toUpperCase();
+    document.getElementById('sb-uname').textContent=displayUser;
+  } else {
+    err.textContent='Usuario o contraseña incorrectos.';
     err.style.display='block';
   }
 
