@@ -1,29 +1,73 @@
-functionsDirectory = "/opt/build/repo/netlify/functions"
-functionsDirectoryOrigin = "config-v1"
-plugins = []
-headers = []
-redirects = []
+# ============================================================
+# PORCICENTRO — configuración de Netlify
+# ------------------------------------------------------------
+# El sitio es estático (publicado desde la raíz del repositorio)
+# y usa Netlify Functions para el CRM (/api/auth) y el registro
+# de pedidos (/api/pedidos).
+# ============================================================
 
 [build]
-publish = "/opt/build/repo"
-publishOrigin = "default"
-functions = "/opt/build/repo/netlify/functions"
-
-  [build.environment]
-
-  [build.processing]
-
-    [build.processing.css]
-
-    [build.processing.html]
-
-    [build.processing.images]
-
-    [build.processing.js]
-
-  [build.services]
+  publish = "."
+  functions = "netlify/functions"
 
 [functions]
-
-  [functions."*"]
   node_bundler = "esbuild"
+
+# ── API: rutas amigables hacia las funciones ────────────────
+[[redirects]]
+  from = "/api/auth"
+  to = "/.netlify/functions/auth"
+  status = 200
+
+[[redirects]]
+  from = "/api/pedidos"
+  to = "/.netlify/functions/pedidos"
+  status = 200
+
+# ── No exponer el código fuente de las funciones ni las rutas internas ──
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# ── Cabeceras de seguridad ─────────────────────────────────
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'"
+
+# El CRM nunca debe indexarse ni quedar en caché
+[[headers]]
+  for = "/crm.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store, max-age=0"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=600"
+
+[[headers]]
+  for = "/shared.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/shared.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/data.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

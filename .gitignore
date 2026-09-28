@@ -1,0 +1,10 @@
+# Dependencias
+node_modules/
+
+# Datos locales del servidor de desarrollo y credenciales de prueba
+.datos-locales/
+.env.local
+
+# Sistema
+.DS_Store
+*.log

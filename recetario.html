@@ -4,8 +4,30 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recetario — PorciCentro Guatemala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<meta name="description" content="Recetas guatemaltecas con carne de cerdo: chicharrón, carnitas, chuletas, longaniza y más, con el corte exacto y cómo pedirlo por WhatsApp.">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="author" content="PorciCentro">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://erikgpaiz-lgtm.github.io/Porcicentro/recetario.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PorciCentro">
+<meta property="og:locale" content="es_GT">
+<meta property="og:title" content="Recetario de Cerdo — PorciCentro Guatemala">
+<meta property="og:description" content="Recetas guatemaltecas con carne de cerdo: chicharrón, carnitas, chuletas, longaniza y más, con el corte exacto y cómo pedirlo por WhatsApp.">
+<meta property="og:url" content="https://erikgpaiz-lgtm.github.io/Porcicentro/recetario.html">
+<meta property="og:image" content="https://erikgpaiz-lgtm.github.io/Porcicentro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PorciCentro — carne de cerdo fresca en Guatemala">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Recetario de Cerdo — PorciCentro Guatemala">
+<meta name="twitter:description" content="Recetas guatemaltecas con carne de cerdo: chicharrón, carnitas, chuletas, longaniza y más, con el corte exacto y cómo pedirlo por WhatsApp.">
+<meta name="twitter:image" content="https://erikgpaiz-lgtm.github.io/Porcicentro/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
 <style>
 .rec-filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:48px 0}
 .rf-btn{font-family:var(--font-c);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:9px 20px;border-radius:100px;border:1.5px solid rgba(13,13,13,.14);color:var(--gris);background:#fff;transition:all .22s;cursor:pointer}
@@ -68,16 +90,58 @@
 .rm-order-txt{font-size:.9rem;color:var(--gris)}
 .rm-order-txt strong{color:var(--negro)}
 @media(max-width:640px){.rec-grid{grid-template-columns:1fr;padding:0 16px 72px}.rm-ing-grid{grid-template-columns:1fr}.rm-body{padding:24px}}
+
+.rec-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rm-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rec-img-overlay{z-index:1}
+.rec-cat-tag,.rec-time-tag,.rec-diff{z-index:2}
+
 </style>
+<!-- PC:JSONLD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://erikgpaiz-lgtm.github.io/Porcicentro/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Recetario",
+          "item": "https://erikgpaiz-lgtm.github.io/Porcicentro/recetario.html"
+        }
+      ]
+    },
+    {
+      "@type": "CollectionPage",
+      "name": "Recetario de cerdo",
+      "inLanguage": "es-GT",
+      "isPartOf": {
+        "@id": "https://erikgpaiz-lgtm.github.io/Porcicentro/#sitio"
+      }
+    }
+  ]
+}
+</script>
+<!-- /PC:JSONLD -->
 </head>
 <body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
 <nav class="nav"><div class="nav-inner">
   <a class="nav-logo" href="index.html"><div class="logo-mark">PC</div><div class="logo-wordmark">PORCI<em>CENTRO</em></div></a>
   <div class="nav-links"><a href="index.html">Inicio</a><a href="productos.html">Productos</a><a href="recetario.html" class="active">Recetario</a><a href="nosotros.html">Nosotros</a><a href="trabaja.html">Trabaja con Nosotros</a><a href="contacto.html">Contacto</a></div>
-  <div class="nav-actions"><a class="btn-nav-cta" href="productos.html">Ver Productos</a><button class="burger" id="pc-burger" onclick="pcToggleMenu()"><span></span><span></span><span></span></button></div>
+  <div class="nav-actions"><a class="btn-nav-cta" href="productos.html">Ver Productos</a><button class="nav-cart" type="button" aria-label="Abrir tu pedido" onclick="pcOpenCart()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-dot" id="cart-badge">0</span></button><button class="burger" id="pc-burger" type="button" aria-label="Abrir menú de navegación" aria-controls="pc-mob-nav" aria-expanded="false" onclick="pcToggleMenu()"><span></span><span></span><span></span></button></div>
 </div></nav>
-<div class="mob-nav" id="pc-mob-nav"><a href="index.html" onclick="pcCloseMenu()">Inicio</a><a href="productos.html" onclick="pcCloseMenu()">Productos</a><a href="recetario.html" onclick="pcCloseMenu()">Recetario</a><a href="nosotros.html" onclick="pcCloseMenu()">Nosotros</a><a href="trabaja.html" onclick="pcCloseMenu()">Trabaja con Nosotros</a><a href="contacto.html" onclick="pcCloseMenu()">Contacto</a></div>
+<nav class="mob-nav" id="pc-mob-nav" aria-label="Menú móvil" aria-hidden="true"><a href="index.html" onclick="pcCloseMenu()">Inicio</a><a href="productos.html" onclick="pcCloseMenu()">Productos</a><a href="recetario.html" onclick="pcCloseMenu()">Recetario</a><a href="nosotros.html" onclick="pcCloseMenu()">Nosotros</a><a href="trabaja.html" onclick="pcCloseMenu()">Trabaja con Nosotros</a><a href="contacto.html" onclick="pcCloseMenu()">Contacto</a></nav>
 
+<main id="main">
 <section class="page-hero">
   <div class="page-hero-dots"></div>
   <div class="page-tag"><div class="page-tag-dot"></div><span>Recetario PorciCentro 2025</span></div>
@@ -86,97 +150,98 @@
 </section>
 
 <div style="max-width:var(--max-w);margin:0 auto">
-  <div class="rec-filters rv">
-    <button class="rf-btn active" onclick="filterRec('all',this)">Todas las Recetas</button>
-    <button class="rf-btn" onclick="filterRec('costillar',this)">Costillar</button>
-    <button class="rf-btn" onclick="filterRec('chicharron',this)">Chicharrón</button>
-    <button class="rf-btn" onclick="filterRec('lomo',this)">Lomo</button>
-    <button class="rf-btn" onclick="filterRec('paleta',this)">Paleta</button>
-    <button class="rf-btn" onclick="filterRec('especial',this)">Especialidades</button>
+  <div class="rec-filters rv" role="group" aria-label="Filtrar recetas">
+    <button class="rf-btn active" type="button" aria-pressed="true" onclick="pcFiltrar('all',this)">Todas las Recetas</button>
+    <button class="rf-btn" type="button" aria-pressed="false" onclick="pcFiltrar('cortes',this)">Cortes al horno o parrilla</button>
+    <button class="rf-btn" type="button" aria-pressed="false" onclick="pcFiltrar('preparados',this)">Chicharrón y carnitas</button>
+    <button class="rf-btn" type="button" aria-pressed="false" onclick="pcFiltrar('especialidades',this)">Especialidades</button>
   </div>
+
 </div>
 
 <div class="rec-grid" id="rec-grid"></div>
 
 <!-- MODAL -->
 <div class="rec-overlay" id="rec-overlay" onclick="closeRecModal(event)">
-  <div class="rec-modal" id="rec-modal"></div>
+  <div class="rec-modal" id="rec-modal" role="dialog" aria-modal="true" aria-label="Receta"></div>
 </div>
 
-<footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
+</main>
+<footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy"><a href="privacidad.html">Aviso de privacidad</a></div><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
 
+<script src="data.js"></script>
 <script src="shared.js"></script>
 <script>
 const RECIPES = [
   {
-    id:'costillas-bbq', cat:'costillar', cut:'Costillar', name:'Costillas BBQ a la Parrilla',
+    id:'costillas-bbq', cutId:'costilla', group:'cortes', name:'Costillas BBQ a la Parrilla',
     desc:'La receta clásica de las costillas, glaseadas con salsa BBQ casera y asadas lentamente hasta quedar tiernas y caramelizadas.',
-    time:'2h 30min', servings:4, difficulty:2, price:'Q23.50/lb',
+    time:'2h 30min', servings:4, difficulty:2,
     ingredients:['2 lb de costillas de cerdo','4 dientes de ajo picado','2 cdas de aceite','Sal y pimienta al gusto','1/2 tz salsa BBQ','2 cdas de miel','1 cda de mostaza','1 limón (jugo)','Hierbas al gusto'],
     steps:['Sazona las costillas con sal, pimienta y ajo. Deja marinar 30 min o toda la noche.','Precalienta la parrilla a fuego medio. Engrasa bien la rejilla.','Cocina las costillas 45 minutos tapadas, volteando cada 15 minutos.','Mezcla la salsa BBQ, miel y mostaza. Barniza las costillas.','Cocina 30 minutos más, barnizando cada 10 minutos hasta caramelizar.','Deja reposar 10 minutos antes de servir con limón.'],
     tip:'Para costillas más tiernas, envuélvelas en papel aluminio los primeros 45 minutos antes de poner en la parrilla directa.'
   },
   {
-    id:'chicharron-receta', cat:'chicharron', cut:'Chicharrón', name:'Chicharrón Crujiente Guatemalteco',
+    id:'chicharron-receta', cutId:'chicharron', group:'preparados', name:'Chicharrón Crujiente Guatemalteco',
     desc:'El chicharrón dorado y crujiente que todos amamos. Preparado con el método tradicional guatemalteco que garantiza la textura perfecta.',
-    time:'45min', servings:6, difficulty:1, price:'Q60/lb',
+    time:'45min', servings:6, difficulty:1,
     ingredients:['1 lb de chicharrón PorciCentro','Sal al gusto','Limón','Chile pimiento','Tortillas calientes','Frijoles negros'],
     steps:['Calienta el chicharrón en sartén a fuego medio-alto por 8-10 minutos.','Agrega una pizca de sal y voltea constantemente para dorar parejo.','Retira cuando esté dorado y crujiente uniformemente.','Escurre el exceso de grasa en papel absorbente.','Sirve inmediatamente con limón, tortillas y frijoles.'],
     tip:'¡El chicharrón PorciCentro ya viene preparado! Solo necesitas calentarlo para obtener el crujiente perfecto. Nunca lo cubras o perderá el crujiente.'
   },
   {
-    id:'lomo-relleno', cat:'lomo', cut:'Lomo de Cerdo', name:'Lomo Relleno al Horno',
+    id:'lomo-relleno', cutId:'lomocinta', group:'cortes', name:'Lomo Relleno al Horno',
     desc:'Un lomo de cerdo mariposa relleno de hierbas, vegetales y queso. El platillo estrella para ocasiones especiales.',
-    time:'1h 45min', servings:6, difficulty:3, price:'Q23.50/lb',
+    time:'1h 45min', servings:6, difficulty:3,
     ingredients:['1.5 lb de lomo de cerdo','100g de queso','1 chile pimiento rojo','2 cdas de mostaza Dijon','Romero y tomillo','4 dientes de ajo','Sal, pimienta','Aceite de oliva','Cuerda de cocinar'],
     steps:['Corta el lomo en mariposa (sin separar). Aplana un poco con mazo.','Embadurna por dentro con mostaza, ajo picado, sal y pimienta.','Coloca tiras de pimiento y queso sobre el interior.','Enrolla firmemente y ata con cuerda cada 2 cm.','Sella en sartén caliente por todos lados (5 min). Coloca en refractario.','Hornea a 180°C por 60-70 minutos hasta dorar. Temperatura interna: 70°C.','Deja reposar 10 min, retira la cuerda y rebana en medallones.'],
     tip:'Pide en PorciCentro que te hagan el corte mariposa para ahorrarte tiempo. El lomo queda mejor si lo marinas una noche antes.'
   },
   {
-    id:'carnitas-tacos', cat:'especial', cut:'Carnitas', name:'Tacos de Carnitas Estilo Guatemalteco',
+    id:'carnitas-tacos', cutId:'carnitas', group:'preparados', name:'Tacos de Carnitas Estilo Guatemalteco',
     desc:'Carnitas jugosas y tiernas, servidas en tortillas de maíz con los acompañamientos tradicionales de nuestro país.',
-    time:'25min', servings:4, difficulty:1, price:'Q60/lb',
+    time:'25min', servings:4, difficulty:1,
     ingredients:['1 lb de carnitas PorciCentro','Tortillas de maíz calientes','Cebolla blanca picada','Cilantro fresco','Limón','Salsa verde','Rábanos en rodajas','Aguacate'],
     steps:['Calienta las carnitas en sartén con poco aceite a fuego medio por 8 minutos.','Revuelve ocasionalmente hasta que estén doradas y calientes.','Prepara los toppings: pica cebolla, cilantro y rebana rábanos.','Calienta las tortillas en comal o directamente en flama.','Arma los tacos con carnitas, cebolla, cilantro y salsa.','Acompaña con limón y aguacate al gusto.'],
     tip:'Las carnitas PorciCentro ya están cocidas, solo necesitas calentar. ¡Más carnitas en el taco siempre es la respuesta correcta!'
   },
   {
-    id:'caldo-patitas', cat:'especial', cut:'Patitas', name:'Caldo de Patitas Guatemalteco',
+    id:'caldo-patitas', cutId:'patitas', group:'especialidades', name:'Caldo de Patitas Guatemalteco',
     desc:'El reconfortante caldo de patitas de cerdo, rico en colágeno y sabor. Un clásico de la gastronomía guatemalteca.',
-    time:'3h', servings:8, difficulty:2, price:'Q8 c/u',
+    time:'3h', servings:8, difficulty:2,
     ingredients:['4-6 patitas de cerdo','2 zanahorias','2 papas grandes','1 güisquil','Ejotes al gusto','1 cebolla','4 dientes de ajo','Hierbabuena','Sal, pimienta','Chile pimiento verde'],
     steps:['Limpia bien las patitas, raspa y lava con agua fría y limón.','Coloca en olla grande con agua y hierve 10 minutos. Desecha el agua inicial.','Agrega agua limpia, cebolla, ajo, sal y pimienta. Cocina 2 horas.','Cuando las patitas estén tiernas, agrega vegetales en trozos medianos.','Cocina 30 minutos más hasta que los vegetales estén suaves.','Ajusta sal, agrega hierbabuena y sirve caliente.'],
     tip:'El colágeno de las patitas hace que el caldo sea espeso y nutritivo al enfriarse. Si amanece gelatinoso, ¡está perfecto!'
   },
   {
-    id:'paleta-guisada', cat:'paleta', cut:'Paleta de Cerdo', name:'Paleta de Cerdo Guisada',
-    desc:'Paleta en trozos cocida lentamente con tomate, chile y especias. Un guiso reconfortante para toda la familia.',
-    time:'2h', servings:6, difficulty:2, price:'Q23.50/lb',
-    ingredients:['1.5 lb de paleta en trozos','3 tomates maduros','2 chiles pimientos','1 cebolla','4 dientes de ajo','2 cdas de aceite','Comino, orégano, sal','Caldo de pollo','Papas opcionales'],
-    steps:['Sazona los trozos de paleta con sal, pimienta y comino.','Dora en aceite caliente por todos lados (8-10 min). Reserva.','En la misma olla, sofríe cebolla y ajo hasta transparentar.','Agrega tomate y chile pimiento picado. Cocina 5 minutos.','Regresa la carne, agrega caldo hasta cubrir. Hierve.','Reduce fuego, cocina tapado 1h 30min hasta que la carne se deshaga.','Agrega papas los últimos 20 min si deseas.'],
-    tip:'La paleta queda perfecta cuando la carne se puede deshilachar con tenedor. Sirvela con arroz blanco y tortillas calientes.'
+    id:'paleta-guisada', cutId:'brazuelo', group:'cortes', name:'Brazuelo Guisado (Paleta)',
+    desc:'Brazuelo (paleta) en trozos cocido lentamente con tomate, chile y especias. Un guiso reconfortante para toda la familia.',
+    time:'2h', servings:6, difficulty:2,
+    ingredients:['1.5 lb de brazuelo en trozos','3 tomates maduros','2 chiles pimientos','1 cebolla','4 dientes de ajo','2 cdas de aceite','Comino, orégano, sal','Caldo de pollo','Papas opcionales'],
+    steps:['Sazona los trozos de brazuelo con sal, pimienta y comino.','Dora en aceite caliente por todos lados (8-10 min). Reserva.','En la misma olla, sofríe cebolla y ajo hasta transparentar.','Agrega tomate y chile pimiento picado. Cocina 5 minutos.','Regresa la carne, agrega caldo hasta cubrir. Hierve.','Reduce fuego, cocina tapado 1h 30min hasta que la carne se deshaga.','Agrega papas los últimos 20 min si deseas.'],
+    tip:'El brazuelo queda perfecto cuando la carne se puede deshilachar con tenedor. Sirvela con arroz blanco y tortillas calientes.'
   },
   {
-    id:'tamales-cabeza', cat:'especial', cut:'Cabeza de Cerdo', name:'Tamales Colorados Guatemaltecos',
+    id:'tamales-cabeza', cutId:'cabeza', group:'especialidades', name:'Tamales Colorados Guatemaltecos',
     desc:'Los tamales más famosos de Guatemala, preparados con recado colorado y carne de cabeza de cerdo. Receta familiar.',
-    time:'4h', servings:20, difficulty:3, price:'Q140 cabeza',
+    time:'4h', servings:20, difficulty:3,
     ingredients:['1 cabeza de cerdo PorciCentro','2 lb de masa de maíz','Recado colorado','Tomates y chiles','Achiote','Aceitunas y alcaparras','Hojas de maxan o plátano','Pasas','Chile pimiento en tiras'],
     steps:['Cocina la cabeza en olla con agua, ajo y sal por 2 horas. Deshilacha la carne.','Reserva el caldo. Prepara el recado colorado con tomate, chile y especias fritas.','Mezcla la masa con caldo, recado y achiote hasta tener consistencia suave.','Extiende masa en hojas de maxan. Coloca carne, recado, aceitunas y pasas.','Dobla y amarra bien cada tamal.','Cocina al vapor en tamalera por 1 hora hasta que la masa se despegue limpia.'],
     tip:'La carne de la cabeza es perfecta para tamales por su textura y sabor. Pide en PorciCentro que te la deshuesen para facilitar el trabajo.'
   },
   {
-    id:'sopa-espinazo', cat:'especial', cut:'Espinazo', name:'Sopa de Frijoles con Espinazo',
-    desc:'La sopa negra con espinazo, un clásico guatemalteco que calienta el alma. Fácil, económica y deliciosa.',
-    time:'2h 30min', servings:8, difficulty:1, price:'Q23.50/lb',
-    ingredients:['1 lb de espinazo','2 tazas de frijoles negros','1 cebolla','4 dientes de ajo','1 chile güaque','Hierba santa','Sal al gusto','Tortillas para acompañar'],
-    steps:['Remoja los frijoles desde la noche anterior.','Hierve el espinazo 30 minutos. Desecha el agua inicial para eliminar impurezas.','En olla nueva, cocina frijoles con el espinazo, cebolla y ajo por 1h30min.','Agrega chile güaque e hierba santa los últimos 30 minutos.','Ajusta sal. Los frijoles deben estar suaves y el caldo cremoso.','Sirve caliente con tortillas y cebollín picado.'],
-    tip:'El espinazo aporta colágeno que espesa la sopa naturalmente. Si usas olla de presión, reduce el tiempo a 45 minutos total.'
+    id:'sopa-espinazo', cutId:'costilla', group:'cortes', name:'Sopa de Frijoles con Costilla',
+    desc:'La sopa negra con costilla de cerdo, un clásico guatemalteco que calienta el alma. Fácil, económica y deliciosa.',
+    time:'2h 30min', servings:8, difficulty:1,
+    ingredients:['1 lb de costilla de cerdo','2 tazas de frijoles negros','1 cebolla','4 dientes de ajo','1 chile güaque','Hierba santa','Sal al gusto','Tortillas para acompañar'],
+    steps:['Remoja los frijoles desde la noche anterior.','Hierve la costilla 30 minutos. Desecha el agua inicial para eliminar impurezas.','En olla nueva, cocina frijoles con la costilla, cebolla y ajo por 1h30min.','Agrega chile güaque e hierba santa los últimos 30 minutos.','Ajusta sal. Los frijoles deben estar suaves y el caldo cremoso.','Sirve caliente con tortillas y cebollín picado.'],
+    tip:'La costilla aporta colágeno que espesa la sopa naturalmente. Si usas olla de presión, reduce el tiempo a 45 minutos total.'
   },
   {
-    id:'longaniza-desayuno', cat:'especial', cut:'Longaniza', name:'Longaniza Frita con Huevos',
+    id:'longaniza-desayuno', cutId:'longaniza', group:'especialidades', name:'Longaniza Frita con Huevos',
     desc:'El desayuno guatemalteco por excelencia. Longaniza artesanal PorciCentro frita con huevos, frijoles y tortillas.',
-    time:'20min', servings:2, difficulty:1, price:'Q10 c/u',
-    ingredients:['2-4 longanizas PorciCentro','4 huevos','Frijoles volteados','Crema fresca','Tortillas calientes','Aceite para freír','Sal al gusto'],
+    time:'20min', servings:2, difficulty:1,
+    ingredients:['½ lb de longaniza PorciCentro (2–4 piezas)','4 huevos','Frijoles volteados','Crema fresca','Tortillas calientes','Aceite para freír','Sal al gusto'],
     steps:['Calienta sartén con poco aceite a fuego medio.','Agrega las longanizas enteras o cortadas en trozos.','Cocina 8-10 minutos volteando hasta dorar parejo.','En el mismo sartén, fríe los huevos con sal.','Calienta los frijoles en ollita con crema.','Sirve todo junto con tortillas calientes.'],
     tip:'La longaniza PorciCentro tiene especias naturales que al freírse aroman toda la cocina. No necesitas agregar sazón extra.'
   }
@@ -186,17 +251,19 @@ const grid = document.getElementById('rec-grid');
 RECIPES.forEach(r => {
   const stars = Array(3).fill(0).map((_,i)=>`<div class="rec-diff-dot${i<r.difficulty?' on':''}"></div>`).join('');
   const card = document.createElement('div');
-  card.className='rec-card rv'; card.dataset.cat=r.cat;
+  const prod = window.PC.buscar(r.cutId) || { name:r.cutId, price:0, priceUnit:'lb', cat:'cerdo' };
+  const cutName = prod.name, cutPrecio = window.PC.precioConEtiqueta(prod);
+  card.className='rec-card rv'; card.dataset.cat=r.group;
   card.innerHTML=`
     <div class="rec-img">
-      <div class="rec-img-ico">🍽️</div><div class="rec-img-lbl">Imagen próximamente</div>
+      <img src="${window.PC.imgReceta(r.id)}" alt="${r.name}, preparado con ${cutName}" loading="lazy" decoding="async">
       <div class="rec-img-overlay"></div>
-      <div class="rec-cat-tag">${r.cut}</div>
+      <div class="rec-cat-tag">${cutName}</div>
       <div class="rec-time-tag"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${r.time}</div>
       <div class="rec-diff">${stars}</div>
     </div>
     <div class="rec-body">
-      <div class="rec-cut">${r.cut}</div>
+      <div class="rec-cut">${cutName}</div>
       <div class="rec-name">${r.name}</div>
       <div class="rec-desc">${r.desc}</div>
       <div class="rec-meta">
@@ -204,39 +271,33 @@ RECIPES.forEach(r => {
         <div class="rec-m"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${r.time}</div>
       </div>
       <div class="rec-foot">
-        <div class="rec-price-hint">Ingrediente clave desde <strong>${r.price}</strong></div>
+        <div class="rec-price-hint">Ingrediente clave: <strong>${cutPrecio}</strong></div>
         <button class="rec-btn" onclick="openRecModal('${r.id}')">Ver Receta →</button>
       </div>
     </div>`;
   grid.appendChild(card);
 });
 
-function filterRec(cat, btn) {
-  document.querySelectorAll('.rf-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.rec-card').forEach(c=>{
-    c.classList.toggle('hidden', cat!=='all' && c.dataset.cat!==cat);
-  });
-}
-
 function openRecModal(id) {
   const r = RECIPES.find(x=>x.id===id); if(!r) return;
   const stars = Array(3).fill(0).map((_,i)=>`<div class="rec-diff-dot${i<r.difficulty?' on':''}" style="width:10px;height:10px;border-radius:50%;background:${i<r.difficulty?'var(--oro)':'rgba(0,0,0,.15)'}"></div>`).join('');
   const diff = ['Fácil','Intermedia','Avanzada'][r.difficulty-1];
+  const prod = window.PC.buscar(r.cutId) || { name:r.cutId, price:0, priceUnit:'lb', cat:'cerdo' };
+  const cutName = prod.name, cutPrecio = window.PC.precioConEtiqueta(prod);
   const modal = document.getElementById('rec-modal');
   modal.innerHTML=`
     <div class="rm-img">
-      <div class="rm-img-ico">🍽️</div>
-      <button class="rm-close" onclick="closeRecModal(null)">✕</button>
+      <img src="${window.PC.imgReceta(r.id)}" alt="${r.name}, preparado con ${cutName}" decoding="async">
+      <button class="rm-close" type="button" aria-label="Cerrar receta" onclick="closeRecModal(null)">✕</button>
     </div>
     <div class="rm-body">
-      <div class="rm-cut">${r.cut} · Dificultad: ${diff}</div>
+      <div class="rm-cut">${cutName} · Dificultad: ${diff}</div>
       <h2 class="rm-name">${r.name}</h2>
       <p class="rm-desc">${r.desc}</p>
       <div class="rm-meta">
         <div class="rm-m"><div class="rm-m-val">${r.time}</div><div class="rm-m-lbl">Tiempo total</div></div>
         <div class="rm-m"><div class="rm-m-val">${r.servings}</div><div class="rm-m-lbl">Porciones</div></div>
-        <div class="rm-m"><div class="rm-m-val">${r.price}</div><div class="rm-m-lbl">Ingrediente clave</div></div>
+        <div class="rm-m"><div class="rm-m-val">${cutPrecio}</div><div class="rm-m-lbl">Precio del corte</div></div>
         <div class="rm-m"><div style="display:flex;gap:3px;margin-top:4px">${Array(3).fill(0).map((_,i)=>`<div style="width:10px;height:10px;border-radius:50%;background:${i<r.difficulty?'var(--oro)':'rgba(0,0,0,.15)'}"></div>`).join('')}</div><div class="rm-m-lbl">Dificultad</div></div>
       </div>
       <div class="rm-section">Ingredientes</div>
@@ -245,13 +306,17 @@ function openRecModal(id) {
       <div class="rm-steps">${r.steps.map((s,i)=>`<div class="rm-step"><div class="rm-step-n">${i+1}</div><div class="rm-step-text">${s}</div></div>`).join('')}</div>
       <div class="rm-tip">💡 <strong>Consejo PorciCentro:</strong> ${r.tip}</div>
       <div class="rm-order">
-        <div class="rm-order-txt">¿Necesitas <strong>${r.cut}</strong> fresco para esta receta?</div>
-        <a class="btn btn-primary btn-sm" href="https://wa.me/50248890091?text=Hola, necesito ${encodeURIComponent(r.cut)} para la receta de ${encodeURIComponent(r.name)}" target="_blank">Pedir por WhatsApp</a>
+        <div class="rm-order-txt">¿Necesitas <strong>${cutName}</strong> fresco para esta receta?</div>
+        <a class="btn btn-primary btn-sm" href="https://wa.me/50248890091?text=Hola, necesito ${encodeURIComponent(cutName)} para la receta de ${encodeURIComponent(r.name)}" target="_blank" rel="noopener">Pedir por WhatsApp</a>
       </div>
     </div>`;
   document.getElementById('rec-overlay').classList.add('on');
   document.body.style.overflow='hidden';
+  const closeBtn = modal.querySelector('.rm-close');
+  if (closeBtn) closeBtn.focus();
 }
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeRecModal(); });
 
 function closeRecModal(e) {
   if (e && e.target !== document.getElementById('rec-overlay')) return;

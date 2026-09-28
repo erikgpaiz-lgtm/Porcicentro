@@ -1,0 +1,19 @@
+{
+  "name": "porcicentro",
+  "version": "3.0.0",
+  "private": true,
+  "description": "Sitio web + CRM de PorciCentro (carne de cerdo, Guatemala)",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "hash": "node scripts/hash-password.mjs",
+    "set-domain": "node scripts/set-domain.mjs",
+    "dev": "node scripts/dev-server.mjs",
+    "serve": "netlify dev"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^8.1.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
