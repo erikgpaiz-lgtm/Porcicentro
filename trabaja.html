@@ -4,8 +4,30 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trabaja con Nosotros — PorciCentro Guatemala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<meta name="description" content="Trabaja en PorciCentro: vacantes de reparto, atención al cliente y operaciones en Ciudad de Guatemala. Aplica por WhatsApp en minutos.">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="author" content="PorciCentro">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://erikgpaiz-lgtm.github.io/Porcicentro/trabaja.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PorciCentro">
+<meta property="og:locale" content="es_GT">
+<meta property="og:title" content="Trabaja con Nosotros — PorciCentro Guatemala">
+<meta property="og:description" content="Trabaja en PorciCentro: vacantes de reparto, atención al cliente y operaciones en Ciudad de Guatemala. Aplica por WhatsApp en minutos.">
+<meta property="og:url" content="https://erikgpaiz-lgtm.github.io/Porcicentro/trabaja.html">
+<meta property="og:image" content="https://erikgpaiz-lgtm.github.io/Porcicentro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PorciCentro — carne de cerdo fresca en Guatemala">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trabaja con Nosotros — PorciCentro Guatemala">
+<meta name="twitter:description" content="Trabaja en PorciCentro: vacantes de reparto, atención al cliente y operaciones en Ciudad de Guatemala. Aplica por WhatsApp en minutos.">
+<meta name="twitter:image" content="https://erikgpaiz-lgtm.github.io/Porcicentro/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
 <style>
 /* ── JOBS SECTION ── */
 .jobs-sec{padding:90px 24px;background:var(--crema)}
@@ -92,9 +114,47 @@
   .ben-card+.ben-card{border-left:none;border-top:1px solid rgba(255,255,255,.05)}
   .ben-card:nth-child(odd){border-right:none}
 }
+.form-privacy{font-size:.76rem;color:var(--gris);line-height:1.6;margin:14px 0 0}
+.form-privacy a{color:var(--rojo);font-weight:600}
 </style>
+<!-- PC:JSONLD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://erikgpaiz-lgtm.github.io/Porcicentro/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Trabaja con Nosotros",
+          "item": "https://erikgpaiz-lgtm.github.io/Porcicentro/trabaja.html"
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "name": "Trabaja con Nosotros — PorciCentro",
+      "inLanguage": "es-GT",
+      "isPartOf": {
+        "@id": "https://erikgpaiz-lgtm.github.io/Porcicentro/#sitio"
+      },
+      "description": "Únete al equipo de PorciCentro: vacantes en Guatemala, postúlate por WhatsApp al +502 4889-0091."
+    }
+  ]
+}
+</script>
+<!-- /PC:JSONLD -->
 </head>
 <body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
 
 <nav class="nav"><div class="nav-inner">
   <a class="nav-logo" href="index.html"><div class="logo-mark">PC</div><div class="logo-wordmark">PORCI<em>CENTRO</em></div></a>
@@ -108,20 +168,21 @@
   </div>
   <div class="nav-actions">
     <a class="btn-nav-cta" href="https://wa.me/50248890091" target="_blank" rel="noopener">WhatsApp</a>
-    <button class="burger" id="pc-burger" onclick="pcToggleMenu()"><span></span><span></span><span></span></button>
+    <button class="nav-cart" type="button" aria-label="Abrir tu pedido" onclick="pcOpenCart()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-dot" id="cart-badge">0</span></button><button class="burger" id="pc-burger" type="button" aria-label="Abrir menú de navegación" aria-controls="pc-mob-nav" aria-expanded="false" onclick="pcToggleMenu()"><span></span><span></span><span></span></button>
   </div>
 </div></nav>
 
-<div class="mob-nav" id="pc-mob-nav">
+<nav class="mob-nav" id="pc-mob-nav" aria-label="Menú móvil" aria-hidden="true">
   <a href="index.html" onclick="pcCloseMenu()">Inicio</a>
   <a href="productos.html" onclick="pcCloseMenu()">Productos</a>
   <a href="recetario.html" onclick="pcCloseMenu()">Recetario</a>
   <a href="nosotros.html" onclick="pcCloseMenu()">Nosotros</a>
   <a href="trabaja.html" onclick="pcCloseMenu()">Trabaja con Nosotros</a>
   <a href="contacto.html" onclick="pcCloseMenu()">Contacto</a>
-</div>
+</nav>
 
 <!-- HERO -->
+<main id="main">
 <section class="page-hero">
   <div class="page-hero-dots"></div>
   <div class="page-tag"><div class="page-tag-dot"></div><span>Oportunidades de Empleo · Guatemala</span></div>
@@ -140,7 +201,7 @@
 
     <div class="jobs-grid">
       <!-- Plaza 1 -->
-      <div class="job-card rv d1" onclick="selectJob('Carnicero Profesional')">
+      <div class="job-card rv d1" onclick="selectJob('Carnicero Profesional')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
         <div class="jc-ico">
           <svg viewBox="0 0 24 24"><path d="M3 6l9 6 9-6M3 6v12l9 6 9-6V6"/></svg>
         </div>
@@ -160,7 +221,7 @@
       </div>
 
       <!-- Plaza 2 -->
-      <div class="job-card rv d2" onclick="selectJob('Motorista Repartidor')">
+      <div class="job-card rv d2" onclick="selectJob('Motorista Repartidor')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
         <div class="jc-ico">
           <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
         </div>
@@ -227,43 +288,47 @@
 
     <div class="apply-form rv d1">
       <div class="form-row">
-        <div class="fg"><label>Nombre completo *</label><input type="text" id="f-nombre" placeholder="Tu nombre completo" required></div>
-        <div class="fg"><label>Teléfono / WhatsApp *</label><input type="tel" id="f-tel" placeholder="+502 0000-0000" required></div>
+        <div class="fg"><label for="f-nombre">Nombre completo *</label><input type="text" id="f-nombre" name="nombre" autocomplete="name" placeholder="Tu nombre completo" required></div>
+        <div class="fg"><label for="f-tel">Teléfono / WhatsApp *</label><input type="tel" id="f-tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="+502 0000-0000" required></div>
       </div>
       <div class="form-row">
-        <div class="fg"><label>Edad</label><input type="number" id="f-edad" placeholder="Ej: 28" min="18" max="65"></div>
+        <div class="fg"><label for="f-edad">Edad</label><input type="number" id="f-edad" name="edad" placeholder="Ej: 28" min="18" max="65"></div>
         <div class="fg"><label>Plaza de interés *</label>
-          <select id="f-plaza">
+          <select id="f-plaza" name="plaza">
             <option value="">Selecciona una plaza</option>
             <option value="Carnicero Profesional">Carnicero Profesional</option>
             <option value="Motorista Repartidor">Motorista Repartidor</option>
           </select>
         </div>
       </div>
-      <div class="fg"><label>Experiencia relevante *</label><textarea id="f-exp" placeholder="Cuéntanos brevemente tu experiencia en el área..."></textarea></div>
+      <div class="fg"><label for="f-exp">Experiencia relevante *</label><textarea id="f-exp" name="experiencia" placeholder="Cuéntanos brevemente tu experiencia en el área..." required></textarea></div>
       <div class="fg">
-        <label>Adjuntar documentos (CV, DPI, licencia, etc.)</label>
+        <label for="file-input">Adjuntar documentos (CV, DPI, licencia, etc.)</label>
         <div class="file-drop" id="file-drop">
           <input type="file" id="file-input" multiple accept=".pdf,.doc,.docx,.jpg,.png,.jpeg" onchange="handleFiles(this.files)">
           <div class="fd-ico">📎</div>
           <div class="fd-title">Arrastra tus archivos aquí o haz clic para seleccionar</div>
-          <div class="fd-sub">PDF, Word, JPG, PNG · Máximo 5 archivos</div>
+          <div class="fd-sub">PDF, Word, JPG, PNG · máximo 5 archivos · se comparten en el chat de WhatsApp</div>
           <div class="fd-files" id="fd-files"></div>
         </div>
-        <div class="file-note">⚠️ Los archivos serán mencionados en el mensaje de WhatsApp. Deberás enviarlos manualmente en el chat.</div>
+        <div class="file-note">⚠️ El sitio no puede adjuntar archivos a WhatsApp. Al enviar tu solicitud te indicaremos cómo compartir tu CV en el mismo chat.</div>
       </div>
-      <div class="fg"><label>Mensaje adicional</label><textarea id="f-msg" placeholder="¿Algo más que quieras agregar?"></textarea></div>
-      <button class="submit-btn" onclick="enviarAplicacion()">
+      <div class="fg"><label for="f-msg">Mensaje adicional</label><textarea id="f-msg" name="mensaje" placeholder="¿Algo más que quieras agregar?"></textarea></div>
+      <p class="form-privacy">Al enviar aceptas nuestro <a href="privacidad.html">aviso de privacidad</a>. Guardamos tu solicitud hasta 6 meses después del proceso.</p>
+      <p class="form-status" id="fa-status" role="status" aria-live="polite"></p>
+      <button class="submit-btn" type="button" onclick="enviarAplicacion()">
         <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0013 14.85l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0121.18 16"/></svg>
         Enviar solicitud por WhatsApp
       </button>
-      <p class="wa-alt">¿Prefieres contactar directo? <a href="https://wa.me/50248890091" target="_blank">Escríbenos al +502 4889-0091</a></p>
+      <p class="wa-alt">¿Prefieres contactar directo? <a href="https://wa.me/50248890091" target="_blank" rel="noopener">Escríbenos al +502 4889-0091</a></p>
     </div>
   </div>
 </section>
 
-<footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
+</main>
+<footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy"><a href="privacidad.html">Aviso de privacidad</a></div><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
 
+<script src="data.js"></script>
 <script src="shared.js"></script>
 <script>
 let uploadedFiles = [];
@@ -295,17 +360,26 @@ function enviarAplicacion() {
   const edad = document.getElementById('f-edad').value;
   const exp = document.getElementById('f-exp').value.trim();
   const msg = document.getElementById('f-msg').value.trim();
-  if (!nombre || !tel || !plaza) { pcToast('Por favor completa los campos requeridos'); return; }
-  let wa = `💼 *SOLICITUD DE EMPLEO — PORCICENTRO*\n━━━━━━━━━━━━━━━━━━━━\n`;
-  wa += `👤 *Nombre:* ${nombre}\n`;
-  wa += `📱 *Teléfono:* ${tel}\n`;
-  if (edad) wa += `🎂 *Edad:* ${edad} años\n`;
-  wa += `🏢 *Plaza:* ${plaza}\n`;
-  if (exp) wa += `\n📝 *Experiencia:*\n${exp}\n`;
-  if (uploadedFiles.length) wa += `\n📎 *Documentos adjuntos:* ${uploadedFiles.map(f => f.name).join(', ')}\n_(Favor enviar los archivos en este chat)_\n`;
-  if (msg) wa += `\n💬 *Mensaje adicional:*\n${msg}\n`;
-  wa += `\n━━━━━━━━━━━━━━━━━━━━\n_Enviado desde porcicentro.gt_`;
-  window.open('https://wa.me/50248890091?text=' + encodeURIComponent(wa), '_blank');
+  const st = document.getElementById('fa-status');
+  if (!nombre || !tel || !plaza) {
+    if (st) { st.textContent = 'Completa nombre, teléfono y plaza a la que aplicas.'; st.className = 'form-status err'; }
+    pcToast('Por favor completa los campos requeridos');
+    return;
+  }
+  let wa = '💼 *SOLICITUD DE EMPLEO — PORCICENTRO*\n━━━━━━━━━━━━━━━━━━━━\n';
+  wa += '👤 *Nombre:* ' + nombre + '\n';
+  wa += '📱 *Teléfono:* ' + tel + '\n';
+  if (edad) wa += '🎂 *Edad:* ' + edad + ' años\n';
+  wa += '🏢 *Plaza:* ' + plaza + '\n';
+  if (exp) wa += '\n📝 *Experiencia:*\n' + exp + '\n';
+  if (uploadedFiles.length) {
+    // Los archivos NO viajan por el enlace de WhatsApp: se dice con claridad.
+    wa += '\n📎 *CV preparado para enviar:* ' + uploadedFiles.map(function (f) { return f.name; }).join(', ') + '\n';
+    wa += '_(El sitio no puede adjuntar archivos: los compartiré en este mismo chat a continuación.)_\n';
+  }
+  if (msg) wa += '\n💬 *Mensaje adicional:*\n' + msg + '\n';
+  wa += '\n━━━━━━━━━━━━━━━━━━━━\n_Enviado desde el sitio web_';
+  pcSubmitWA(wa, 'fa-status');
 }
 </script>
 </body>

@@ -4,6 +4,9 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CRM — PorciCentro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="robots" content="noindex, nofollow">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--r:#B8001A;--rv:#E0001F;--ro:rgba(184,0,26,.08);--gold:#D4920A;--negro:#0A0A0A;--carbon:#141414;--gris-d:#252525;--gris:#666;--gris-m:#999;--gris-l:#EDE9E3;--crema:#FAF7F2;--verde:#1A6B3A;--fh:'Playfair Display',serif;--fb:'Barlow',sans-serif;--fc:'Barlow Condensed',sans-serif;}
@@ -61,6 +64,8 @@ ul{list-style:none}
 .logout-btn{display:flex;align-items:center;gap:7px;font-family:var(--fc);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.3);transition:color .2s;cursor:pointer}
 .logout-btn:hover{color:var(--r)}
 .logout-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.nube-status{font-size:.7rem;color:rgba(255,255,255,.42);margin:0 0 10px;line-height:1.5}
+.nube-status:empty{display:none}
 
 .main{flex:1;margin-left:240px;display:flex;flex-direction:column;min-height:100vh}
 .topbar{padding:0 28px;height:62px;border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.2);flex-shrink:0}
@@ -227,6 +232,16 @@ ul{list-style:none}
   .bar{flex-direction:column}
   .search-box{min-width:100%}
 }
+
+/* ── ESTADO DE LA BARRA / LOGIN ── */
+.bar-count{font-family:var(--fc);font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.4);white-space:nowrap}
+.login-note{font-size:.78rem;line-height:1.5;color:rgba(255,255,255,.45);margin-top:14px}
+.login-note.warn{color:#F5C842;text-align:left;background:rgba(212,146,10,.08);border:1px solid rgba(212,146,10,.25);border-radius:10px;padding:12px}
+.badge-web{background:rgba(37,211,102,.14);color:#25D366}
+.modo-local{background:rgba(212,146,10,.12);border:1px solid rgba(212,146,10,.3);color:#F5C842;border-radius:10px;padding:10px 14px;font-size:.8rem;margin-bottom:16px;line-height:1.5}
+.sync-msg{font-size:.8rem;color:rgba(255,255,255,.5);margin:-10px 0 16px}
+.modal :focus-visible{outline:3px solid #F5C842;outline-offset:2px}
+@media(max-width:860px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:none}.main{margin-left:0}.mob-toggle{display:flex}.sb-overlay.on{display:block}}
 </style>
 </head>
 <body>
@@ -237,10 +252,11 @@ ul{list-style:none}
     <div class="login-logo"><div class="lm">PC</div><div class="lw">PORCI<em>CENTRO</em></div></div>
     <div class="login-title">Panel CRM</div>
     <div class="login-sub">Acceso restringido. Ingresa tus credenciales.</div>
-    <div class="lf"><label>Usuario</label><input type="text" id="l-user" placeholder="Usuario" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()"></div>
-    <div class="lf"><label>Contrasena</label><input type="password" id="l-pass" placeholder="Contrasena" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
-    <div class="login-err" id="l-err">Usuario o contrasena incorrectos.</div>
-    <button class="login-btn" id="login-btn" onclick="doLogin()"><span class="login-spinner" id="login-spin"></span>Ingresar</button>
+    <div class="lf"><label for="l-user">Usuario</label><input type="text" id="l-user" placeholder="Usuario" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="lf"><label for="l-pass">Contraseña</label><input type="password" id="l-pass" placeholder="Contraseña" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="login-err" id="l-err" role="alert">Usuario o contraseña incorrectos.</div>
+    <button class="login-btn" id="login-btn" type="button" onclick="doLogin()"><span class="login-spinner" id="login-spin"></span>Ingresar</button>
+    <div class="login-note" id="l-note" role="status" aria-live="polite"></div>
   </div>
 </div>
 
@@ -250,7 +266,7 @@ ul{list-style:none}
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sb-logo"><div class="sb-lm">PC</div><div class="sb-lw">PORCI<em>CENTRO</em></div></div>
-    <nav class="sb-nav">
+    <nav class="sb-nav" aria-label="Secciones del CRM">
       <div class="sb-label">Principal</div>
       <button class="sb-link active" onclick="goPage('dashboard',this)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</button>
       <button class="sb-link" onclick="goPage('clientes',this)"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Clientes</button>
@@ -260,12 +276,17 @@ ul{list-style:none}
       <div class="sb-label">Herramientas</div>
       <button class="sb-link" onclick="exportCSV('clientes')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar Clientes</button>
       <button class="sb-link" onclick="exportCSV('pedidos')"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Exportar Pedidos</button>
-      <a class="sb-link" href="index.html" target="_blank"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Ir al Sitio Web</a>
+      <a class="sb-link" href="index.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Ir al Sitio Web</a>
       <a class="sb-link" href="https://wa.me/50248890091" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>WhatsApp</a>
     </nav>
     <div class="sb-ft">
       <div class="sb-user"><div class="sb-avatar" id="sb-av">A</div><div><div class="sb-uname" id="sb-uname">Admin</div><div class="sb-urole">Administrador</div></div></div>
-      <button class="logout-btn" onclick="doLogout()"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesion</button>
+      <div class="nube-status" id="nube-status" role="status">☁ Conectando…</div>
+      <button class="logout-btn" type="button" onclick="subirDatos()">☁ Guardar en el servidor ahora</button>
+      <button class="logout-btn" type="button" onclick="exportarRespaldo()">💾 Respaldar datos</button>
+      <button class="logout-btn" type="button" onclick="document.getElementById('import-file').click()">📂 Restaurar respaldo</button>
+      <input type="file" id="import-file" accept="application/json" hidden onchange="importarRespaldo(this.files[0])">
+      <button class="logout-btn" type="button" onclick="doLogout()"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>Cerrar Sesion</button>
     </div>
   </aside>
 
@@ -273,7 +294,7 @@ ul{list-style:none}
   <div class="main">
     <div class="topbar">
       <div class="topbar-left">
-        <button class="mob-toggle" onclick="toggleSidebar()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+        <button class="mob-toggle" type="button" aria-label="Abrir menú lateral" aria-controls="sidebar" aria-expanded="false" onclick="toggleSidebar()"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
         <div class="topbar-title" id="page-title">Dashboard</div>
       </div>
       <div class="topbar-actions">
@@ -287,23 +308,130 @@ ul{list-style:none}
 </div>
 
 <!-- MODAL -->
-<div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
+<div class="modal-bg" id="modal-bg" onclick="closeModal(event)" role="dialog" aria-modal="true" aria-label="Formulario">
   <div class="modal" id="modal-box"></div>
 </div>
 
 <div class="toast" id="toast"></div>
 
+<script src="data.js"></script>
+<script src="shared.js"></script>
 <script>
-// ─── DATA STORE (localStorage) ─────────────────────────────
+// ─── DATA STORE ────────────────────────────────────────────
+// El navegador sigue siendo la copia de trabajo (rápida y sin
+// conexión), pero cuando hay servidor cada cambio se sube solo a
+// /api/datos: así el panel se ve igual desde cualquier equipo.
+const DATOS_URL = '/api/datos';
+const CAMPOS = ['clientes','pedidos','notas','prospectos'];
+
 function loadData(k){ try{return JSON.parse(localStorage.getItem('pc_crm_'+k)||'[]')}catch{return []} }
-function saveData(k,v){ localStorage.setItem('pc_crm_'+k,JSON.stringify(v)) }
+function saveData(k,v){
+  localStorage.setItem('pc_crm_'+k,JSON.stringify(v));
+  marcarCambio();
+}
+function snapshot(){
+  const d = { updated: localStorage.getItem('pc_crm_updated') || new Date().toISOString() };
+  CAMPOS.forEach(c => { d[c] = loadData(c); });
+  return d;
+}
+function marcarCambio(){
+  localStorage.setItem('pc_crm_updated', new Date().toISOString());
+  programarSubida();
+}
+let _subirTimer = null, _subiendo = false;
+function programarSubida(){
+  if(MODO_LOCAL || !AUTENTICADO) return;
+  clearTimeout(_subirTimer);
+  _subirTimer = setTimeout(subirDatos, 1200);   // agrupa cambios seguidos
+}
+async function subirDatos(){
+  if(MODO_LOCAL || !AUTENTICADO || _subiendo) return;
+  _subiendo = true;
+  try{
+    const res = await apiFetch(DATOS_URL, { method:'POST', body: JSON.stringify(snapshot()) });
+    if(res.ok) marcarNube('☁ Guardado en el servidor');
+    else marcarNube('⚠ No se pudo guardar en el servidor');
+  }catch(e){ marcarNube('⚠ Sin conexión: cambios solo en este navegador'); }
+  finally{ _subiendo = false; }
+}
+// Al entrar: si el servidor tiene datos más recientes, se adoptan.
+async function bajarDatos(){
+  if(MODO_LOCAL) return;
+  try{
+    const res = await apiFetch(DATOS_URL);
+    const json = await res.json();
+    if(!json.datos){ marcarNube('☁ Conectado: sin datos aún en el servidor'); return; }
+    const local = localStorage.getItem('pc_crm_updated') || '';
+    const nube  = json.datos.updated || '';
+    if(nube > local){
+      CAMPOS.forEach(c => localStorage.setItem('pc_crm_'+c, JSON.stringify(json.datos[c]||[])));
+      localStorage.setItem('pc_crm_updated', nube);
+      renderPage(STATE.page);
+      marcarNube('☁ Datos actualizados desde el servidor');
+    }else if(local){
+      marcarNube('☁ Este equipo tiene la versión más reciente');
+      programarSubida();
+    }else{
+      marcarNube('☁ Conectado al servidor');
+    }
+  }catch(e){ marcarNube('⚠ No se pudo leer el servidor'); }
+}
+function marcarNube(texto){
+  const el = document.getElementById('nube-status');
+  if(el) el.textContent = texto;
+}
 function genId(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,6) }
 function now(){ return new Date().toLocaleString('es-GT',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}) }
 function today(){ return new Date().toLocaleDateString('es-GT',{day:'2-digit',month:'short',year:'numeric'}) }
 
 let STATE = { page:'dashboard', cliente_filter:'', pedido_filter:'' };
 
-// ─── LOGIN (server-side auth via Netlify Function) ──────────
+// ─── AUTENTICACIÓN ──────────────────────────────────────────
+// Las credenciales ya NO viven en el HTML. Se validan en el servidor
+// (Netlify Function /api/auth con variables de entorno ADMIN_USERS).
+// Sin servidor disponible, el panel entra en "modo local": no hay
+// autenticación real y los datos solo existen en este navegador.
+const AUTH_URL = '/api/auth';
+let AUTENTICADO = false;   // true solo si el servidor validó la sesión
+let MODO_LOCAL  = false;   // true si no hay servidor (GitHub Pages, file://, etc.)
+
+function token(){ return sessionStorage.getItem('pc_crm_token') || ''; }
+function setStatus(msg, cls){
+  const el=document.getElementById('l-note');
+  if(el){ el.textContent=msg; el.className='login-note '+(cls||''); }
+}
+
+async function apiFetch(url, opts){
+  const o = Object.assign({ headers:{} }, opts||{});
+  if(token()) o.headers['Authorization'] = 'Bearer ' + token();
+  if(o.body) o.headers['Content-Type'] = 'application/json';
+  const res = await fetch(url, o);
+  if(res.status===401 || res.status===403){ doLogout('Tu sesión expiró. Vuelve a ingresar.'); throw new Error('No autorizado'); }
+  return res;
+}
+
+function entrarAlPanel(usuario, verificado){
+  document.getElementById('login-screen').classList.add('out');
+  setTimeout(()=>{
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').classList.add('on');
+    renderPage('dashboard');
+  },420);
+  const d = document.getElementById('sb-av'), n = document.getElementById('sb-uname');
+  if(d) d.textContent = (usuario||'?')[0].toUpperCase();
+  if(n) n.textContent = usuario || 'Local';
+  const rol = document.querySelector('.sb-urole');
+  if(rol) rol.textContent = verificado ? 'Sesión verificada por el servidor' : 'Modo local · sin servidor';
+  autenticar(usuario, verificado);
+  if(verificado) setTimeout(bajarDatos, 500);   // trae los datos del servidor si son más nuevos
+}
+
+function autenticar(usuario, verificado){
+  AUTENTICADO = !!verificado;
+  sessionStorage.setItem('pc_crm_auth', usuario);
+  sessionStorage.setItem('pc_crm_verified', verificado ? '1' : '0');
+}
+
 async function doLogin(){
   const u=document.getElementById('l-user').value.trim();
   const p=document.getElementById('l-pass').value;
@@ -312,62 +440,79 @@ async function doLogin(){
   const spinner=document.getElementById('login-spin');
 
   if(!u||!p){
-    err.textContent='Por favor ingresa usuario y contrasena.';
+    err.textContent='Por favor ingresa usuario y contraseña.';
     err.style.display='block';
     return;
   }
-
-  // Show loading state
   btn.disabled=true;
   spinner.style.display='inline-block';
   err.style.display='none';
+  setStatus('Verificando con el servidor…');
 
-  // Verificación de credenciales
-  await new Promise(r => setTimeout(r, 600));
-  const USERS = { 'erik': '1234' };
-  if (USERS[u.toLowerCase()] && USERS[u.toLowerCase()] === p) {
-    const displayUser = u.charAt(0).toUpperCase() + u.slice(1).toLowerCase();
-    sessionStorage.setItem('pc_crm_auth', displayUser);
-    document.getElementById('login-screen').classList.add('out');
-    setTimeout(()=>{
-      document.getElementById('login-screen').style.display='none';
-      document.getElementById('app').classList.add('on');
-      renderPage('dashboard');
-    },420);
-    document.getElementById('sb-av').textContent=displayUser[0].toUpperCase();
-    document.getElementById('sb-uname').textContent=displayUser;
-  } else {
-    err.textContent='Usuario o contraseña incorrectos.';
-    err.style.display='block';
+  try{
+    const res = await fetch(AUTH_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ accion:'login', usuario:u, password:p })
+    });
+    if(res.status===401){ throw new Error('credenciales'); }
+    if(!res.ok) throw new Error('servidor');
+    const data = await res.json();
+    sessionStorage.setItem('pc_crm_token', data.token);
+    setStatus('');
+    entrarAlPanel(data.usuario || u, true);
+  }catch(e){
+    if(e.message==='credenciales'){
+      err.textContent='Usuario o contraseña incorrectos.';
+      err.style.display='block';
+      setStatus('');
+    }else{
+      // No hay servidor (GitHub Pages, archivo local, Netlify sin función):
+      // se avisa sin disfrazarlo de login seguro.
+      MODO_LOCAL = true;
+      setStatus('⚠ No se pudo contactar al servidor de autenticación. Entrando en MODO LOCAL: los datos quedan solo en este navegador y el acceso no está protegido. Lee README.md para activar el login seguro.', 'warn');
+      setTimeout(()=>entrarAlPanel(u, false), 1400);
+    }
   }
-
   btn.disabled=false;
   spinner.style.display='none';
 }
 
-function doLogout(){
+function doLogout(msg){
   sessionStorage.removeItem('pc_crm_auth');
   sessionStorage.removeItem('pc_crm_token');
+  sessionStorage.removeItem('pc_crm_verified');
+  AUTENTICADO=false;
   document.getElementById('app').classList.remove('on');
   document.getElementById('login-screen').style.display='flex';
   document.getElementById('login-screen').classList.remove('out');
   document.getElementById('l-pass').value='';
+  if(msg) setStatus(msg,'warn');
 }
 
-// Check if already authenticated
-if(sessionStorage.getItem('pc_crm_auth')){
+// Si hay sesión guardada, se revalida contra el servidor (si existe).
+(async function restaurarSesion(){
   const u = sessionStorage.getItem('pc_crm_auth');
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('app').classList.add('on');
-  document.getElementById('sb-av').textContent=u[0].toUpperCase();
-  document.getElementById('sb-uname').textContent=u.charAt(0).toUpperCase()+u.slice(1);
-  setTimeout(()=>renderPage('dashboard'),0);
-}
+  if(!u) return;
+  const verificadoAntes = sessionStorage.getItem('pc_crm_verified')==='1';
+  if(!verificadoAntes){ MODO_LOCAL=true; entrarAlPanel(u,false); return; }
+  try{
+    const res = await fetch(AUTH_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ accion:'verificar', token:token() }) });
+    if(res.ok){ const d=await res.json(); entrarAlPanel(d.usuario||u,true); return; }
+    throw new Error('invalido');
+  }catch(e){
+    MODO_LOCAL=true;
+    entrarAlPanel(u,false);
+  }
+})();
 
 // ─── MOBILE SIDEBAR ─────────────────────────────────────────
 function toggleSidebar(){
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sb-overlay').classList.toggle('on');
+  const sb=document.getElementById('sidebar');
+  const abierto=sb.classList.toggle('open');
+  document.getElementById('sb-overlay').classList.toggle('on', abierto);
+  const btn=document.querySelector('.mob-toggle');
+  if(btn) btn.setAttribute('aria-expanded', abierto?'true':'false');
 }
 function closeSidebar(){
   document.getElementById('sidebar').classList.remove('open');
@@ -382,7 +527,7 @@ function goPage(page,btn){
   const titles={dashboard:'Dashboard',clientes:'Clientes',pedidos:'Pedidos',seguimiento:'Seguimiento',pipeline:'Pipeline de Prospectos'};
   document.getElementById('page-title').textContent=titles[page]||page;
   const ctaLabels={clientes:'Nuevo Cliente',pedidos:'Nuevo Pedido',dashboard:'Nuevo Cliente',seguimiento:'Agregar Nota',pipeline:'Nuevo Prospecto'};
-  const ctaActions={clientes:"openModal('cliente')",pedidos:"openModal('pedido')",dashboard:"openModal('cliente')",seguimiento:"openModal('nota')",pipeline:"openModal('cliente')"};
+  const ctaActions={clientes:"openModal('cliente')",pedidos:"openModal('pedido')",dashboard:"openModal('cliente')",seguimiento:"openModal('nota')",pipeline:"openModal('prospecto')"};
   const ctaBtn=document.getElementById('topbar-cta');
   ctaBtn.setAttribute('onclick',ctaActions[page]||'');
   ctaBtn.innerHTML=`<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round"><path d="M12 5v14M5 12h14"/></svg>${ctaLabels[page]||'Nuevo'}`;
@@ -411,11 +556,13 @@ function renderDashboard(){
   const recientes=clientes.slice(-5).reverse();
   const recPed=pedidos.slice(-5).reverse();
 
+  const webCount=pedidos.filter(p=>p.origen==='web').length;
   return `
+  ${MODO_LOCAL?`<div class="modo-local" role="status">⚠ <strong>Modo local.</strong> No hay servidor conectado: el acceso no está protegido y los clientes, pedidos y notas quedan solo en este navegador (los pedidos del sitio web no llegarán aquí). Para activar el login seguro y la sincronización entre equipos, despliega en Netlify con ADMIN_USERS y AUTH_SECRET (ver README.md). Mientras tanto, usa “💾 Respaldar datos” y “📂 Restaurar respaldo”.</div>`:''}
   <div class="stats-row">
     <div class="stat-card"><div class="sc-val">${clientes.length}</div><div class="sc-lbl">Clientes Totales</div>${clientes.length?`<div class="sc-trend trend-up">${activos} activos</div>`:''}</div>
     <div class="stat-card"><div class="sc-val">${pedidos.length}</div><div class="sc-lbl">Pedidos Registrados</div>${pendientes?`<div class="sc-trend trend-new">${pendientes} pendientes</div>`:''}</div>
-    <div class="stat-card"><div class="sc-val">${entregados}</div><div class="sc-lbl">Pedidos Entregados</div></div>
+    <div class="stat-card"><div class="sc-val">${entregados}</div><div class="sc-lbl">Pedidos Entregados</div>${webCount?`<div class="sc-trend trend-new">${webCount} del sitio web</div>`:''}</div>
     <div class="stat-card"><div class="sc-val">Q${total.toLocaleString('es-GT',{minimumFractionDigits:2})}</div><div class="sc-lbl">Ventas Totales</div></div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
@@ -430,61 +577,109 @@ function renderDashboard(){
   </div>`;
 }
 
+// ─── BÚSQUEDA SIN PERDER EL FOCO ────────────────────────────
+// Antes cada tecla reconstruía todo el HTML: el input se destruía, se
+// perdía el foco y el filtro se reseteaba. Ahora solo se repinta la tabla.
+function pintarFilasClientes(){
+  const tbody=document.getElementById('clientes-tbody');
+  if(tbody) tbody.innerHTML=filasClientes();
+}
+function pintarFilasPedidos(){
+  const tbody=document.getElementById('pedidos-tbody');
+  if(tbody) tbody.innerHTML=filasPedidos();
+}
+function aplicarFiltroCliente(el){
+  STATE.cliente_filter=el.value;
+  pintarFilasClientes();
+}
+function aplicarFiltroPedido(el){
+  STATE.pedido_filter=el.value;
+  pintarFilasPedidos();
+}
+
 // ─── CLIENTES ───────────────────────────────────────────────
-function renderClientes(){
+function filasClientes(){
   const clientes=loadData('clientes');
   const q=STATE.cliente_filter.toLowerCase();
   const fil=q?clientes.filter(c=>c.nombre.toLowerCase().includes(q)||c.tel.includes(q)||(c.tipo||'').toLowerCase().includes(q)):clientes;
-  return `
-  <div class="bar">
-    <div class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Buscar cliente por nombre, telefono o tipo..." value="${STATE.cliente_filter}" oninput="STATE.cliente_filter=this.value;renderPage('clientes')"></div>
-    <select class="filter-sel" onchange="STATE.cliente_filter=this.value;renderPage('clientes')"><option value="">Todos los tipos</option><option>Restaurante</option><option>Carniceria</option><option>Hogar</option><option>Mayorista</option><option>Otro</option></select>
-  </div>
-  <div class="tbl-wrap">
-    <table class="tbl">
-      <thead><tr><th>#</th><th>Nombre</th><th>Telefono</th><th>Tipo</th><th>Estado</th><th>Direccion</th><th>Notas</th><th>Acciones</th></tr></thead>
-      <tbody>${fil.length?fil.map((c,i)=>`<tr>
+  if(!fil.length) return `<tr><td colspan="8"><div class="empty-state"><div class="ei">&#x1F465;</div><h3>Sin resultados</h3><p>No hay clientes que coincidan</p></div></td></tr>`;
+  return fil.map(c=>`<tr>
         <td style="color:rgba(255,255,255,.3);font-family:var(--fc);font-size:.7rem">${clientes.length-clientes.indexOf(c)}</td>
         <td><strong style="color:#fff">${esc(c.nombre)}</strong></td>
-        <td><a href="https://wa.me/502${c.tel.replace(/\D/g,'')}" target="_blank" rel="noopener" style="color:#25D366;font-family:var(--fc);font-size:.82rem">${esc(c.tel)}</a></td>
+        <td><a href="${pcWA(c.tel)}" target="_blank" rel="noopener" style="color:#25D366;font-family:var(--fc);font-size:.82rem" aria-label="Escribir por WhatsApp a ${escA(c.nombre)}">${esc(c.tel)}</a></td>
         <td><span class="badge badge-new">${esc(c.tipo||'--')}</span></td>
         <td><span class="badge badge-${c.estado==='Activo'?'ok':'warn'}">${esc(c.estado||'--')}</span></td>
         <td style="color:rgba(255,255,255,.5);font-size:.82rem;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(c.dir||'--')}</td>
         <td style="color:rgba(255,255,255,.4);font-size:.8rem;max-width:160px">${c.notas?esc(c.notas.substring(0,50))+'...':'--'}</td>
         <td><div style="display:flex;gap:5px">
-          <button class="btn btn-sm btn-sec" onclick="editCliente('${c.id}')">Editar</button>
-          <button class="btn btn-sm btn-danger" onclick="delCliente('${c.id}')">&#x2715;</button>
+          <button class="btn btn-sm btn-sec" type="button" onclick="editCliente('${c.id}')" aria-label="Editar ${escA(c.nombre)}">Editar</button>
+          <button class="btn btn-sm btn-danger" type="button" onclick="delCliente('${c.id}')" aria-label="Eliminar ${escA(c.nombre)}">&#x2715;</button>
         </div></td>
-      </tr>`).join(''):`<tr><td colspan="8"><div class="empty-state"><div class="ei">&#x1F465;</div><h3>Sin resultados</h3><p>No hay clientes que coincidan</p></div></td></tr>`}
-      </tbody>
+      </tr>`).join('');
+}
+
+function renderClientes(){
+  return `
+  <div class="bar">
+    <div class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="clientes-buscar" type="search" aria-label="Buscar cliente" placeholder="Buscar cliente por nombre, teléfono o tipo..." value="${escA(STATE.cliente_filter)}" oninput="aplicarFiltroCliente(this)"></div>
+    <select class="filter-sel" aria-label="Filtrar por tipo de cliente" onchange="aplicarFiltroCliente(this)">
+      <option value="">Todos los tipos</option>
+      <option ${STATE.cliente_filter==='Restaurante'?'selected':''}>Restaurante</option>
+      <option ${STATE.cliente_filter==='Carniceria'?'selected':''}>Carniceria</option>
+      <option ${STATE.cliente_filter==='Hogar'?'selected':''}>Hogar</option>
+      <option ${STATE.cliente_filter==='Mayorista'?'selected':''}>Mayorista</option>
+      <option ${STATE.cliente_filter==='Otro'?'selected':''}>Otro</option>
+    </select>
+    <span class="bar-count" id="clientes-contador" role="status" aria-live="polite">${loadData('clientes').length} clientes</span>
+  </div>
+  <div class="tbl-wrap">
+    <table class="tbl">
+      <thead><tr><th>#</th><th>Nombre</th><th>Teléfono</th><th>Tipo</th><th>Estado</th><th>Dirección</th><th>Notas</th><th>Acciones</th></tr></thead>
+      <tbody id="clientes-tbody">${filasClientes()}</tbody>
     </table>
   </div>`;
 }
 
 // ─── PEDIDOS ────────────────────────────────────────────────
-function renderPedidos(){
+function filasPedidos(){
   const pedidos=loadData('pedidos');
   const q=STATE.pedido_filter.toLowerCase();
   const fil=q?pedidos.filter(p=>p.cliente.toLowerCase().includes(q)||(p.detalle||'').toLowerCase().includes(q)||(p.estado||'').toLowerCase().includes(q)):pedidos;
-  return `
-  <div class="bar">
-    <div class="search-box"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Buscar por cliente, detalle o estado..." value="${STATE.pedido_filter}" oninput="STATE.pedido_filter=this.value;renderPage('pedidos')"></div>
-    <select class="filter-sel" onchange="STATE.pedido_filter=this.value;renderPage('pedidos')"><option value="">Todos los estados</option><option>Pendiente</option><option>En camino</option><option>Entregado</option><option>Cancelado</option></select>
-  </div>
-  <div class="tbl-wrap"><table class="tbl"><thead><tr><th>#</th><th>Fecha</th><th>Cliente</th><th>Detalle</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead>
-  <tbody>${fil.length?fil.slice().reverse().map((p,i)=>`<tr>
+  if(!fil.length) return `<tr><td colspan="7"><div class="empty-state"><div class="ei">&#x1F4E6;</div><h3>Sin pedidos</h3><p>Registra el primer pedido o sincroniza los del sitio web</p></div></td></tr>`;
+  return fil.slice().reverse().map(p=>`<tr>
     <td style="color:rgba(255,255,255,.3);font-family:var(--fc);font-size:.7rem">${pedidos.indexOf(p)+1}</td>
     <td style="font-family:var(--fc);font-size:.75rem;color:rgba(255,255,255,.4)">${esc(p.fecha||'--')}</td>
-    <td><strong style="color:#fff">${esc(p.cliente)}</strong></td>
+    <td><strong style="color:#fff">${esc(p.cliente)}</strong>${p.origen==='web'?' <span class="badge badge-web">🌐 Web</span>':''}</td>
     <td style="color:rgba(255,255,255,.5);font-size:.82rem;max-width:180px">${p.detalle?esc(p.detalle.substring(0,60)):'--'}</td>
     <td><strong style="color:var(--r);font-family:var(--fh)">Q${(p.total||0).toFixed(2)}</strong></td>
     <td><span class="badge badge-${p.estado==='Entregado'?'ok':p.estado==='Pendiente'?'warn':p.estado==='En camino'?'new':'hot'}">${esc(p.estado)}</span></td>
     <td><div style="display:flex;gap:5px">
-      <button class="btn btn-sm btn-sec" onclick="editPedido('${p.id}')">Editar</button>
-      <button class="btn btn-sm btn-danger" onclick="delPedido('${p.id}')">&#x2715;</button>
+      <button class="btn btn-sm btn-sec" type="button" onclick="editPedido('${p.id}')" aria-label="Editar pedido de ${escA(p.cliente)}">Editar</button>
+      <button class="btn btn-sm btn-danger" type="button" onclick="delPedido('${p.id}')" aria-label="Eliminar pedido de ${escA(p.cliente)}">&#x2715;</button>
     </div></td>
-  </tr>`).join(''):`<tr><td colspan="7"><div class="empty-state"><div class="ei">&#x1F4E6;</div><h3>Sin pedidos</h3><p>Registra el primer pedido</p></div></td></tr>`}
-  </tbody></table></div>`;
+  </tr>`).join('');
+}
+
+function renderPedidos(){
+  return `
+  <div class="bar">
+    <div class="search-box"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="pedidos-buscar" type="search" aria-label="Buscar pedido" placeholder="Buscar por cliente, detalle o estado..." value="${escA(STATE.pedido_filter)}" oninput="aplicarFiltroPedido(this)"></div>
+    <select class="filter-sel" aria-label="Filtrar por estado" onchange="aplicarFiltroPedido(this)">
+      <option value="">Todos los estados</option>
+      <option ${STATE.pedido_filter==='Pendiente'?'selected':''}>Pendiente</option>
+      <option ${STATE.pedido_filter==='En camino'?'selected':''}>En camino</option>
+      <option ${STATE.pedido_filter==='Entregado'?'selected':''}>Entregado</option>
+      <option ${STATE.pedido_filter==='Cancelado'?'selected':''}>Cancelado</option>
+    </select>
+    <button class="btn btn-sec" type="button" onclick="sincronizarPedidosWeb(this)">🔄 Sincronizar pedidos del sitio</button>
+    <span class="bar-count" id="pedidos-contador" role="status" aria-live="polite">${loadData('pedidos').length} pedidos</span>
+  </div>
+  <div class="tbl-wrap"><table class="tbl">
+  <thead><tr><th>#</th><th>Fecha</th><th>Cliente</th><th>Detalle</th><th>Total</th><th>Estado</th><th>Acciones</th></tr></thead>
+  <tbody id="pedidos-tbody">${filasPedidos()}</tbody>
+  </table></div>`;
 }
 
 // ─── SEGUIMIENTO ────────────────────────────────────────────
@@ -579,7 +774,7 @@ function renderProspectoCard(p){
       </div>
     </div>
     ${p.empresa?`<div class="kc-meta">🏢 ${esc(p.empresa)}</div>`:''}
-    ${p.tel?`<a href="https://wa.me/502${p.tel.replace(/\D/g,'')}" target="_blank" class="kc-meta kc-wa" onclick="event.stopPropagation()">📱 ${esc(p.tel)}</a>`:''}
+    ${p.tel?`<a href="${pcWA(p.tel)}" target="_blank" rel="noopener" class="kc-meta kc-wa" onclick="event.stopPropagation()">📱 ${esc(p.tel)}</a>`:''}
     ${p.notas?`<div class="kc-notes">${esc(p.notas.substring(0,80))}${p.notas.length>80?'...':''}</div>`:''}
     <div class="kc-footer">
       <span style="font-size:.62rem;color:rgba(255,255,255,.2)">${p.fecha||''}</span>
@@ -645,30 +840,30 @@ function openModal(type, id){
     const c=id?clientes.find(x=>x.id===id):{};
     box.innerHTML=`
       <div class="modal-hd"><div class="modal-title">${id?'Editar':'Nuevo'} Cliente</div><button class="modal-close" onclick="closeModal()">&#x2715;</button></div>
-      <div class="fg-row"><div class="fg"><label>Nombre completo *</label><input id="mc-nombre" value="${esc(c.nombre||'')}" placeholder="Nombre del cliente"></div>
-      <div class="fg"><label>Telefono *</label><input id="mc-tel" value="${esc(c.tel||'')}" placeholder="+502 0000-0000"></div></div>
-      <div class="fg-row"><div class="fg"><label>Tipo de cliente</label><select id="mc-tipo"><option ${!c.tipo?'selected':''}>Seleccionar</option><option ${c.tipo==='Restaurante'?'selected':''}>Restaurante</option><option ${c.tipo==='Carniceria'?'selected':''}>Carniceria</option><option ${c.tipo==='Hogar'?'selected':''}>Hogar</option><option ${c.tipo==='Mayorista'?'selected':''}>Mayorista</option><option ${c.tipo==='Otro'?'selected':''}>Otro</option></select></div>
-      <div class="fg"><label>Estado</label><select id="mc-estado"><option ${c.estado==='Activo'||!c.estado?'selected':''}>Activo</option><option ${c.estado==='Inactivo'?'selected':''}>Inactivo</option><option ${c.estado==='Potencial'?'selected':''}>Potencial</option></select></div></div>
-      <div class="fg"><label>Direccion de entrega</label><input id="mc-dir" value="${esc(c.dir||'')}" placeholder="Zona, colonia, direccion"></div>
-      <div class="fg"><label>Email</label><input id="mc-email" type="email" value="${esc(c.email||'')}" placeholder="correo@ejemplo.com"></div>
-      <div class="fg"><label>Notas / Preferencias</label><textarea id="mc-notas" placeholder="Pedidos habituales, horarios preferidos, cortes favoritos...">${esc(c.notas||'')}</textarea></div>
+      <div class="fg-row"><div class="fg"><label for="mc-nombre">Nombre completo *</label><input id="mc-nombre" value="${escA(c.nombre||'')}" placeholder="Nombre del cliente"></div>
+      <div class="fg"><label for="mc-tel">Telefono *</label><input id="mc-tel" value="${escA(c.tel||'')}" placeholder="+502 0000-0000"></div></div>
+      <div class="fg-row"><div class="fg"><label for="mc-tipo">Tipo de cliente</label><select id="mc-tipo"><option ${!c.tipo?'selected':''}>Seleccionar</option><option ${c.tipo==='Restaurante'?'selected':''}>Restaurante</option><option ${c.tipo==='Carniceria'?'selected':''}>Carniceria</option><option ${c.tipo==='Hogar'?'selected':''}>Hogar</option><option ${c.tipo==='Mayorista'?'selected':''}>Mayorista</option><option ${c.tipo==='Otro'?'selected':''}>Otro</option></select></div>
+      <div class="fg"><label for="mc-estado">Estado</label><select id="mc-estado"><option ${c.estado==='Activo'||!c.estado?'selected':''}>Activo</option><option ${c.estado==='Inactivo'?'selected':''}>Inactivo</option><option ${c.estado==='Potencial'?'selected':''}>Potencial</option></select></div></div>
+      <div class="fg"><label for="mc-dir">Direccion de entrega</label><input id="mc-dir" value="${escA(c.dir||'')}" placeholder="Zona, colonia, direccion"></div>
+      <div class="fg"><label for="mc-email">Email</label><input id="mc-email" type="email" value="${escA(c.email||'')}" placeholder="correo@ejemplo.com"></div>
+      <div class="fg"><label for="mc-notas">Notas / Preferencias</label><textarea id="mc-notas" placeholder="Pedidos habituales, horarios preferidos, cortes favoritos...">${esc(c.notas||'')}</textarea></div>
       <div class="modal-ft"><button class="btn btn-sec" onclick="closeModal()">Cancelar</button><button class="btn btn-prim" onclick="saveCliente('${id||''}')">Guardar Cliente</button></div>`;
   } else if(type==='prospecto'){
     const p=id||{};
     const etapaDefault=arguments[2]||'no_contactado';
     box.innerHTML=`
       <div class="modal-hd"><div class="modal-title">${p.id?'Editar Prospecto':'Nuevo Prospecto'}</div><button class="modal-close" onclick="closeModal()">&#x2715;</button></div>
-      <div class="fg"><label>Nombre *</label><input id="mp-nombre" placeholder="Nombre completo" value="${esc(p.nombre||'')}"></div>
+      <div class="fg"><label for="mp-nombre">Nombre *</label><input id="mp-nombre" placeholder="Nombre completo" value="${escA(p.nombre||'')}"></div>
       <div class="fg-row">
-        <div class="fg"><label>Teléfono</label><input id="mp-tel" placeholder="+502 0000-0000" value="${esc(p.tel||'')}"></div>
-        <div class="fg"><label>Empresa / Negocio</label><input id="mp-empresa" placeholder="Restaurante, carnicería..." value="${esc(p.empresa||'')}"></div>
+        <div class="fg"><label for="mp-tel">Teléfono</label><input id="mp-tel" placeholder="+502 0000-0000" value="${escA(p.tel||'')}"></div>
+        <div class="fg"><label for="mp-empresa">Empresa / Negocio</label><input id="mp-empresa" placeholder="Restaurante, carnicería..." value="${escA(p.empresa||'')}"></div>
       </div>
-      <div class="fg"><label>Etapa</label>
+      <div class="fg"><label for="mp-etapa">Etapa</label>
         <select id="mp-etapa">
           ${PIPELINE_COLS.map(c=>`<option value="${c.id}" ${(p.etapa||etapaDefault)===c.id?'selected':''}>${c.icon} ${c.label}</option>`).join('')}
         </select>
       </div>
-      <div class="fg"><label>Notas</label><textarea id="mp-notas" placeholder="Detalles del prospecto, interés, seguimiento...">${esc(p.notas||'')}</textarea></div>
+      <div class="fg"><label for="mp-notas">Notas</label><textarea id="mp-notas" placeholder="Detalles del prospecto, interés, seguimiento...">${esc(p.notas||'')}</textarea></div>
       <div class="modal-ft"><button class="btn btn-sec" onclick="closeModal()">Cancelar</button><button class="btn btn-prim" onclick="saveProspecto('${p.id||''}')">Guardar</button></div>`;
     bg.classList.add('on');
     return;
@@ -678,24 +873,28 @@ function openModal(type, id){
     const p=id?pedidos.find(x=>x.id===id):{};
     box.innerHTML=`
       <div class="modal-hd"><div class="modal-title">${id?'Editar':'Nuevo'} Pedido</div><button class="modal-close" onclick="closeModal()">&#x2715;</button></div>
-      <div class="fg"><label>Cliente *</label><select id="mp-cliente"><option value="">Seleccionar cliente</option>${clientes.map(c=>`<option value="${c.id}" ${(p.clienteId===c.id)?'selected':''}>${esc(c.nombre)}</option>`).join('')}</select></div>
-      <div class="fg"><label>Detalle del pedido *</label><textarea id="mp-detalle" placeholder="Ej: 3lb costilla, 2lb lomo, 1lb chicharron...">${esc(p.detalle||'')}</textarea></div>
+      <div class="fg"><label for="mp-cliente">Cliente *</label><select id="mp-cliente"><option value="">Seleccionar cliente</option>${clientes.map(c=>`<option value="${c.id}" ${(p.clienteId===c.id)?'selected':''}>${esc(c.nombre)}</option>`).join('')}</select></div>
+      <div class="fg"><label for="mp-detalle">Detalle del pedido *</label><textarea id="mp-detalle" placeholder="Ej: 3lb costilla, 2lb lomo, 1lb chicharron...">${esc(p.detalle||'')}</textarea></div>
       <div class="fg-row">
-        <div class="fg"><label>Total (Q) *</label><input id="mp-total" type="number" min="0" step="0.5" value="${p.total||''}" placeholder="0.00"></div>
-        <div class="fg"><label>Estado</label><select id="mp-estado"><option ${!p.estado||p.estado==='Pendiente'?'selected':''}>Pendiente</option><option ${p.estado==='En camino'?'selected':''}>En camino</option><option ${p.estado==='Entregado'?'selected':''}>Entregado</option><option ${p.estado==='Cancelado'?'selected':''}>Cancelado</option></select></div>
+        <div class="fg"><label for="mp-total">Total (Q) *</label><input id="mp-total" type="number" min="0" step="0.5" value="${p.total||''}" placeholder="0.00"></div>
+        <div class="fg"><label for="mp-estado">Estado</label><select id="mp-estado"><option value="Pendiente" ${!p.estado||p.estado==='Pendiente'?'selected':''}>Pendiente</option><option ${p.estado==='En camino'?'selected':''}>En camino</option><option ${p.estado==='Entregado'?'selected':''}>Entregado</option><option ${p.estado==='Cancelado'?'selected':''}>Cancelado</option></select></div>
       </div>
-      <div class="fg"><label>Fecha de entrega</label><input id="mp-fecha" type="date" value="${p.fechaEnt||''}"></div>
-      <div class="fg"><label>Notas del pedido</label><textarea id="mp-notas" placeholder="Instrucciones especiales, hora de entrega...">${esc(p.notas||'')}</textarea></div>
+      <div class="fg"><label for="mp-fecha">Fecha de entrega</label><input id="mp-fecha" type="date" value="${p.fechaEnt||''}"></div>
+      <div class="fg"><label for="mp-notas-pedido">Notas del pedido</label><textarea id="mp-notas-pedido" placeholder="Instrucciones especiales, hora de entrega...">${esc(p.notas||'')}</textarea></div>
       <div class="modal-ft"><button class="btn btn-sec" onclick="closeModal()">Cancelar</button><button class="btn btn-prim" onclick="savePedido('${id||''}')">Guardar Pedido</button></div>`;
   } else if(type==='nota'){
     const clientes=loadData('clientes');
     box.innerHTML=`
       <div class="modal-hd"><div class="modal-title">Agregar Nota</div><button class="modal-close" onclick="closeModal()">&#x2715;</button></div>
-      <div class="fg"><label>Cliente</label><select id="mn-cliente"><option value="">Seleccionar</option>${clientes.map(c=>`<option value="${c.id}">${esc(c.nombre)}</option>`).join('')}</select></div>
-      <div class="fg"><label>Nota *</label><textarea id="mn-texto" placeholder="Escribe la nota de seguimiento..."></textarea></div>
+      <div class="fg"><label for="mn-cliente">Cliente</label><select id="mn-cliente"><option value="">Seleccionar</option>${clientes.map(c=>`<option value="${c.id}">${esc(c.nombre)}</option>`).join('')}</select></div>
+      <div class="fg"><label for="mn-texto">Nota *</label><textarea id="mn-texto" placeholder="Escribe la nota de seguimiento..."></textarea></div>
       <div class="modal-ft"><button class="btn btn-sec" onclick="closeModal()">Cancelar</button><button class="btn btn-prim" onclick="saveNota()">Guardar Nota</button></div>`;
   }
   bg.classList.add('on');
+  const first=box.querySelector('input,select,textarea,button');
+  if(first) first.focus();
+  const label=box.querySelector('.modal-title');
+  if(label) bg.setAttribute('aria-label', label.textContent);
 }
 
 function closeModal(e){
@@ -756,7 +955,7 @@ function savePedido(id){
   const clientes=loadData('clientes');
   const c=clientes.find(x=>x.id===clienteId);
   const pedidos=loadData('pedidos');
-  const obj={id:id||genId(),clienteId,cliente:c?c.nombre:'Desconocido',detalle,total,estado:document.getElementById('mp-estado').value,fechaEnt:document.getElementById('mp-fecha').value,notas:document.getElementById('mp-notas').value.trim(),fecha:id?pedidos.find(x=>x.id===id)?.fecha:today()};
+  const obj={id:id||genId(),clienteId,cliente:c?c.nombre:'Desconocido',detalle,total,estado:document.getElementById('mp-estado').value,fechaEnt:document.getElementById('mp-fecha').value,notas:document.getElementById('mp-notas-pedido').value.trim(),fecha:id?pedidos.find(x=>x.id===id)?.fecha:today()};
   if(id){const i=pedidos.findIndex(x=>x.id===id);if(i>-1)pedidos[i]=obj;}else{pedidos.push(obj);}
   saveData('pedidos',pedidos);
   document.getElementById('modal-bg').classList.remove('on');
@@ -782,6 +981,78 @@ function saveNota(){
   document.getElementById('modal-bg').classList.remove('on');
   renderPage(STATE.page);
   showToast('Nota guardada');
+}
+
+// ─── PEDIDOS DEL SITIO WEB (API) ────────────────────────────
+// Los pedidos que llegan por la web se registran en el servidor ANTES de
+// abrir WhatsApp, así que aquí aparecen aunque el cliente no complete el chat.
+async function sincronizarPedidosWeb(btn){
+  const etiquetaOriginal = btn ? btn.textContent : '';
+  if(btn){ btn.disabled=true; btn.textContent='Sincronizando…'; }
+  try{
+    const res = await apiFetch('/api/pedidos');
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
+    const web = data.pedidos || [];
+    const locales = loadData('pedidos');
+    const existentes = new Set(locales.map(p=>p.id));
+    let nuevos = 0;
+    web.forEach(o=>{
+      const id='web-'+o.id;
+      if(existentes.has(id)) return;
+      locales.push({
+        id, cliente: o.cliente || 'Pedido del sitio web', clienteId:'',
+        detalle: o.detalle || '', total: o.total || 0, estado:'Pendiente',
+        fecha: o.fecha || '', fechaEnt:'', notas: o.notas || '', origen:'web'
+      });
+      nuevos++;
+    });
+    saveData('pedidos', locales);
+    pintarFilasPedidos();
+    const st=document.getElementById('pedidos-contador');
+    if(st) st.textContent = loadData('pedidos').length + ' pedidos';
+    showToast(nuevos ? '✓ '+nuevos+' pedido(s) nuevo(s) del sitio web' : 'Sin pedidos nuevos del sitio');
+  }catch(e){
+    showToast('No se pudo conectar con el servidor (modo local)');
+  }finally{
+    if(btn){ btn.disabled=false; btn.textContent = etiquetaOriginal || '🔄 Sincronizar pedidos del sitio'; }
+  }
+}
+
+// ─── RESPALDO Y RESTAURACIÓN (los datos viven en este navegador) ──────────
+function exportarRespaldo(){
+  const data = {
+    app:'PorciCentro CRM', version:1, exportado:new Date().toISOString(),
+    clientes: loadData('clientes'), pedidos: loadData('pedidos'),
+    notas: loadData('notas'), prospectos: loadData('prospectos')
+  };
+  const blob = new Blob([JSON.stringify(data,null,1)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'porcicentro-respaldo-' + new Date().toISOString().slice(0,10) + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Respaldo descargado');
+}
+
+function importarRespaldo(file){
+  if(!file) return;
+  const lector = new FileReader();
+  lector.onload = () => {
+    let data;
+    try { data = JSON.parse(lector.result); }
+    catch(e){ showToast('El archivo no es un respaldo válido'); return; }
+    const resumen = ['clientes','pedidos','notas','prospectos']
+      .filter(k=>Array.isArray(data[k]))
+      .map(k=>data[k].length+' '+k).join(', ');
+    if(!resumen){ showToast('El respaldo está vacío o es de otro formato'); return; }
+    if(!confirm('Se reemplazarán los datos actuales con: ' + resumen + '. ¿Continuar?')) return;
+    ['clientes','pedidos','notas','prospectos'].forEach(k=>{ if(Array.isArray(data[k])) saveData(k, data[k]); });
+    renderPage(STATE.page);
+    showToast('Respaldo restaurado');
+  };
+  lector.readAsText(file);
 }
 
 // ─── EXPORT CSV ─────────────────────────────────────────────
@@ -814,12 +1085,18 @@ function exportCSV(type){
   showToast('Archivo CSV descargado');
 }
 
-// ─── HTML ESCAPE (XSS prevention) ──────────────────────────
+// ─── ESCAPADO (prevención de XSS) ──────────────────────────
+// esc(): para TEXTO entre etiquetas. escA(): para ATRIBUTOS
+// (value="..."), donde una comilla sin escapar permite inyectar
+// atributos como onmouseover=... aunque el dato venga de un CSV.
 function esc(str){
-  if(!str) return '';
+  if(!str && str!==0) return '';
   const d=document.createElement('div');
-  d.textContent=str;
+  d.textContent=String(str);
   return d.innerHTML;
+}
+function escA(str){
+  return esc(str).replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/`/g,'&#96;');
 }
 
 // ─── TOAST ──────────────────────────────────────────────────

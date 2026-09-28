@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" role="img"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0B7BC"/><stop offset="55%" stop-color="#D9828C"/><stop offset="100%" stop-color="#A9505F"/></linearGradient><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8F2"/><stop offset="100%" stop-color="#E4D6C4"/></linearGradient><radialGradient id="g" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#B8001A" stop-opacity=".30"/><stop offset="100%" stop-color="#B8001A" stop-opacity="0"/></radialGradient></defs>
+<ellipse cx="200" cy="132" rx="148" ry="104" fill="url(#g)"/>
+<g fill="url(#m)" stroke="#A9505F" stroke-opacity=".4" stroke-width="3">
+  <path d="M118 58 Q146 56 152 88 L158 168 Q160 196 138 198 Q114 198 112 168 L106 92 Q104 62 118 58Z"/>
+  <path d="M250 58 Q278 56 284 88 L290 168 Q292 196 270 198 Q246 198 244 168 L238 92 Q236 62 250 58Z"/>
+</g>
+<g fill="#FBF3EA">
+  <path d="M104 186 Q160 178 164 212 Q166 232 138 236 Q108 238 100 214Z"/>
+  <path d="M236 186 Q292 178 296 212 Q298 232 270 236 Q240 238 232 214Z"/>
+</g>
+<g fill="none" stroke="#D8C6B0" stroke-width="5"><path d="M120 190 v40"/><path d="M252 190 v40"/></g>
+<g fill="#FFF3EE" opacity=".55"><circle cx="132" cy="104" r="7"/><circle cx="264" cy="104" r="7"/></g></svg>

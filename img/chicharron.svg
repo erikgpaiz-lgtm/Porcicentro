@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" role="img">
+<defs>
+<linearGradient id="m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0B7BC"/><stop offset="55%" stop-color="#D9828C"/><stop offset="100%" stop-color="#A9505F"/></linearGradient>
+<radialGradient id="g" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#B8001A" stop-opacity=".30"/><stop offset="100%" stop-color="#B8001A" stop-opacity="0"/></radialGradient>
+<radialGradient id="f" cx="34%" cy="28%" r="78%"><stop offset="0" stop-color="#F7D48A"/><stop offset="48%" stop-color="#D08C2E"/><stop offset="100%" stop-color="#7E3F0C"/></radialGradient>
+</defs>
+<ellipse cx="200" cy="132" rx="152" ry="106" fill="url(#g)"/>
+<g fill="url(#f)" stroke="#6B330A" stroke-width="4" stroke-linejoin="round">
+  <path d="M92 70 q22 -18 44 -6 q16 -12 34 0 q26 -4 32 22 q16 20 -4 36 q4 22 -20 26 q-16 14 -36 2 q-24 6 -34 -14 q-22 -12 -16 -36 q-14 -16 0 -30Z"/>
+  <path d="M226 58 q26 -12 48 4 q22 -6 34 16 q18 16 4 36 q10 22 -14 30 q-14 16 -36 6 q-22 8 -34 -12 q-14 -18 -2 -34 q-12 -22 0 -46Z"/>
+  <path d="M104 152 q20 -16 42 -4 q18 -10 34 4 q24 -2 28 22 q14 20 -4 34 q0 22 -24 24 q-18 12 -36 -2 q-24 4 -32 -16 q-20 -14 -14 -36 q-10 -14 6 -26Z"/>
+  <path d="M236 158 q20 -14 40 -2 q18 -8 32 6 q22 0 26 22 q12 18 -4 32 q-2 20 -24 22 q-16 10 -32 -4 q-22 4 -30 -14 q-18 -14 -12 -34 q-8 -14 4 -28Z"/>
+</g>
+<g stroke="#F7DFAE" stroke-opacity=".45" stroke-width="5" fill="none" stroke-linecap="round">
+  <path d="M112 84 q22 -8 40 6"/><path d="M250 78 q24 -6 40 8"/><path d="M126 168 q22 -8 40 4"/><path d="M262 174 q20 -6 36 6"/>
+</g>
+<g fill="#FBEEC6" opacity=".55"><circle cx="146" cy="104" r="6"/><circle cx="262" cy="98" r="5"/><circle cx="158" cy="188" r="5"/><circle cx="284" cy="192" r="6"/><circle cx="204" cy="116" r="4"/><circle cx="330" cy="132" r="4"/></g>
+</svg>

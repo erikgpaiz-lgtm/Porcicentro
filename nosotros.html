@@ -4,8 +4,30 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nosotros — PorciCentro Guatemala</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shared.css">
+<meta name="description" content="Somos una distribuidora guatemalteca de carne de cerdo fresca: calidad sin compromiso, precios honestos y atención directa de lunes a domingo.">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="author" content="PorciCentro">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://erikgpaiz-lgtm.github.io/Porcicentro/nosotros.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PorciCentro">
+<meta property="og:locale" content="es_GT">
+<meta property="og:title" content="Quiénes Somos — PorciCentro Guatemala">
+<meta property="og:description" content="Somos una distribuidora guatemalteca de carne de cerdo fresca: calidad sin compromiso, precios honestos y atención directa de lunes a domingo.">
+<meta property="og:url" content="https://erikgpaiz-lgtm.github.io/Porcicentro/nosotros.html">
+<meta property="og:image" content="https://erikgpaiz-lgtm.github.io/Porcicentro/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PorciCentro — carne de cerdo fresca en Guatemala">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quiénes Somos — PorciCentro Guatemala">
+<meta name="twitter:description" content="Somos una distribuidora guatemalteca de carne de cerdo fresca: calidad sin compromiso, precios honestos y atención directa de lunes a domingo.">
+<meta name="twitter:image" content="https://erikgpaiz-lgtm.github.io/Porcicentro/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
 <style>
 .story{padding:100px 24px;background:var(--crema)}
 .story-wrap{max-width:var(--max-w);margin:0 auto}
@@ -39,15 +61,51 @@
 .mv-text{font-size:.9rem;color:var(--gris);line-height:1.82}
 @media(max-width:1024px){.story-grid{grid-template-columns:1fr;gap:48px}.val-grid{grid-template-columns:1fr}.val-card+.val-card{border-left:none;border-top:1px solid rgba(255,255,255,.05)}.mv-grid{grid-template-columns:1fr}}
 </style>
+<!-- PC:JSONLD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://erikgpaiz-lgtm.github.io/Porcicentro/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Nosotros",
+          "item": "https://erikgpaiz-lgtm.github.io/Porcicentro/nosotros.html"
+        }
+      ]
+    },
+    {
+      "@type": "AboutPage",
+      "name": "Sobre PorciCentro",
+      "inLanguage": "es-GT",
+      "isPartOf": {
+        "@id": "https://erikgpaiz-lgtm.github.io/Porcicentro/#sitio"
+      }
+    }
+  ]
+}
+</script>
+<!-- /PC:JSONLD -->
 </head>
 <body>
+<a class="skip-link" href="#main">Saltar al contenido</a>
 <nav class="nav"><div class="nav-inner">
   <a class="nav-logo" href="index.html"><div class="logo-mark">PC</div><div class="logo-wordmark">PORCI<em>CENTRO</em></div></a>
   <div class="nav-links"><a href="index.html">Inicio</a><a href="productos.html">Productos</a><a href="recetario.html">Recetario</a><a href="nosotros.html" class="active">Nosotros</a><a href="trabaja.html">Trabaja con Nosotros</a><a href="contacto.html">Contacto</a></div>
-  <div class="nav-actions"><a class="btn-nav-cta" href="https://wa.me/50248890091" target="_blank" rel="noopener">WhatsApp</a><button class="burger" id="pc-burger" onclick="pcToggleMenu()"><span></span><span></span><span></span></button></div>
+  <div class="nav-actions"><a class="btn-nav-cta" href="https://wa.me/50248890091" target="_blank" rel="noopener">WhatsApp</a><button class="nav-cart" type="button" aria-label="Abrir tu pedido" onclick="pcOpenCart()"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-dot" id="cart-badge">0</span></button><button class="burger" id="pc-burger" type="button" aria-label="Abrir menú de navegación" aria-controls="pc-mob-nav" aria-expanded="false" onclick="pcToggleMenu()"><span></span><span></span><span></span></button></div>
 </div></nav>
-<div class="mob-nav" id="pc-mob-nav"><a href="index.html" onclick="pcCloseMenu()">Inicio</a><a href="productos.html" onclick="pcCloseMenu()">Productos</a><a href="recetario.html" onclick="pcCloseMenu()">Recetario</a><a href="nosotros.html" onclick="pcCloseMenu()">Nosotros</a><a href="trabaja.html" onclick="pcCloseMenu()">Trabaja con Nosotros</a><a href="contacto.html" onclick="pcCloseMenu()">Contacto</a></div>
+<nav class="mob-nav" id="pc-mob-nav" aria-label="Menú móvil" aria-hidden="true"><a href="index.html" onclick="pcCloseMenu()">Inicio</a><a href="productos.html" onclick="pcCloseMenu()">Productos</a><a href="recetario.html" onclick="pcCloseMenu()">Recetario</a><a href="nosotros.html" onclick="pcCloseMenu()">Nosotros</a><a href="trabaja.html" onclick="pcCloseMenu()">Trabaja con Nosotros</a><a href="contacto.html" onclick="pcCloseMenu()">Contacto</a></nav>
 
+<main id="main">
 <section class="page-hero"><div class="page-hero-dots"></div><div class="page-tag"><div class="page-tag-dot"></div><span>Nuestra Historia · Est. 2025</span></div><h1>Quiénes <span class="red">Somos</span></h1><p class="page-hero-sub">PorciCentro nació con una visión clara: llevar carne de cerdo fresca y de calidad a cada rincón de Guatemala con honestidad, puntualidad y servicio de excelencia.</p></section>
 
 <section class="story"><div class="story-wrap"><div class="story-grid">
@@ -60,7 +118,7 @@
     <h2 class="sec-title">Un sueño <em>guatemalteco</em></h2>
     <p class="story-text">PorciCentro nació en <strong>2025</strong> con una misión sencilla pero poderosa: distribuir carne de cerdo fresca de la más alta calidad a restaurantes, carnicerías y hogares en Guatemala.</p>
     <p class="story-text">Desde el primer día apostamos por la <strong>frescura total</strong> —sin congelados, sin intermediarios innecesarios— llevando los cortes directamente del rastro al cliente en menos de 24 horas.</p>
-    <p class="story-text">Hoy operamos de <strong>lunes a domingo</strong>, ofrecemos más de 18 cortes diferentes y seguimos creciendo gracias a la confianza de nuestra clientela.</p>
+    <p class="story-text">Hoy operamos de <strong>lunes a domingo</strong>, ofrecemos 16 cortes diferentes y seguimos creciendo gracias a la confianza de nuestra clientela.</p>
     <a class="btn btn-primary" href="contacto.html" style="margin-top:12px">Contáctanos →</a>
   </div>
 </div></div></section>
@@ -82,6 +140,8 @@
   </div>
 </div></section>
 
-<footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
+</main>
+<footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy"><a href="privacidad.html">Aviso de privacidad</a></div><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
+<script src="data.js"></script>
 <script src="shared.js"></script>
 </body></html>
