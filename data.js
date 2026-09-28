@@ -31,25 +31,25 @@
   // unit: 'libra' | 'unidad'   ·  min: cantidad mínima  ·  step: incremento
   var CATALOGO = [
     // ── Cortes estándar Q23.50/lb ──────────────────────────
-    { id:'chuleta',   name:'Chuleta de Cerdo',   cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/chuleta.svg', emoji:'🥩', destacado:true,
+    { id:'chuleta',   name:'Chuleta de Cerdo',   cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/foto/chuleta', emoji:'🥩', destacado:true,
       desc:'Chuleta fresca con hueso, ideal para asar a la plancha o al horno. Jugosa y sabrosa.' },
-    { id:'brazuelo',  name:'Posta de Brazuelo',  cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/asado.svg', emoji:'🍖',
+    { id:'brazuelo',  name:'Posta de Brazuelo',  cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/foto/brazuelo', emoji:'🍖',
       desc:'Posta del brazuelo delantero, perfecta para guisos, estofados y preparaciones largas.' },
-    { id:'costilla',  name:'Costilla de Cerdo',  cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/costilla.svg', emoji:'🍖', destacado:true,
+    { id:'costilla',  name:'Costilla de Cerdo',  cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/foto/costilla', emoji:'🍖', destacado:true,
       desc:'Costilla fresca con hueso, ideal para parrilla, horno y recetas festivas.' },
-    { id:'lomocinta', name:'Lomo de Cinta',      cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/lomo.svg', emoji:'🥩', destacado:true,
+    { id:'lomocinta', name:'Lomo de Cinta',      cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/foto/lomocinta', emoji:'🥩', destacado:true,
       desc:'Lomo de cinta magro y tierno, perfecto para medallones, escalopes y recetas gourmet.' },
-    { id:'nuca',      name:'Nuca de Cerdo',      cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/nuca.svg', emoji:'🐖',
+    { id:'nuca',      name:'Nuca de Cerdo',      cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/foto/nuca', emoji:'🐖',
       desc:'Nuca jugosa con buena infiltración de grasa. Excelente para asados y cocidos largos.' },
-    { id:'pierna',    name:'Pierna de Cerdo',    cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/pierna.svg', emoji:'🍖',
+    { id:'pierna',    name:'Pierna de Cerdo',    cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/foto/pierna', emoji:'🍖',
       desc:'Pierna fresca entera o en piezas. Perfecta para hornear en celebraciones y tamales.' },
-    { id:'posta',     name:'Posta de Cerdo',     cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/asado.svg', emoji:'🥩',
+    { id:'posta',     name:'Posta de Cerdo',     cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/foto/posta', emoji:'🥩',
       desc:'Posta versátil, limpia y sin hueso. Ideal para guisos, picadillo y preparaciones rápidas.' },
-    { id:'solomillo', name:'Solomillo de Cerdo', cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/lomo.svg', emoji:'🥩',
+    { id:'solomillo', name:'Solomillo de Cerdo', cat:'cerdo', price:23.50, priceUnit:'lb', unit:'libra', min:0.5, step:0.5, img:'img/foto/solomillo', emoji:'🥩',
       desc:'El corte más noble del cerdo. Suave, magro y exquisito para preparaciones especiales.' },
 
     // ── Especialidades ─────────────────────────────────────
-    { id:'cabeza',     name:'Cabeza de Cerdo',     cat:'especial', price:140, priceUnit:'c/u', unit:'unidad', min:1,   step:1,   img:'img/cabeza.svg', emoji:'🐷',
+    { id:'cabeza',     name:'Cabeza de Cerdo',     cat:'especial', price:140, priceUnit:'c/u', unit:'unidad', min:1,   step:1,   img:'img/foto/cabeza', emoji:'🐷',
       desc:'Cabeza entera de cerdo. Perfecta para tamales, queso de puerco y preparaciones festivas.' },
 
     { id:'patitas',    name:'Patitas de Cerdo',    cat:'especial', price:8,   priceUnit:'c/u', unit:'unidad', min:1,   step:1,   img:'img/patitas.svg', emoji:'🐾', destacado:true,

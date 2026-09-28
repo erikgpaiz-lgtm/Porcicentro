@@ -78,7 +78,7 @@
 .cuts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:22px}
 .cut-card{background:#fff;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:all .35s cubic-bezier(.25,.8,.25,1);display:flex;flex-direction:column;position:relative}
 .cut-card:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.11),0 4px 16px rgba(184,0,26,.09)}
-.cut-img{height:190px;overflow:hidden;background:linear-gradient(135deg,#180004,#2e000a);position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:rgba(255,255,255,.12)}
+.cut-img{height:210px;overflow:hidden;background:linear-gradient(135deg,#180004,#2e000a);position:relative;flex-shrink:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:rgba(255,255,255,.12)}
 .cut-img-ico{font-size:2.5rem;opacity:.15}
 .cut-img-lbl{font-family:var(--font-c);font-size:.55rem;letter-spacing:2px;text-transform:uppercase;opacity:.3}
 .cut-badge{position:absolute;top:12px;left:12px;font-family:var(--font-c);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;padding:4px 10px;border-radius:100px;z-index:2}
@@ -157,6 +157,34 @@
 .cut-img .cut-img-ico{position:absolute;bottom:10px;right:12px;font-size:1.5rem;opacity:.85;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
 .cut-img{position:relative}
 
+
+/* ── Hero con foto real ─────────────────────────────────── */
+.hero-photo{display:block;position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 90px rgba(0,0,0,.6);transform:rotate(-1.4deg)}
+.hero-photo img{width:100%;height:auto;display:block}
+.hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.45),transparent 55%)}
+.hero-nota{font-size:.84rem;color:rgba(255,255,255,.5);margin:-14px 0 30px;display:flex;align-items:center;gap:8px}
+.hero-nota::before{content:'✓';color:var(--verde);font-weight:800}
+/* ── Banda de confianza ─────────────────────────────────── */
+.trust{background:var(--carbon);border-bottom:1px solid rgba(255,255,255,.06);padding:34px 24px}
+.trust-wrap{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+.trust-item{display:flex;gap:13px;align-items:flex-start}
+.trust-ico{font-size:1.35rem;line-height:1;flex-shrink:0;filter:grayscale(.15)}
+.trust-t{font-family:var(--font-c);font-size:.78rem;font-weight:700;letter-spacing:.4px;color:#fff;margin-bottom:4px}
+.trust-s{font-size:.78rem;color:rgba(255,255,255,.42);line-height:1.55}
+@media(max-width:980px){.trust-wrap{grid-template-columns:1fr 1fr;gap:22px}}
+@media(max-width:560px){.trust-wrap{grid-template-columns:1fr}}
+/* ── Cómo pedir en 3 pasos ──────────────────────────────── */
+.pasos{padding:100px 24px;background:var(--blanco)}
+.pasos-wrap{max-width:var(--max-w);margin:0 auto}
+.pasos-grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px;counter-reset:paso}
+.paso{position:relative;background:var(--crema);border:1px solid rgba(0,0,0,.05);border-radius:var(--r-lg);padding:34px 28px 30px}
+.paso-n{position:absolute;top:-18px;left:26px;width:44px;height:44px;border-radius:50%;background:var(--rojo);color:#fff;font-family:var(--font-h);font-size:1.3rem;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(184,0,26,.3)}
+.paso h3{font-family:var(--font-c);font-size:1.02rem;font-weight:800;letter-spacing:.3px;margin:14px 0 10px;color:var(--negro)}
+.paso p{color:var(--gris);font-size:.9rem;line-height:1.75}
+.pasos-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:44px}
+.btn-wa{background:#25D366;color:#062B14;border:1.5px solid #25D366}
+.btn-wa:hover{background:#1fb757;border-color:#1fb757;color:#04220f}
+@media(max-width:900px){.pasos-grid{grid-template-columns:1fr}.pasos{padding:80px 24px}}
 </style>
 <!-- PC:JSONLD -->
 <script type="application/ld+json">
@@ -673,22 +701,26 @@
       <h1>CARNE<br>DE <span class="red">CERDO</span><br><span class="stroke">PREMIUM</span></h1>
       <div class="hero-chip"><span>Cortes estándar desde</span><strong><span data-pc-precio="chuleta">Q23.50</span> / lb</strong></div>
       <p class="hero-sub">Cortes frescos seleccionados directamente del rastro. Calidad garantizada para restaurantes, carnicerías y hogares guatemaltecos exigentes.</p>
+      <p class="hero-nota">Sin registro ni tarjeta: armas tu pedido y lo confirmas por WhatsApp en un minuto.</p>
       <div class="hero-btns">
-        <a class="btn btn-primary btn-lg" href="productos.html"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>Ver Catálogo</a>
+        <a class="btn btn-primary btn-lg" href="productos.html"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>Ver cortes y precios</a>
         <a class="btn btn-outline-light btn-lg" href="https://wa.me/50248890091" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L6.09 7.91A16 16 0 0013 14.85l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0121.18 16"/></svg>Hacer Pedido</a>
       </div>
       <div class="hero-stats">
-        <div class="hs"><div class="hs-n">2025</div><div class="hs-l">Año de inicio</div></div>
+        <div class="hs"><div class="hs-n">24 h</div><div class="hs-l">Del rastro a tu mesa</div></div>
         <div class="hs"><div class="hs-n" data-pc-conteo>16</div><div class="hs-l">Cortes disponibles</div></div>
-        <div class="hs"><div class="hs-n">100%</div><div class="hs-l">Carne fresca diaria</div></div>
+        <div class="hs"><div class="hs-n" data-pc-envio>25 lb</div><div class="hs-l">Para envío gratis</div></div>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-frame">
         <div class="hero-ring1"></div><div class="hero-ring2"></div>
-        <img class="hero-img" src="img/hero-corte.svg" alt="Corte de cerdo fresco PorciCentro sobre tabla de cocina" loading="eager" decoding="async" width="600" height="600">
+        <picture class="hero-photo">
+          <source type="image/webp" srcset="img/foto/hero-900.webp 900w, img/foto/hero-1600.webp 1600w" sizes="(max-width:1024px) 92vw, 560px">
+          <img src="img/foto/hero-900.jpg" srcset="img/foto/hero-900.jpg 900w, img/foto/hero-1600.jpg 1600w" sizes="(max-width:1024px) 92vw, 560px" alt="Cortes de cerdo frescos PorciCentro sobre tabla de carnicería" width="1600" height="900" fetchpriority="high" decoding="async">
+        </picture>
         <div class="hero-badge1"><div class="hb-n" data-pc-precio="chuleta">Q23.50</div><div class="hb-l">por libra</div></div>
-        <div class="hero-badge2"><div class="hb2"><div class="hb2-dot"></div><div class="hb2-t">Carne fresca hoy</div></div></div>
+        <div class="hero-badge2"><div class="hb2"><div class="hb2-dot"></div><div class="hb2-t">Fresco hoy · del rastro a tu mesa</div></div></div>
       </div>
     </div>
   </div>
@@ -706,6 +738,15 @@
   </div>
 </div>
 
+
+<section class="trust">
+  <div class="trust-wrap">
+    <div class="trust-item"><div class="trust-ico">❄️</div><div><div class="trust-t">Frescura de menos de 24 horas</div><div class="trust-s">Del rastro directo a tu cocina, sin congelar</div></div></div>
+    <div class="trust-item"><div class="trust-ico">🚚</div><div><div class="trust-t">Entrega gratis desde 25 lb</div><div class="trust-s">Reparto en Ciudad de Guatemala, lunes a domingo</div></div></div>
+    <div class="trust-item"><div class="trust-ico">💬</div><div><div class="trust-t">Pedido por WhatsApp en 1 minuto</div><div class="trust-s">Sin registro, sin tarjeta, respuesta rápida</div></div></div>
+    <div class="trust-item"><div class="trust-ico">🏪</div><div><div class="trust-t">Mayoreo para negocios</div><div class="trust-s">Restaurantes, carnicerías, comedores y eventos</div></div></div>
+  </div>
+</section>
 <section class="cuts" id="cortes">
   <div class="cuts-wrap">
     <div class="sec-head rv">
@@ -764,6 +805,22 @@
   </div>
 </section>
 
+
+<section class="pasos">
+  <div class="pasos-wrap">
+    <div class="sec-head rv">
+      <div class="sec-kicker"><div class="sec-kicker-line"></div><span>Así de simple</span></div>
+      <h2 class="sec-title">Pide en <em>3 pasos</em></h2>
+      <p class="sec-desc">Sin apps, sin cuentas y sin filas. El precio que ves es el precio que pagas.</p>
+    </div>
+    <ol class="pasos-grid">
+      <li class="paso rv d1"><div class="paso-n">1</div><h3>Arma tu pedido</h3><p>Agrega los cortes y las libras que necesitas desde el catálogo. El carrito calcula el total y el envío gratis.</p></li>
+      <li class="paso rv d2"><div class="paso-n">2</div><h3>Confírmalo por WhatsApp</h3><p>Un toque y se abre WhatsApp con tu pedido escrito. Coordinamos hora, dirección y forma de pago.</p></li>
+      <li class="paso rv d3"><div class="paso-n">3</div><h3>Recibe fresco el mismo día</h3><p>Cortamos y empacamos el día de la entrega, con el peso exacto que pediste.</p></li>
+    </ol>
+    <div class="pasos-cta rv"><a class="btn btn-primary btn-lg" href="productos.html">Empezar mi pedido →</a><a class="btn btn-wa btn-lg" href="https://wa.me/50248890091" target="_blank" rel="noopener">O escríbenos por WhatsApp</a></div>
+  </div>
+</section>
 <section class="pricing">
   <div class="pricing-wrap">
     <div class="sec-head rv"><div class="sec-kicker"><div class="sec-kicker-line"></div><span>Lista de Precios</span></div><h2 class="sec-title">Precios <em>claros</em> y transparentes</h2></div>

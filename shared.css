@@ -583,3 +583,94 @@ ul, ol { list-style:none; }
 /* Tarjetas de producto: emoji destacado en el hueco de foto */
 .cut-img-ico { font-size:3rem; opacity:.55; }
 .cut-img-lbl { color:rgba(255,255,255,.45); }
+
+/* ============================================================
+   TARJETAS DE PRODUCTO, PRECIOS Y LLAMADAS A LA ACCIÓN
+   (una sola definición para la home y el catálogo)
+   ============================================================ */
+.cut-img { position:relative; overflow:hidden; }
+.cut-img picture { position:absolute; inset:0; display:block; }
+.cut-img img, .cut-img-arte { width:100%; height:100%; object-fit:cover; display:block; }
+.cut-img img { transition:transform .55s cubic-bezier(.25,.8,.25,1); }
+.cut-card:hover .cut-img img { transform:scale(1.06); }
+.cut-img::after {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:linear-gradient(to top, rgba(10,10,10,.55) 0%, rgba(10,10,10,0) 46%);
+}
+/* Sello de destacado */
+.cut-flag {
+  position:absolute; top:12px; right:12px; z-index:3;
+  background:#F5C842; color:#231a00;
+  font-family:var(--font-c); font-size:.6rem; font-weight:800;
+  letter-spacing:1.4px; text-transform:uppercase;
+  padding:5px 11px; border-radius:100px;
+  box-shadow:0 6px 18px rgba(0,0,0,.28);
+}
+/* Bloque de precio: el dato que más se busca */
+.cut-precio { display:flex; flex-direction:column; gap:1px; }
+.cut-precio .cut-price { font-size:1.5rem; }
+.cut-precio .cut-unit { display:block; }
+.cut-min {
+  font-family:var(--font-c); font-size:.6rem; letter-spacing:1.2px;
+  text-transform:uppercase; color:var(--gris); margin-top:4px;
+}
+.add-btn { white-space:nowrap; }
+
+/* ── Barra de acción fija (móvil) ─────────────────────────── */
+.pc-cta-bar {
+  position:fixed; left:0; right:0; bottom:0; z-index:900;
+  display:none; align-items:center; gap:10px;
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+  background:rgba(12,12,12,.94); backdrop-filter:blur(12px);
+  border-top:1px solid rgba(255,255,255,.08);
+  transform:translateY(120%); transition:transform .35s cubic-bezier(.25,.8,.25,1);
+}
+.pc-cta-bar.on { transform:none; }
+.pc-cta-cart {
+  position:relative; flex-shrink:0; width:52px; height:52px; border-radius:14px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+.pc-cta-cart svg { width:22px; height:22px; stroke:#fff; fill:none; stroke-width:1.7; }
+.pc-cta-count {
+  position:absolute; top:-6px; right:-6px; min-width:20px; height:20px; padding:0 5px;
+  border-radius:100px; background:var(--gris); color:#fff;
+  font-family:var(--font-c); font-size:.68rem; font-weight:800;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .25s;
+}
+.pc-cta-cart.on .pc-cta-count { background:var(--rojo); }
+.pc-cta-main {
+  flex:1; min-height:52px; border-radius:14px;
+  background:#25D366; color:#062B14;
+  display:flex; align-items:center; justify-content:center; gap:9px;
+  font-family:var(--font-c); font-weight:800; font-size:.78rem;
+  letter-spacing:1.4px; text-transform:uppercase; text-align:center;
+  box-shadow:0 10px 26px rgba(37,211,102,.28);
+}
+.pc-cta-main em { font-style:normal; opacity:.72; font-size:.72rem; letter-spacing:.6px; text-transform:none; }
+.pc-cta-main svg { width:20px; height:20px; fill:#062B14; flex-shrink:0; }
+@media (max-width:860px) { .pc-cta-bar { display:flex; } }
+
+/* ── Botón flotante de WhatsApp (escritorio) ──────────────── */
+.pc-wa-float {
+  position:fixed; right:22px; bottom:24px; z-index:900;
+  display:flex; align-items:center; gap:0;
+  background:#25D366; color:#062B14; border-radius:100px;
+  padding:15px; box-shadow:0 14px 34px rgba(37,211,102,.32), 0 3px 10px rgba(0,0,0,.22);
+  transform:translateY(140%); transition:transform .35s cubic-bezier(.25,.8,.25,1), gap .3s, padding .3s;
+}
+.pc-wa-float.on { transform:none; }
+.pc-wa-float svg { width:26px; height:26px; fill:#062B14; flex-shrink:0; }
+.pc-wa-tip {
+  max-width:0; overflow:hidden; white-space:nowrap;
+  font-family:var(--font-c); font-size:.72rem; font-weight:700; line-height:1.35;
+  transition:max-width .35s cubic-bezier(.25,.8,.25,1), margin .35s;
+}
+.pc-wa-tip strong { display:block; font-family:var(--font-b); font-size:.8rem; letter-spacing:.3px; }
+.pc-wa-float:hover { gap:12px; padding-right:22px; }
+.pc-wa-float:hover .pc-wa-tip { max-width:230px; margin-left:2px; }
+@media (max-width:860px) { .pc-wa-float { display:none; } }
+
+/* Compensar la barra fija al final de la página */
+@media (max-width:860px) { body { padding-bottom:76px; } }

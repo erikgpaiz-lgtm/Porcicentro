@@ -96,22 +96,36 @@
       else el.textContent = CFG.MONEDA + fmt(p.price);
     });
     document.querySelectorAll('[data-pc-conteo]').forEach(function (el) { el.textContent = PRODUCTOS.length; });
+    document.querySelectorAll('[data-pc-envio]').forEach(function (el) { el.textContent = CFG.ENVIO_GRATIS_LB + ' lb'; });
   };
 
   /* ── TARJETA DE PRODUCTO (una sola implementación) ────── */
-  window.pcProductCard = function (p) {
+  window.pcProductCard = function (p, opciones) {
+    var mostrarSello = p.destacado && !(opciones && opciones.sinSello);
     var bc = p.cat === 'especial' ? 'badge-spc' : p.cat === 'economico' ? 'badge-eco' : 'badge-std';
+    var foto = p.img && p.img.indexOf('.svg') === -1 ? p.img : '';
+    var alt = p.name + ' fresco de PorciCentro' + (p.unit === 'libra' ? ', precio por libra' : '');
+    var media = foto
+      ? '<picture>' +
+          '<source type="image/webp" srcset="' + foto + '-450.webp 450w, ' + foto + '-900.webp 900w" sizes="(max-width:640px) 92vw, (max-width:1100px) 44vw, 380px">' +
+          '<img src="' + foto + '-450.jpg" srcset="' + foto + '-450.jpg 450w, ' + foto + '-900.jpg 900w" sizes="(max-width:640px) 92vw, (max-width:1100px) 44vw, 380px" alt="' + alt + '" width="900" height="675" loading="lazy" decoding="async">' +
+        '</picture>'
+      : '<img class="cut-img-arte" src="' + (p.img || 'img/asado.svg') + '" alt="' + alt + '" loading="lazy" decoding="async">';
+
     return '<div class="cut-card rv" data-cat="' + p.cat + '" data-id="' + p.id + '">' +
-      '<div class="cut-img">' +
-        '<img src="' + (p.img || 'img/asado.svg') + '" alt="' + p.name + ' — corte de cerdo fresco" loading="lazy" decoding="async">' +
-        '<div class="cut-img-ico" aria-hidden="true">' + (p.emoji || '🥩') + '</div>' +
+      '<div class="cut-img">' + media +
         '<div class="cut-badge ' + bc + '">' + window.PC.precioConEtiqueta(p) + '</div>' +
+        (mostrarSello ? '<div class="cut-flag">★ Más vendido</div>' : '') +
       '</div>' +
       '<div class="cut-body">' +
         '<h3 class="cut-name">' + p.name + '</h3>' +
         '<p class="cut-desc">' + p.desc + '</p>' +
         '<div class="cut-foot">' +
-          '<div><div class="cut-price">Q' + fmt(p.price) + '</div><span class="cut-unit">/ ' + p.priceUnit + '</span></div>' +
+          '<div class="cut-precio">' +
+            '<div class="cut-price">Q' + fmt(p.price) + '</div>' +
+            '<span class="cut-unit">/ ' + p.priceUnit + '</span>' +
+            '<span class="cut-min">mínimo ' + (p.min === 0.5 ? '½' : fmt(p.min)) + ' ' + p.priceUnit + '</span>' +
+          '</div>' +
           '<div class="cut-acts">' +
             '<div class="qty-row">' +
               '<button class="q-btn" type="button" aria-label="Quitar ' + p.step + ' ' + p.priceUnit + ' de ' + p.name + '" onclick="pcQty(\'' + p.id + '\',-' + p.step + ')">−</button>' +
@@ -129,7 +143,7 @@
     var el = typeof contenedor === 'string' ? document.getElementById(contenedor) : contenedor;
     if (!el) return;
     var lista = soloDestacados ? PRODUCTOS.filter(function (p) { return p.destacado; }) : PRODUCTOS;
-    el.innerHTML = lista.map(window.pcProductCard).join('');
+    el.innerHTML = lista.map(function (p) { return window.pcProductCard(p, { sinSello: !!soloDestacados }); }).join('');
   };
 
   window.pcQty = function (id, delta) {
@@ -236,6 +250,11 @@
     if (badge) {
       badge.textContent = list.length;
       badge.classList.toggle('on', list.length > 0);
+    }
+    var cta = document.getElementById('pc-cta-count');
+    if (cta) {
+      cta.textContent = list.length;
+      cta.parentElement.classList.toggle('on', list.length > 0);
     }
     var cc = document.getElementById('cart-content');
     var cf = document.getElementById('cart-ft');
@@ -463,6 +482,46 @@
     }
   };
 
+  /* ── LLAMADA A LA ACCIÓN SIEMPRE A LA VISTA ───────────── */
+  // En móvil: barra inferior con "Pedir por WhatsApp" y el pedido.
+  // En escritorio: botón flotante de WhatsApp. Aparecen al bajar.
+  window.pcEnsureCTA = function () {
+    if (!document.querySelector('.nav') || document.getElementById('pc-cta-bar')) return;
+
+    var barra = document.createElement('div');
+    barra.className = 'pc-cta-bar';
+    barra.id = 'pc-cta-bar';
+    barra.innerHTML =
+      '<button class="pc-cta-cart" type="button" aria-label="Ver tu pedido" onclick="pcOpenCart()">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>' +
+        '<span class="pc-cta-count" id="pc-cta-count">0</span>' +
+      '</button>' +
+      '<a class="pc-cta-main" href="' + 'https://wa.me/' + CFG.WHATSAPP + '" target="_blank" rel="noopener">' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>' +
+        'Pedir por WhatsApp <em>' + CFG.TEL_DISPLAY + '</em>' +
+      '</a>';
+    document.body.appendChild(barra);
+
+    var flotante = document.createElement('a');
+    flotante.className = 'pc-wa-float';
+    flotante.href = 'https://wa.me/' + CFG.WHATSAPP;
+    flotante.target = '_blank';
+    flotante.rel = 'noopener';
+    flotante.setAttribute('aria-label', 'Escribir por WhatsApp al ' + CFG.TEL_DISPLAY);
+    flotante.innerHTML =
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>' +
+      '<span class="pc-wa-tip">¿Dudas? Escríbenos<strong>' + CFG.TEL_DISPLAY + '</strong></span>';
+    document.body.appendChild(flotante);
+
+    var alScroll = function () {
+      var visible = window.scrollY > 420;
+      barra.classList.toggle('on', visible);
+      flotante.classList.toggle('on', visible);
+    };
+    window.addEventListener('scroll', alScroll, { passive: true });
+    alScroll();
+  };
+
   /* ── INICIALIZACIÓN ───────────────────────────────────── */
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
@@ -474,6 +533,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     window.pcEnsureCartUI();
+    window.pcEnsureCTA();
     window.pcHydrateLinks();
     window.pcHydratePrecios();
     window.pcInitNav();
