@@ -173,16 +173,32 @@ node scripts/gen-structured-data.mjs  # deja los datos de Google al día
 
 ## 6. Imágenes
 
-Las ilustraciones de los cortes, el despiece y el hero son **SVG propios** (nada
-de fotos de terceros ni de bancos de imágenes con licencia dudosa): pesan pocos
-kB, se ven nítidos en cualquier pantalla y se pueden recolorear editando el
-archivo. Cada producto de `data.js` apunta a la suya con `img:'img/…svg'`, y el
-recetario usa el mapa `RECETAS` de `data.js`.
+El sitio usa **fotografía de producto propia** en `img/foto/`: los 16 cortes, el
+hero y los platos del recetario. Cada foto se publica en cuatro archivos para
+que cargue rápido sin perder nitidez:
 
-Cuando tengas fotos reales, reemplaza el archivo (por ejemplo
-`img/chuleta.svg` → `img/chuleta.jpg`) y actualiza la ruta en `data.js`: no hay
-que tocar ninguna página. Para el hero, la sección de despiece y las tarjetas del
-recetario funciona igual (la ruta está en el HTML o en `RECETAS`).
+```
+img/foto/chuleta-450.webp   450 px  (celular)   ← WebP, el más liviano
+img/foto/chuleta-450.jpg    450 px              ← respaldo universal
+img/foto/chuleta-900.webp   900 px  (escritorio/pantalla retina)
+img/foto/chuleta-900.jpg    900 px
+```
+
+Las páginas las arman con `<picture>` + `srcset` (el helper `pcFoto()` de
+`shared.js`), así el navegador elige el archivo correcto y solo descarga lo que
+necesita. La ruta base de cada producto está en `data.js` (`img:'img/foto/…'`)
+y la de cada receta en el mapa `RECETAS`.
+
+**Para cambiar una foto** reemplaza los cuatro archivos con el mismo nombre, o
+apunta a otra ruta desde `data.js`. Si vas a usar fotos reales del negocio
+(siempre venden más que cualquier imagen de estudio):
+
+```bash
+# instala ImageMagick y genera los 4 tamaños desde una sola foto
+convert original.jpg -resize 900x675^ -gravity center -extent 900x675 img/foto/chuleta-900.jpg
+convert original.jpg -resize 450x338^ -gravity center -extent 450x338 img/foto/chuleta-450.jpg
+# luego convierte a .webp con la herramienta que prefieras (o pídelo en el chat)
+```
 
 ## 7. Estructura
 

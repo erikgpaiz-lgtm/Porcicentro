@@ -54,7 +54,7 @@
 .hs-n{font-family:var(--font-h);font-size:2rem;font-weight:900;background:linear-gradient(135deg,#fff 40%,var(--rojo-viv));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
 .hs-l{font-family:var(--font-c);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.26);margin-top:5px}
 .hero-visual{display:flex;align-items:center;justify-content:center;position:relative}
-.hero-frame{width:100%;max-width:460px;position:relative}
+.hero-frame{width:100%;max-width:520px;position:relative}
 .hero-ring1{position:absolute;inset:-16px;border-radius:50%;border:1px solid rgba(184,0,26,.18);animation:spin 22s linear infinite}
 .hero-ring2{position:absolute;inset:-44px;border-radius:50%;border:1px dashed rgba(184,0,26,.09);animation:spin 36s linear infinite reverse}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -159,7 +159,7 @@
 
 
 /* ── Hero con foto real ─────────────────────────────────── */
-.hero-photo{display:block;position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 90px rgba(0,0,0,.6);transform:rotate(-1.4deg)}
+.hero-photo{display:block;position:relative;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 34px 100px rgba(0,0,0,.62);transform:rotate(-1deg)}
 .hero-photo img{width:100%;height:auto;display:block}
 .hero-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.45),transparent 55%)}
 .hero-nota{font-size:.84rem;color:rgba(255,255,255,.5);margin:-14px 0 30px;display:flex;align-items:center;gap:8px}
@@ -185,6 +185,28 @@
 .btn-wa{background:#25D366;color:#062B14;border:1.5px solid #25D366}
 .btn-wa:hover{background:#1fb757;border-color:#1fb757;color:#04220f}
 @media(max-width:900px){.pasos-grid{grid-template-columns:1fr}.pasos{padding:80px 24px}}
+
+/* ── Mosaico del despiece (fotos reales del catálogo) ───── */
+.mosaico{display:grid;grid-template-columns:1.35fr 1fr;grid-template-rows:repeat(2,190px);gap:10px}
+.mosaico picture{display:block;overflow:hidden;position:relative;border-radius:16px;background:#180004}
+.mosaico img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.25,.8,.25,1)}
+.mosaico picture:hover img{transform:scale(1.07)}
+.mosaico .m1{grid-row:span 2}
+.mosaico .m1 img{height:100%}
+.mosaico .m4,.mosaico .m5{display:none}
+@media(min-width:1200px){
+  .mosaico{grid-template-columns:1.35fr 1fr 1fr;grid-template-rows:repeat(2,168px)}
+  .mosaico .m1{grid-row:span 2}
+  .mosaico .m4{display:block}
+  .mosaico .m5{display:block;grid-column:span 1}
+}
+@media(max-width:900px){
+  .mosaico{grid-template-columns:1fr 1fr;grid-template-rows:repeat(2,150px)}
+  .mosaico .m1{grid-row:span 1}
+  .mosaico .m3{display:none}
+}
+.cta-big h2 em{font-style:italic;color:var(--oro-l)}
+.cta-nota{margin-top:22px;font-size:.82rem;color:rgba(255,255,255,.5);letter-spacing:.3px}
 </style>
 <!-- PC:JSONLD -->
 <script type="application/ld+json">
@@ -714,10 +736,9 @@
     </div>
     <div class="hero-visual">
       <div class="hero-frame">
-        <div class="hero-ring1"></div><div class="hero-ring2"></div>
         <picture class="hero-photo">
-          <source type="image/webp" srcset="img/foto/hero-900.webp 900w, img/foto/hero-1600.webp 1600w" sizes="(max-width:1024px) 92vw, 560px">
-          <img src="img/foto/hero-900.jpg" srcset="img/foto/hero-900.jpg 900w, img/foto/hero-1600.jpg 1600w" sizes="(max-width:1024px) 92vw, 560px" alt="Cortes de cerdo frescos PorciCentro sobre tabla de carnicería" width="1600" height="900" fetchpriority="high" decoding="async">
+          <source type="image/webp" srcset="img/foto/hero-450.webp 450w, img/foto/hero-900.webp 900w, img/foto/hero-1600.webp 1600w" sizes="(max-width:1024px) 92vw, 560px">
+          <img src="img/foto/hero-900.jpg" srcset="img/foto/hero-450.jpg 450w, img/foto/hero-900.jpg 900w, img/foto/hero-1600.jpg 1600w" sizes="(max-width:1024px) 92vw, 560px" alt="Cortes de cerdo frescos PorciCentro sobre tabla de carnicería" width="1600" height="900" fetchpriority="high" decoding="async">
         </picture>
         <div class="hero-badge1"><div class="hb-n" data-pc-precio="chuleta">Q23.50</div><div class="hb-l">por libra</div></div>
         <div class="hero-badge2"><div class="hb2"><div class="hb2-dot"></div><div class="hb2-t">Fresco hoy · del rastro a tu mesa</div></div></div>
@@ -765,8 +786,14 @@
   <div class="despiece-wrap">
     <div class="despiece-inner">
       <div class="despiece-img-wrap rv">
-        <img src="img/despiece.svg" alt="Guía del despiece del cerdo: de ahí salen los 16 cortes que vendemos" loading="lazy" decoding="async" style="width:100%;display:block">
-        <div class="despiece-lbl">Guía de Corte y Despiece · PorciCentro</div>
+        <div class="mosaico" aria-hidden="true">
+          <picture class="m1"><source type="image/webp" srcset="img/foto/chuleta-450.webp"><img src="img/foto/chuleta-450.jpg" alt="" width="450" height="338" loading="lazy" decoding="async"></picture>
+          <picture class="m2"><source type="image/webp" srcset="img/foto/costilla-450.webp"><img src="img/foto/costilla-450.jpg" alt="" width="450" height="338" loading="lazy" decoding="async"></picture>
+          <picture class="m3"><source type="image/webp" srcset="img/foto/carnitas-450.webp"><img src="img/foto/carnitas-450.jpg" alt="" width="450" height="338" loading="lazy" decoding="async"></picture>
+          <picture class="m4"><source type="image/webp" srcset="img/foto/longaniza-450.webp"><img src="img/foto/longaniza-450.jpg" alt="" width="450" height="338" loading="lazy" decoding="async"></picture>
+          <picture class="m5"><source type="image/webp" srcset="img/foto/chicharron-450.webp"><img src="img/foto/chicharron-450.jpg" alt="" width="450" height="338" loading="lazy" decoding="async"></picture>
+        </div>
+        <div class="despiece-lbl">Del cerdo completo aprovechamos todo: 16 cortes frescos</div>
       </div>
       <div class="rv d1">
         <div class="sec-kicker"><div class="sec-kicker-line"></div><span>Conoce nuestros cortes</span></div>
@@ -838,12 +865,13 @@
 
 <section class="cta-big">
   <div class="cta-inner">
-    <h2>¿Listo para hacer tu pedido?</h2>
-    <p>Escríbenos por WhatsApp y recibe tu carne fresca en puerta. Atendemos pedidos todos los días de 8AM a 5PM.</p>
+    <h2>Hoy se corta fresco. <em>¿Qué te preparamos?</em></h2>
+    <p>Escríbenos por WhatsApp con lo que necesitas y te confirmamos precio, hora y entrega en minutos. Cortamos el mismo día, sin congelar y con el peso exacto.</p>
     <div class="cta-row">
-      <a class="btn btn-white btn-lg" href="https://wa.me/50248890091" target="_blank" rel="noopener">Pedir por WhatsApp</a>
-      <a class="btn btn-outline-light btn-lg" href="productos.html">Ver Catálogo</a>
+      <a class="btn btn-wa btn-lg" href="https://wa.me/50248890091" target="_blank" rel="noopener">Pedir por WhatsApp · 4889-0091</a>
+      <a class="btn btn-outline-light btn-lg" href="productos.html">Armar mi pedido en el catálogo</a>
     </div>
+    <p class="cta-nota">Entrega en Ciudad de Guatemala · Envío gratis desde 25 lb · Lun a Dom, 8:00 AM – 5:00 PM</p>
   </div>
 </section>
 

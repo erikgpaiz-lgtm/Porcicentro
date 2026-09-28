@@ -93,6 +93,8 @@
 
 .rec-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .rm-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rm-img picture{position:absolute;inset:0;display:block}
+.rec-img picture{position:absolute;inset:0;display:block}
 .rec-img-overlay{z-index:1}
 .rec-cat-tag,.rec-time-tag,.rec-diff{z-index:2}
 
@@ -256,7 +258,7 @@ RECIPES.forEach(r => {
   card.className='rec-card rv'; card.dataset.cat=r.group;
   card.innerHTML=`
     <div class="rec-img">
-      <img src="${window.PC.imgReceta(r.id)}" alt="${r.name}, preparado con ${cutName}" loading="lazy" decoding="async">
+      ${window.pcFoto(window.PC.imgReceta(r.id), r.name + ', preparado con ' + cutName, '(max-width:640px) 92vw, (max-width:1100px) 44vw, 360px')}
       <div class="rec-img-overlay"></div>
       <div class="rec-cat-tag">${cutName}</div>
       <div class="rec-time-tag"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${r.time}</div>
@@ -287,7 +289,7 @@ function openRecModal(id) {
   const modal = document.getElementById('rec-modal');
   modal.innerHTML=`
     <div class="rm-img">
-      <img src="${window.PC.imgReceta(r.id)}" alt="${r.name}, preparado con ${cutName}" decoding="async">
+      ${window.pcFoto(window.PC.imgReceta(r.id), r.name + ', preparado con ' + cutName, '(max-width:760px) 92vw, 760px')}
       <button class="rm-close" type="button" aria-label="Cerrar receta" onclick="closeRecModal(null)">✕</button>
     </div>
     <div class="rm-body">

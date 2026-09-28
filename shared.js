@@ -100,17 +100,26 @@
   };
 
   /* ── TARJETA DE PRODUCTO (una sola implementación) ────── */
+  /* ── FOTO RESPONSIVA (WebP + JPG, 450/900, con carga diferida) ── */
+  // Un solo lugar para todas las imágenes de producto y receta: si mañana se
+  // cambian las medidas, se cambian aquí y no en cada página.
+  window.pcFoto = function (base, alt, tamanos, prioridad) {
+    var sizes = tamanos || '(max-width:640px) 92vw, (max-width:1100px) 44vw, 380px';
+    if (base && base.indexOf('.svg') > -1) {
+      return '<img class="cut-img-arte" src="' + base + '" alt="' + alt + '" loading="lazy" decoding="async">';
+    }
+    return '<picture>' +
+        '<source type="image/webp" srcset="' + base + '-450.webp 450w, ' + base + '-900.webp 900w" sizes="' + sizes + '">' +
+        '<img src="' + base + '-450.jpg" srcset="' + base + '-450.jpg 450w, ' + base + '-900.jpg 900w" sizes="' + sizes +
+          '" alt="' + alt + '" width="900" height="675" ' + (prioridad ? 'fetchpriority="high"' : 'loading="lazy"') + ' decoding="async">' +
+      '</picture>';
+  };
+
   window.pcProductCard = function (p, opciones) {
     var mostrarSello = p.destacado && !(opciones && opciones.sinSello);
     var bc = p.cat === 'especial' ? 'badge-spc' : p.cat === 'economico' ? 'badge-eco' : 'badge-std';
-    var foto = p.img && p.img.indexOf('.svg') === -1 ? p.img : '';
     var alt = p.name + ' fresco de PorciCentro' + (p.unit === 'libra' ? ', precio por libra' : '');
-    var media = foto
-      ? '<picture>' +
-          '<source type="image/webp" srcset="' + foto + '-450.webp 450w, ' + foto + '-900.webp 900w" sizes="(max-width:640px) 92vw, (max-width:1100px) 44vw, 380px">' +
-          '<img src="' + foto + '-450.jpg" srcset="' + foto + '-450.jpg 450w, ' + foto + '-900.jpg 900w" sizes="(max-width:640px) 92vw, (max-width:1100px) 44vw, 380px" alt="' + alt + '" width="900" height="675" loading="lazy" decoding="async">' +
-        '</picture>'
-      : '<img class="cut-img-arte" src="' + (p.img || 'img/asado.svg') + '" alt="' + alt + '" loading="lazy" decoding="async">';
+    var media = window.pcFoto(p.img || 'img/foto/chuleta', alt);
 
     return '<div class="cut-card rv" data-cat="' + p.cat + '" data-id="' + p.id + '">' +
       '<div class="cut-img">' + media +
@@ -514,7 +523,7 @@
     document.body.appendChild(flotante);
 
     var alScroll = function () {
-      var visible = window.scrollY > 420;
+      var visible = window.scrollY > 220;
       barra.classList.toggle('on', visible);
       flotante.classList.toggle('on', visible);
     };

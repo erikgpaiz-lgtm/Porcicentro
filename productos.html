@@ -70,6 +70,18 @@
 .cut-img .cut-img-ico{position:absolute;bottom:10px;right:12px;font-size:1.5rem;opacity:.85;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
 .cut-img{position:relative}
 
+
+/* ── Banda de mayoreo ───────────────────────────────────── */
+.mayoreo{padding:86px 24px;background:var(--carbon);color:#fff}
+.mayoreo-wrap{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
+.mayoreo-t{font-family:var(--font-h);font-size:clamp(1.7rem,3.4vw,2.6rem);font-weight:700;line-height:1.12;margin:16px 0 16px}
+.mayoreo-s{color:rgba(255,255,255,.55);line-height:1.85;font-size:.95rem;margin-bottom:22px}
+.mayoreo-list{list-style:none;display:grid;gap:9px;margin-bottom:30px}
+.mayoreo-list li{position:relative;padding-left:26px;color:rgba(255,255,255,.8);font-size:.9rem}
+.mayoreo-list li::before{content:'✓';position:absolute;left:0;color:var(--verde);font-weight:800}
+.mayoreo-foto{display:block;border-radius:var(--r-xl);overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.mayoreo-foto img{width:100%;display:block}
+@media(max-width:900px){.mayoreo-wrap{grid-template-columns:1fr;gap:34px}.mayoreo{padding:70px 24px}}
 </style>
 <!-- PC:JSONLD -->
 <script type="application/ld+json">
@@ -556,6 +568,27 @@
 </div></section>
 
 </main>
+
+<section class="mayoreo">
+  <div class="mayoreo-wrap">
+    <div>
+      <div class="sec-kicker"><div class="sec-kicker-line"></div><span>Para negocios</span></div>
+      <h2 class="mayoreo-t">¿Compras por volumen? Tenemos precio de mayoreo.</h2>
+      <p class="mayoreo-s">Restaurantes, comedores, carnicerías, hoteles y eventos: cotizamos por semana o por pedido fijo, con entrega programada y factura. Escríbenos con el corte y las libras que necesitas y te pasamos precio hoy mismo.</p>
+      <ul class="mayoreo-list">
+        <li>Precio especial desde 100 lb por pedido</li>
+        <li>Entrega programada a tu horario</li>
+        <li>Cortes a la medida de tu menú</li>
+        <li>Pago en efectivo, transferencia o contra entrega</li>
+      </ul>
+      <a class="btn btn-wa btn-lg" href="https://wa.me/50248890091?text=Hola%20PorciCentro%2C%20quiero%20cotizaci%C3%B3n%20de%20mayoreo" target="_blank" rel="noopener">Cotizar mayoreo por WhatsApp</a>
+    </div>
+    <picture class="mayoreo-foto">
+      <source type="image/webp" srcset="img/foto/costilla-900.webp">
+      <img src="img/foto/costilla-900.jpg" alt="Costillar de cerdo fresco listo para cotizar al mayoreo" width="900" height="675" loading="lazy" decoding="async">
+    </picture>
+  </div>
+</section>
 <footer class="footer"><div class="footer-wrap"><div class="footer-bottom"><div class="footer-copy"><a href="privacidad.html">Aviso de privacidad</a></div><div class="footer-copy">© 2025 <em>PorciCentro</em>. Todos los derechos reservados.</div><div class="footer-copy">Guatemala · +502 4889-0091</div></div></div></footer>
 
 <script src="data.js"></script>

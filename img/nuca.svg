@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" width="400" height="260" role="img"><defs><linearGradient id="m" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0B7BC"/><stop offset="55%" stop-color="#D9828C"/><stop offset="100%" stop-color="#A9505F"/></linearGradient><linearGradient id="b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF8F2"/><stop offset="100%" stop-color="#E4D6C4"/></linearGradient><radialGradient id="g" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#B8001A" stop-opacity=".30"/><stop offset="100%" stop-color="#B8001A" stop-opacity="0"/></radialGradient></defs>
-<ellipse cx="200" cy="132" rx="150" ry="104" fill="url(#g)"/>
-<path d="M78 176 Q58 118 112 80 Q166 42 246 52 Q316 60 340 112 Q362 162 312 200 Q262 236 190 228 Q118 220 92 202 Q80 192 78 176Z" fill="url(#m)"/>
-<path d="M96 92 Q160 48 250 56 Q318 62 338 108" fill="none" stroke="#FFF3EE" stroke-width="16" stroke-opacity=".85" stroke-linecap="round"/>
-<g fill="none" stroke="#FFF3EE" stroke-opacity=".45" stroke-width="6" stroke-linecap="round">
-  <path d="M118 128 Q210 108 322 122"/><path d="M112 160 Q206 142 322 156"/><path d="M126 192 Q214 176 312 186"/>
-</g>
-<g fill="#FBF3EA" opacity=".5"><ellipse cx="168" cy="140" rx="10" ry="7"/><ellipse cx="236" cy="164" rx="9" ry="6"/><ellipse cx="270" cy="120" rx="8" ry="6"/></g></svg>

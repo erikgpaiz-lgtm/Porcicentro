@@ -52,19 +52,19 @@
     { id:'cabeza',     name:'Cabeza de Cerdo',     cat:'especial', price:140, priceUnit:'c/u', unit:'unidad', min:1,   step:1,   img:'img/foto/cabeza', emoji:'🐷',
       desc:'Cabeza entera de cerdo. Perfecta para tamales, queso de puerco y preparaciones festivas.' },
 
-    { id:'patitas',    name:'Patitas de Cerdo',    cat:'especial', price:8,   priceUnit:'c/u', unit:'unidad', min:1,   step:1,   img:'img/patitas.svg', emoji:'🐾', destacado:true,
+    { id:'patitas',    name:'Patitas de Cerdo',    cat:'especial', price:8,   priceUnit:'c/u', unit:'unidad', min:1,   step:1,   img:'img/foto/patitas', emoji:'🐾', destacado:true,
       desc:'Patitas frescas, ideales para escabeche, pepián y caldos reconfortantes.' },
-    { id:'manteca',    name:'Manteca de Cerdo',    cat:'especial', price:10,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/manteca.svg', emoji:'🫙',
+    { id:'manteca',    name:'Manteca de Cerdo',    cat:'especial', price:10,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/foto/manteca', emoji:'🫙',
       desc:'Manteca pura de cerdo, perfecta para freír, cocinar y preparaciones tradicionales guatemaltecas.' },
-    { id:'longaniza',  name:'Longaniza',           cat:'especial', price:10,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/longaniza.svg', emoji:'🌭', destacado:true,
+    { id:'longaniza',  name:'Longaniza',           cat:'especial', price:10,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/foto/longaniza', emoji:'🌭', destacado:true,
       desc:'Longaniza artesanal elaborada con especias naturales. Perfecta para asados y desayunos.' },
-    { id:'cuero',      name:'Cuero de Cerdo',      cat:'especial', price:10,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/cuero.svg', emoji:'🍥',
+    { id:'cuero',      name:'Cuero de Cerdo',      cat:'especial', price:10,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/foto/cuero', emoji:'🍥',
       desc:'Cuero fresco de cerdo, ideal para chicharrón de cuero, sopas y preparaciones regionales.' },
-    { id:'carnitas',   name:'Carnitas',            cat:'especial', price:60,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/carnitas.svg', emoji:'🍲', destacado:true,
+    { id:'carnitas',   name:'Carnitas',            cat:'especial', price:60,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/foto/carnitas', emoji:'🍲', destacado:true,
       desc:'Carnitas tiernas y jugosas, listas para servir. Perfectas para tacos, tostadas y platillos festivos.' },
-    { id:'chicharron', name:'Chicharrones',        cat:'especial', price:60,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/chicharron.svg', emoji:'🥓', destacado:true,
+    { id:'chicharron', name:'Chicharrones',        cat:'especial', price:60,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/foto/chicharron', emoji:'🥓', destacado:true,
       desc:'Chicharrón dorado y crujiente, preparado con nuestro proceso artesanal único.' },
-    { id:'pinas',      name:'Piñas de Chicharrón', cat:'especial', price:65,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/pina.svg', emoji:'🍢',
+    { id:'pinas',      name:'Piñas de Chicharrón', cat:'especial', price:65,  priceUnit:'lb',  unit:'libra',  min:0.5, step:0.5, img:'img/foto/pinas', emoji:'🍢',
       desc:'Piñas de chicharrón extra crujientes, el favorito para botanas y fiestas guatemaltecas.' }
   ];
 
@@ -78,23 +78,23 @@
 
     /* ── RECETARIO (imagen de cada receta) ──────────────── */
     var RECETAS = {
-      'costillas-bbq':      { img:'img/chuleta.svg',   color:'#2A0A05' },
-      'chicharron-receta':  { img:'img/chicharron.svg',color:'#2A1A05' },
-      'lomo-relleno':       { img:'img/lomo.svg',      color:'#1A0A14' },
-      'carnitas-tacos':     { img:'img/carnitas.svg',  color:'#2A1205' },
-      'caldo-patitas':      { img:'img/patitas.svg',   color:'#1A0F0A' },
-      'paleta-guisada':     { img:'img/asado.svg',     color:'#25100A' },
-      'tamales-cabeza':     { img:'img/cabeza.svg',    color:'#1A0508' },
-      'sopa-espinazo':      { img:'img/costilla.svg',  color:'#200A05' },
-      'longaniza-desayuno': { img:'img/longaniza.svg', color:'#250A0F' }
+      'costillas-bbq':      { img:'img/foto/costilla',              color:'#2A0A05' },
+      'chicharron-receta':  { img:'img/foto/chicharron',            color:'#2A1A05' },
+      'lomo-relleno':       { img:'img/foto/lomocinta',             color:'#1A0A14' },
+      'carnitas-tacos':     { img:'img/foto/carnitas',              color:'#2A1205' },
+      'caldo-patitas':      { img:'img/foto/receta-caldo-patitas', color:'#1A0F0A' },
+      'paleta-guisada':     { img:'img/foto/receta-paleta',        color:'#25100A' },
+      'tamales-cabeza':     { img:'img/foto/receta-tamales',       color:'#1A0508' },
+      'sopa-espinazo':      { img:'img/foto/costilla',              color:'#200A05' },
+      'longaniza-desayuno': { img:'img/foto/longaniza',             color:'#250A0F' }
     };
     function imgReceta(id) {
       var r = RECETAS[id];
-      return r ? r.img : 'img/asado.svg';
+      return r ? r.img : 'img/foto/chuleta';
     }
     function imgDe(id) {
       var p = buscar(id);
-      return p && p.img ? p.img : 'img/asado.svg';
+      return p && p.img ? p.img : 'img/foto/chuleta';
     }
 
   /* ── UTILIDADES ───────────────────────────────────────── */
